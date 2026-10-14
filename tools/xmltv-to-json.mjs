@@ -9,10 +9,9 @@ const TZ = -3 * 3600, DAYS = 5;
 const now = Math.floor(Date.now() / 1000);
 const from = Math.floor((now + TZ) / 86400) * 86400 - TZ;
 const to = from + DAYS * 86400;
-const { channels } = JSON.parse(readFileSync(new URL("../data/channels.json", import.meta.url)));
-
-const byXmltv = new Map();
-for (const ch of channels) for (const id of [ch.id, ...(ch.alias || [])]) byXmltv.set(id, ch.id);
+import { loadChannels, buildMaps, resolve } from "./match.mjs";
+const channels = loadChannels();
+const maps = buildMaps(channels);
 
 const unesc = (s) => s.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;|&#39;/g, "'")
   .replace(/&#(\d+);/g, (_, n) => String.fromCodePoint(+n)).replace(/&amp;/g, "&").replace(/<!\[CDATA\[|\]\]>/g, "").trim();
@@ -42,6 +41,8 @@ const seen = new Set();
 let total = 0, unknown = new Set();
 for (const f of files) {
   const xml = readFileSync(f, "utf8");
+  const names = new Map();
+  for (const c of xml.matchAll(/<channel\s+id="([^"]*)"[^>]*>([\s\S]*?)<\/channel>/g)) names.set(c[1], tag(c[2], "display-name"));
   const re = /<programme\s([^>]*)>([\s\S]*?)<\/programme>/g;
   let m;
   while ((m = re.exec(xml))) {
@@ -49,7 +50,7 @@ for (const f of files) {
     const start = ts((/start="([^"]*)"/.exec(a) || [])[1]);
     const stop = ts((/stop="([^"]*)"/.exec(a) || [])[1]);
     const xid = (/channel="([^"]*)"/.exec(a) || [])[1];
-    const id = byXmltv.get(xid);
+    const id = resolve(maps, xid, names.get(xid));
     if (!id) { unknown.add(xid); continue; }
     if (!(stop > start) || stop <= from || start >= to) continue;
     const key = id + start;

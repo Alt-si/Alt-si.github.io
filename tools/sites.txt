@@ -1,2 +1,2 @@
-directv.com.ar
-mi.tv
+directv.com.ar/directv.com.ar.channels.xml
+mi.tv/mi.tv_ar.channels.xml

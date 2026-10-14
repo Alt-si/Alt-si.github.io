@@ -11,6 +11,7 @@ permissions:
 jobs:
   update:
     runs-on: ubuntu-latest
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
 
@@ -18,27 +19,35 @@ jobs:
         with:
           node-version: 22
 
-      - name: Descargar grillas (iptv-org/epg)
+      - name: Instalar iptv-org/epg
         run: |
           git clone --depth 1 https://github.com/iptv-org/epg.git epg-src
           cd epg-src
-          (npm ci || npm install) 2>&1 | tail -5
-          mkdir -p ../xmltv
-          for site in $(cat ../tools/sites.txt); do
-            echo "=================== $site"
-            ls "sites/$site" 2>&1 | head -20
-            npm run grab --- --site="$site" --days=5 --output="../xmltv/$site.xml" 2>&1 | tail -40 || true
+          (npm ci || npm install) 2>&1 | tail -3
+          echo "--- opciones de grab:"
+          npm run grab -- --help 2>&1 | tail -30
+
+      - name: Descargar grillas
+        run: |
+          mkdir -p xmltv
+          cd epg-src
+          for f in $(cat ../tools/sites.txt); do
+            n=$(basename "$f" .channels.xml)
+            echo "=================== $f"
+            node ../tools/filter-channels.mjs "sites/$f" "../xmltv/$n.channels.xml" || continue
+            npm run grab -- --channels="../xmltv/$n.channels.xml" --days=5 --output="../xmltv/$n.xml" 2>&1 | tail -25 || true
           done
           echo "=== archivos generados"
           ls -la ../xmltv
 
       - name: Convertir a epg.json
         run: |
-          if ! ls xmltv/*.xml >/dev/null 2>&1; then
-            echo "::error::Ninguna fuente generó datos. Mirá el paso anterior (qué sitio falló y por qué)."
+          files=$(ls xmltv/*.xml 2>/dev/null | grep -v '\.channels\.xml$' || true)
+          if [ -z "$files" ]; then
+            echo "::error::Ninguna fuente generó datos. Mirá el paso anterior."
             exit 1
           fi
-          node tools/xmltv-to-json.mjs xmltv/*.xml
+          node tools/xmltv-to-json.mjs $files
 
       - name: Publicar cambios
         run: |
