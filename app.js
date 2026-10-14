@@ -89,6 +89,7 @@ function visibleChannels() {
   const q = norm(state.q.trim());
   const d0 = today0 + state.day * 86400, d1 = d0 + 86400;
   return state.channels.filter((ch) => {
+    if (!(state.epg.programs[ch.id] || []).length) return false; // sin datos en toda la ventana: se oculta
     if (state.favOnly && !state.favs.has(ch.id)) return false;
     if (state.provider !== "all" && !(ch.providers || []).includes(state.provider)) return false;
     const progs = (state.epg.programs[ch.id] || []).filter((p) => p[1] > d0 && p[0] < d1);
