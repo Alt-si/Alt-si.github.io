@@ -10,8 +10,12 @@ let m, keep = [], skip = [];
 while ((m = re.exec(xml))) {
   const id = (/xmltv_id="([^"]*)"/.exec(m[1]) || [])[1] || "";
   const name = m[2].replace(/<!\[CDATA\[|\]\]>/g, "").trim();
-  (resolve(maps, id, name) ? keep : skip).push(m[0]);
-  if (!resolve(maps, id, name)) skip[skip.length - 1] = name;
+  const ours = resolve(maps, id, name);
+  if (ours) {
+    // Reescribimos el xmltv_id con el id propio: así la salida del grabber ya viene con nuestros ids.
+    const attrs = /xmltv_id="[^"]*"/.test(m[1]) ? m[1].replace(/xmltv_id="[^"]*"/, `xmltv_id="${ours}"`) : m[1] + ` xmltv_id="${ours}"`;
+    keep.push(`<channel${attrs}>${m[2]}</channel>`);
+  } else skip.push(name);
 }
 const head = (xml.match(/^[\s\S]*?<channels[^>]*>/) || ['<?xml version="1.0" encoding="UTF-8"?>\n<channels>'])[0];
 writeFileSync(out, head + "\n  " + keep.join("\n  ") + "\n</channels>\n");
