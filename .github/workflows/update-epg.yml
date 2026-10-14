@@ -47,6 +47,12 @@ jobs:
             echo "::error::Ninguna fuente generó datos. Mirá el paso anterior."
             exit 1
           fi
+          echo "--- commit de esta ejecución: $(git log -1 --format=%h)"
+          echo "--- sitios configurados:"; cat tools/sites.txt
+          echo "--- canales de interés que SÍ están en la lista filtrada (xmltv_id / nombre):"
+          grep -hE 'Star|NatGeo|Syfy|Baby|Nick|MTV|Lifetime|Paramount|Cartoonito|A&amp;E|AE\.ar' xmltv/*.channels.xml | head -40 || true
+          echo "--- programas por canal en la salida cruda (los de menos programas primero):"
+          for f in $files; do grep -o ' channel="[^"]*"' $f | sort | uniq -c | sort -n | head -50; done
           node tools/xmltv-to-json.mjs $files
 
       - name: Publicar cambios
