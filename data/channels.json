@@ -1,0 +1,600 @@
+{
+ "channels": [
+  {
+   "id": "Telefe.ar",
+   "name": "Telefe",
+   "cat": "ent",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "ElTrece.ar",
+   "name": "El Trece",
+   "cat": "ent",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "AmericaTV.ar",
+   "name": "América TV",
+   "cat": "ent",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "ElNueve.ar",
+   "name": "El Nueve",
+   "cat": "ent",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "TVPublica.ar",
+   "name": "TV Pública",
+   "cat": "ent",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "NetTV.ar",
+   "name": "Net TV",
+   "cat": "ent",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "TN.ar",
+   "name": "TN",
+   "cat": "news",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "C5N.ar",
+   "name": "C5N",
+   "cat": "news",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "A24.ar",
+   "name": "A24",
+   "cat": "news",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "LN+.ar",
+   "name": "LN+",
+   "cat": "news",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "Canal26.ar",
+   "name": "Canal 26",
+   "cat": "news",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "CronicaTV.ar",
+   "name": "Crónica TV",
+   "cat": "news",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "IPNoticias.ar",
+   "name": "IP Noticias",
+   "cat": "news",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "CNNenEspanol.us",
+   "name": "CNN en Español",
+   "cat": "news",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "ESPN.ar",
+   "name": "ESPN",
+   "cat": "sports",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "ESPN2.ar",
+   "name": "ESPN 2",
+   "cat": "sports",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "ESPN3.ar",
+   "name": "ESPN 3",
+   "cat": "sports",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "ESPNPremium.ar",
+   "name": "ESPN Premium",
+   "cat": "sports",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "FoxSports.ar",
+   "name": "Fox Sports",
+   "cat": "sports",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "FoxSports2.ar",
+   "name": "Fox Sports 2",
+   "cat": "sports",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "FoxSports3.ar",
+   "name": "Fox Sports 3",
+   "cat": "sports",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "TyCSports.ar",
+   "name": "TyC Sports",
+   "cat": "sports",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "TNTSports.ar",
+   "name": "TNT Sports",
+   "cat": "sports",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "DSports.ar",
+   "name": "DSports",
+   "cat": "sports",
+   "providers": [
+    "directv"
+   ]
+  },
+  {
+   "id": "DSports2.ar",
+   "name": "DSports 2",
+   "cat": "sports",
+   "providers": [
+    "directv"
+   ]
+  },
+  {
+   "id": "TNT.ar",
+   "name": "TNT",
+   "cat": "movies",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "Space.ar",
+   "name": "Space",
+   "cat": "movies",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "Warner.ar",
+   "name": "Warner Channel",
+   "cat": "series",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "AXN.ar",
+   "name": "AXN",
+   "cat": "series",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "StudioUniversal.ar",
+   "name": "Studio Universal",
+   "cat": "movies",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "Cinecanal.ar",
+   "name": "Cinecanal",
+   "cat": "movies",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "Cinemax.ar",
+   "name": "Cinemax",
+   "cat": "movies",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "FX.ar",
+   "name": "FX",
+   "cat": "series",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "StarChannel.ar",
+   "name": "Star Channel",
+   "cat": "series",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "TCM.ar",
+   "name": "TCM",
+   "cat": "movies",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "ParamountChannel.ar",
+   "name": "Paramount Channel",
+   "cat": "movies",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "FilmArts.ar",
+   "name": "Film&Arts",
+   "cat": "movies",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "ComedyCentral.ar",
+   "name": "Comedy Central",
+   "cat": "series",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "TNTSeries.ar",
+   "name": "TNT Series",
+   "cat": "series",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "Sony.ar",
+   "name": "Sony Channel",
+   "cat": "series",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "UniversalTV.ar",
+   "name": "Universal TV",
+   "cat": "series",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "AE.ar",
+   "name": "A&E",
+   "cat": "docs",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "Lifetime.ar",
+   "name": "Lifetime",
+   "cat": "series",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "TLC.ar",
+   "name": "TLC",
+   "cat": "ent",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "FoodNetwork.ar",
+   "name": "Food Network",
+   "cat": "ent",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "Discovery.ar",
+   "name": "Discovery Channel",
+   "cat": "docs",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "NatGeo.ar",
+   "name": "National Geographic",
+   "cat": "docs",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "History.ar",
+   "name": "History",
+   "cat": "docs",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "AnimalPlanet.ar",
+   "name": "Animal Planet",
+   "cat": "docs",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "InvestigationDiscovery.ar",
+   "name": "Investigation Discovery",
+   "cat": "docs",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "CartoonNetwork.ar",
+   "name": "Cartoon Network",
+   "cat": "kids",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "DisneyChannel.ar",
+   "name": "Disney Channel",
+   "cat": "kids",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "Nickelodeon.ar",
+   "name": "Nickelodeon",
+   "cat": "kids",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "DiscoveryKids.ar",
+   "name": "Discovery Kids",
+   "cat": "kids",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "DisneyJunior.ar",
+   "name": "Disney Junior",
+   "cat": "kids",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "PakaPaka.ar",
+   "name": "Paka Paka",
+   "cat": "kids",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "Tooncast.ar",
+   "name": "Tooncast",
+   "cat": "kids",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "Cartoonito.ar",
+   "name": "Cartoonito",
+   "cat": "kids",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "MTV.ar",
+   "name": "MTV",
+   "cat": "music",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  },
+  {
+   "id": "QuieroMusica.ar",
+   "name": "Quiero Música",
+   "cat": "music",
+   "providers": [
+    "directv",
+    "flow",
+    "telecentro"
+   ]
+  }
+ ]
+}

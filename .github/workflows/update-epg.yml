@@ -1,0 +1,42 @@
+name: Actualizar programación
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"   # cada 6 horas (UTC)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # Descarga la programación con el grabber open source iptv-org/epg.
+      # SITIOS: ajustá la lista según qué fuente te funcione mejor (ver README).
+      - name: Descargar grillas
+        run: |
+          git clone --depth 1 https://github.com/iptv-org/epg.git epg-src
+          cd epg-src
+          npm ci || npm install
+          mkdir -p ../xmltv
+          for site in $(cat ../tools/sites.txt); do
+            echo "== $site"
+            npm run grab --- --site="$site" --days=5 --output="../xmltv/$site.xml" || echo "falló $site"
+          done
+
+      - name: Convertir a epg.json
+        run: node tools/xmltv-to-json.mjs xmltv/*.xml
+
+      - name: Publicar cambios
+        run: |
+          git config user.name "epg-bot"
+          git config user.email "epg-bot@users.noreply.github.com"
+          git add data/epg.json
+          git diff --cached --quiet || (git commit -m "Actualizar programación" && git push)
