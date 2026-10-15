@@ -64,14 +64,6 @@ function buildControls() {
   }
   const prov = $("#providers");
   prov.innerHTML = "";
-  for (const [k, label] of Object.entries(PROVIDERS)) {
-    const b = document.createElement("button");
-    b.className = "chip";
-    b.textContent = label;
-    b.setAttribute("aria-pressed", state.provider === k && !state.favOnly);
-    b.onclick = () => { state.provider = k; state.favOnly = false; store.set("provider", k); buildControls(); render(); };
-    prov.appendChild(b);
-  }
   const f = document.createElement("button");
   f.className = "chip";
   f.textContent = "★ Favoritos";
@@ -91,7 +83,6 @@ function visibleChannels() {
   return state.channels.filter((ch) => {
     if (!(state.epg.programs[ch.id] || []).length) return false; // sin datos en toda la ventana: se oculta
     if (state.favOnly && !state.favs.has(ch.id)) return false;
-    if (state.provider !== "all" && !(ch.providers || []).includes(state.provider)) return false;
     const progs = (state.epg.programs[ch.id] || []).filter((p) => p[1] > d0 && p[0] < d1);
     if (state.cat !== "all" && !progs.some((p) => categoryOf(ch, p) === state.cat) && ch.cat !== state.cat) return false;
     if (q && !norm(ch.name).includes(q) && !progs.some((p) => norm(p[2]).includes(q))) return false;
@@ -171,14 +162,12 @@ function openSheet(chId, start) {
   const cat = categoryOf(ch, p), now = nowSec();
   const status = p[1] <= now ? "Ya terminó" : p[0] <= now ? "En emisión ahora" : "Más tarde";
   const mins = Math.round((p[1] - p[0]) / 60);
-  const provs = (ch.providers || []).map((k) => PROVIDERS[k]).join(" · ");
   const dd = new Date((p[0] + TZ) * 1000);
   $("#sheetBody").innerHTML =
     `<div class="t-${cat}"><span class="tag">${esc(CATS[cat])}</span></div>` +
     `<h2>${esc(p[2])}</h2>` +
     `<div class="meta">${esc(ch.name)} · ${DOW[dd.getUTCDay()]} ${dd.getUTCDate()} ${MON[dd.getUTCMonth()]}, ${fmtTime(p[0])} – ${fmtTime(p[1])} (${mins} min) · ${status}</div>` +
-    (p[3] ? `<p>${esc(p[3])}</p>` : `<p class="meta">Sin descripción disponible.</p>`) +
-    `<div class="meta">Disponible en: ${esc(provs || "—")}</div>`;
+    (p[3] ? `<p>${esc(p[3])}</p>` : `<p class="meta">Sin descripción disponible.</p>`);
   $("#sheet").showModal();
 }
 

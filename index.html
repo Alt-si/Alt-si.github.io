@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Guía TV Argentina</title>
-<meta name="description" content="Línea de tiempo con la programación de los canales de DIRECTV, Flow y Telecentro para los próximos 5 días.">
+<meta name="description" content="Línea de tiempo con la programación de los canales de TV de Argentina para los próximos 5 días.">
 <meta name="theme-color" content="#0f1115">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
@@ -23,14 +23,10 @@
       <button id="nowBtn" class="pill strong">Ahora</button>
     </div>
   </div>
-  <div class="tabs" role="tablist" aria-label="Sección">
-    <button id="tabGuide" role="tab" aria-selected="true">📺 Guía</button>
-    <button id="tabSports" role="tab" aria-selected="false">🏆 Deportes</button>
-  </div>
   <div id="guideBar">
     <nav id="days" class="days" aria-label="Día"></nav>
     <div class="filters">
-      <div id="providers" class="chips" role="group" aria-label="Proveedor"></div>
+      <div id="providers" class="chips" role="group" aria-label="Favoritos"></div>
       <select id="category" aria-label="Categoría"></select>
       <input id="search" type="search" placeholder="Buscar canal o programa" aria-label="Buscar">
     </div>
@@ -39,7 +35,6 @@
 </header>
 
 <main id="grid" class="grid" tabindex="0" aria-label="Grilla de programación"></main>
-<section id="sports" class="sports" aria-label="Deportes" hidden></section>
 
 <dialog id="sheet">
   <form method="dialog"><button class="close" aria-label="Cerrar">×</button></form>
@@ -47,6 +42,5 @@
 </dialog>
 
 <script src="app.js"></script>
-<script src="sports.js"></script>
 </body>
 </html>
