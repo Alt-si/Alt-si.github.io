@@ -119,3 +119,13 @@ body[data-view="sports"] #guideBar,body[data-view="sports"] #grid,body[data-view
 .s-futbol,.s-futsal{--cat:#1f9d62}.s-tenis,.s-padel,.s-tenis_mesa{--cat:#c9a40a}.s-basquet{--cat:#e0912b}.s-voley{--cat:#d6486a}
 .s-automovilismo{--cat:#d93a3a}.s-rugby{--cat:#8a4fd6}.s-hockey,.s-golf{--cat:#0f8f9a}.s-combate,.s-lucha{--cat:#a33}
 .s-nfl,.s-beisbol{--cat:#2f6fed}.s-olimpico{--cat:#caa400}.s-otros{--cat:var(--c-ent)}
+.live-btn{display:inline-flex;align-items:center;gap:8px;margin-top:8px;height:34px;padding:0 14px;border:1px solid var(--line);background:var(--bg);border-radius:999px;font-weight:700;cursor:pointer}
+.live-btn .dot{width:10px;height:10px;border-radius:50%;background:#e5322d}
+.live-btn small{background:var(--line);border-radius:999px;padding:0 7px;font-weight:600}
+.live-btn[aria-pressed="true"]{background:#e5322d;border-color:#e5322d;color:#fff}
+.live-btn[aria-pressed="true"] .dot{background:#fff;animation:pulse 1.4s infinite}
+.live-btn[aria-pressed="true"] small{background:#ffffff33;color:#fff}
+@keyframes pulse{50%{opacity:.35}}
+.sp-row label:has(input:disabled){opacity:.45}
+.ev .when small{white-space:nowrap}
+.ev .when{width:62px}

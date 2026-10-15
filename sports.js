@@ -1,6 +1,6 @@
 "use strict";
 // Sección Deportes. Usa globals de app.js: $, esc, norm, fmtTime, nowSec, midnightOf, DOW, MON, TZ.
-const ss = { data: null, sport: "all", tournament: "all", day: "all", scope: "all", q: "", hideDone: true, limit: 120 };
+const ss = { data: null, sport: "all", tournament: "all", day: "all", scope: "all", q: "", hideDone: true, live: false, limit: 120 };
 let spHay = [];
 
 async function spLoad() {
@@ -26,12 +26,13 @@ function spFiltered(skip) {
   const out = [];
   for (let i = 0; i < d.events.length; i++) {
     const e = d.events[i], ch = d.channels[e[4]] || {};
+    if (skip !== "live" && ss.live && !(e[0] <= now && now < e[1])) continue;
     if (skip !== "sport" && ss.sport !== "all" && e[5] !== ss.sport) continue;
     if (skip !== "tournament" && ss.tournament !== "all" && e[6] !== ss.tournament) continue;
     if (ss.day !== "all") { const a = t0 + ss.day * 86400; if (e[1] <= a || e[0] >= a + 86400) continue; }
     if (ss.scope === "ar" && ch.c !== "Argentina") continue;
     if (ss.scope === "world" && ch.c === "Argentina") continue;
-    if (ss.hideDone && e[1] <= now) continue;
+    if (ss.hideDone && !ss.live && e[1] <= now) continue;
     if (toks.length && !toks.every((t) => spHay[i].includes(t))) continue;
     out.push(i);
   }
@@ -44,6 +45,7 @@ function spShell() {
   <div class="sp-bar" id="spBar">
     <input id="spQ" type="search" list="spSugg" placeholder="Buscar equipo, jugador, torneo o canal…" autocomplete="off" aria-label="Buscar deportes">
     <datalist id="spSugg">${d.suggest.map((s) => `<option value="${esc(s[0])}">`).join("")}</datalist>
+    <button class="live-btn" id="spLive" aria-pressed="false"><span class="dot"></span> En vivo ahora <small id="spLiveN"></small></button>
     <div class="sp-chips" id="spChips" role="group" aria-label="Deporte"></div>
     <div class="sp-row">
       <select id="spTour" aria-label="Torneo"></select>
@@ -64,6 +66,7 @@ function spShell() {
   }
   let t;
   $("#spQ").oninput = (e) => { clearTimeout(t); t = setTimeout(() => { ss.q = e.target.value; ss.limit = 120; spRender(); }, 150); };
+  $("#spLive").onclick = () => { ss.live = !ss.live; ss.limit = 120; spRender(); };
   $("#spTour").onchange = (e) => { ss.tournament = e.target.value; ss.limit = 120; spRender(); };
   sel.onchange = (e) => { ss.day = e.target.value === "all" ? "all" : +e.target.value; ss.limit = 120; spRender(); };
   $("#spScope").onchange = (e) => { ss.scope = e.target.value; ss.limit = 120; spRender(); };
@@ -79,6 +82,13 @@ function spShell() {
 function spRender() {
   if (!ss.data) return;
   const d = ss.data, now = nowSec();
+
+  // Botón "En vivo ahora" (cuenta respetando los demás filtros)
+  let liveN = 0;
+  for (const i of spFiltered("live")) { const e = d.events[i]; if (e[0] <= now && now < e[1]) liveN++; }
+  $("#spLive").setAttribute("aria-pressed", ss.live);
+  $("#spLiveN").textContent = liveN;
+  $("#spDone").disabled = ss.live;
 
   // Chips de deporte con conteo (respeta los demás filtros)
   const bySport = {};
@@ -105,7 +115,7 @@ function spRender() {
 
   // Lista agrupada por día
   const idx = spFiltered();
-  let html = `<div class="sp-sum">${idx.length} ${idx.length === 1 ? "evento" : "eventos"} · horarios de Argentina</div>`;
+  let html = `<div class="sp-sum">${idx.length} ${idx.length === 1 ? "evento" : "eventos"}${ss.live ? " en vivo ahora" : ""} · todos los horarios son de Argentina (ART, UTC−3)</div>`;
   let lastDay = null;
   for (const i of idx.slice(0, ss.limit)) {
     const e = d.events[i], ch = d.channels[e[4]] || {}, sp = d.sports[e[5]] || {};
@@ -118,12 +128,12 @@ function spRender() {
     }
     const live = e[0] <= now && now < e[1], past = e[1] <= now;
     html += `<button class="ev s-${e[5]}${past ? " past" : ""}" data-i="${i}">
-      <span class="when"><b>${fmtTime(e[0])}</b><small>${fmtTime(e[1])}</small></span>
+      <span class="when"><b>${fmtTime(e[0])}</b><small>${fmtTime(e[1])} ARG</small></span>
       <span class="what"><span class="ttl">${sp.e || ""} ${esc(e[2])}</span>
         <span class="sub">${e[6] ? `<span class="tg">${esc(e[6])}</span>` : ""}<span class="ch">${esc(ch.n || "")}</span><span>${esc(ch.c || "")}</span></span></span>
       ${live ? '<span class="live">EN VIVO</span>' : ""}</button>`;
   }
-  if (!idx.length) html += '<div class="empty">No hay eventos con esos filtros. Probá con otro deporte, otro día o desmarcá "Ocultar terminados".</div>';
+  if (!idx.length) html += `<div class="empty">${ss.live ? "No hay eventos en vivo con esos filtros en este momento." : "No hay eventos con esos filtros. Probá con otro deporte, otro día o desmarcá \"Ocultar terminados\"."}</div>`;
   if (idx.length > ss.limit) html += `<button class="sp-more">Mostrar más (${idx.length - ss.limit})</button>`;
   html += `<p class="sp-note">Los deportes y torneos se detectan a partir de la información de cada canal; algunos partidos pueden aparecer sin torneo. Equipos y jugadores se buscan por el texto del título y la descripción.</p>`;
   $("#spList").innerHTML = html;
@@ -158,5 +168,5 @@ async function showView(v) {
 
 $("#tabGuide").onclick = () => showView("guide");
 $("#tabSports").onclick = () => showView("sports");
-setInterval(() => { if (document.body.dataset.view === "sports" && ss.data) spRender(); }, 5 * 60000);
+setInterval(() => { if (document.body.dataset.view === "sports" && ss.data) spRender(); }, 60000);
 if (location.hash === "#deportes") showView("sports");
