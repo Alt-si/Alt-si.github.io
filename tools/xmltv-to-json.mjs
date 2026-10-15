@@ -62,11 +62,26 @@ for (const f of files) {
     total++;
   }
 }
-let withData = 0;
-for (const id in programs) { programs[id].sort((x, y) => x[0] - y[0]); if (programs[id].length) withData++; }
+for (const id in programs) programs[id].sort((x, y) => x[0] - y[0]);
+
+// Fusionar con lo ya guardado: la fuente cuenta los días en UTC, así que una corrida de noche (después de las 21 h de
+// Argentina) ya no trae el final del día actual. Conservamos lo viejo que no se superpone con lo nuevo.
+const outUrl = new URL("../data/epg.json", import.meta.url);
+let old = null;
+try { old = JSON.parse(readFileSync(outUrl, "utf8")); if (old.meta && old.meta.demo) old = null; } catch {}
+if (old && total > 0) {
+  for (const id in programs) {
+    const n = programs[id], o = ((old.programs || {})[id] || []).filter((p) => p[1] > from && p[0] < to);
+    if (!n.length) { programs[id] = o; continue; }
+    const nMin = n[0][0], nMax = n[n.length - 1][1];
+    programs[id] = [...o.filter((p) => p[1] <= nMin || p[0] >= nMax), ...n].sort((x, y) => x[0] - y[0]);
+  }
+}
 
 if (total === 0) { console.error("No se encontró ningún programa; no se sobreescribe epg.json"); process.exit(2); }
-writeFileSync(new URL("../data/epg.json", import.meta.url), JSON.stringify({ meta: { generated: now, demo: false, days: DAYS }, programs }));
+let withData = 0;
+for (const id in programs) if (programs[id].length) withData++;
+writeFileSync(outUrl, JSON.stringify({ meta: { generated: now, demo: false, days: DAYS }, programs }));
 console.log(`${total} programas, ${withData}/${channels.length} canales con datos`);
 const miss = channels.filter((c) => !programs[c.id].length).map((c) => c.id);
 if (miss.length) console.log("Canales sin datos (revisar id/alias en make-channels.mjs):", miss.join(", "));

@@ -22,3 +22,10 @@ La app lee `data/epg.json`. Ahora trae **datos de demostración** (aparece un ca
 
 ## Google Play
 Ver `play/GUIA-GOOGLE-PLAY.md`. Importante: nombrá el repositorio `TU-USUARIO.github.io` para que la app quede en la raíz del dominio.
+
+## Deportes
+La pestaña **Deportes** busca por deporte, torneo, equipo/jugador o canal, y muestra canal y horario (hora de Argentina).
+- `tools/sports-taxonomy.mjs`: deportes y torneos (palabras clave). Agregá lo que falte ahí.
+- `tools/build-sports.mjs`: arma `data/sports.json` desde los canales argentinos y los deportivos de otros países.
+- `tools/sports-sites.txt`: fuentes de canales deportivos de otros países (hoy mi.tv de MX, BR, CL, CO, PE, PY). Para sumar más países o fuentes, agregá líneas `ruta|País|código`. El flujo imprime la lista de fuentes disponibles en iptv-org.
+- Un evento solo aparece si algún canal lo transmite y está en esas fuentes; Europa/EE.UU. necesitan otra fuente.

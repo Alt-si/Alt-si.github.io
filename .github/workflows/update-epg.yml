@@ -2,7 +2,7 @@ name: Actualizar programación
 
 on:
   schedule:
-    - cron: "0 */6 * * *"   # cada 6 horas (UTC)
+    - cron: "0 3,9,15,21 * * *"   # 00, 06, 12 y 18 h de Argentina (evita 21-24 h, cuando la fuente ya cuenta el día siguiente)
   workflow_dispatch:
 
 permissions:
@@ -40,6 +40,23 @@ jobs:
           echo "=== archivos generados"
           ls -la ../xmltv
 
+      - name: Descargar deportes de otros países
+        continue-on-error: true
+        run: |
+          mkdir -p xmltv/sports
+          cd epg-src
+          echo "--- fuentes disponibles en iptv-org (para sumar más países/canales):"
+          ls sites | tr '\n' ' ' | head -c 9000; echo
+          while IFS='|' read -r f country code; do
+            [ -z "$f" ] && continue
+            n=$(basename "$f" .channels.xml)
+            echo "=================== $f ($country)"
+            [ -f "sites/$f" ] || { echo "no existe sites/$f"; continue; }
+            node ../tools/filter-sports.mjs "sites/$f" "../xmltv/sports/$n.channels.xml" "../xmltv/sports/$n.map.json" "$country" "SP$code" || continue
+            npm run grab -- --channels="../xmltv/sports/$n.channels.xml" --days=5 --output="../xmltv/sports/$n.xml" 2>&1 | tail -3 || true
+          done < ../tools/sports-sites.txt
+          ls -la ../xmltv/sports
+
       - name: Convertir a epg.json
         run: |
           files=$(ls xmltv/*.xml 2>/dev/null | grep -v '\.channels\.xml$' || true)
@@ -55,9 +72,12 @@ jobs:
           for f in $files; do grep -o ' channel="[^"]*"' $f | sort | uniq -c | sort -n | head -50; done
           node tools/xmltv-to-json.mjs $files
 
+      - name: Construir deportes
+        run: node tools/build-sports.mjs xmltv/sports
+
       - name: Publicar cambios
         run: |
           git config user.name "epg-bot"
           git config user.email "epg-bot@users.noreply.github.com"
-          git add data/epg.json
+          git add data/epg.json data/sports.json
           git diff --cached --quiet || (git commit -m "Actualizar programación" && git push)
