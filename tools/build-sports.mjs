@@ -2,7 +2,7 @@
 // Lee data/epg.json (canales argentinos) y, si existen, los XMLTV de canales deportivos
 // de otros países (con su .map.json generado por filter-sports.mjs). Escribe data/sports.json.
 import { readFileSync, writeFileSync, existsSync, readdirSync } from "node:fs";
-import { SPORTS, classify, participants, norm } from "./sports-taxonomy.mjs";
+import { SPORTS, classify, participants, norm, roundOf, sameName } from "./sports-taxonomy.mjs";
 
 const rootUrl = new URL("../", import.meta.url);
 const TZ = -3 * 3600, DAYS = 5;
@@ -99,8 +99,39 @@ for (const e of events) {
 }
 const suggest = [...count.values()].sort((a, b) => b.n - a.n).slice(0, 500).map((o) => [o.name, o.sport]);
 
+// ---- Fase y rivales por evento, y partidos agrupados (varios canales = un solo partido) ----
+for (const e of events) {
+  const pair = participants(e[2]);
+  e[7] = roundOf(e[2] + " " + e[3]);
+  e[8] = pair.length === 2 ? pair[0] : "";
+  e[9] = pair.length === 2 ? pair[1] : "";
+  e.length = 10;
+}
+const DUR = { futbol: 7200, tenis: 10800, padel: 5400, basquet: 9000, voley: 7200, rugby: 6000, hockey: 7200, nfl: 12600, beisbol: 10800, combate: 10800, automovilismo: 7200, golf: 14400 };
+const cands = [];
+for (const e of events) {
+  if (!e[8] || !e[9] || e[5] === "otros") continue;
+  const c = cands.find((x) => x.sp === e[5] && Math.abs(x.s - e[0]) <= 5400 && ((sameName(x.a, e[8]) && sameName(x.b, e[9])) || (sameName(x.a, e[9]) && sameName(x.b, e[8]))));
+  if (c) { if (!c.ch.includes(e[4])) c.ch.push(e[4]); c.t ||= e[6]; c.r ||= e[7]; continue; }
+  cands.push({ t: e[6], sp: e[5], r: e[7], s: e[0], e: e[1], a: e[8], b: e[9], ch: [e[4]] });
+}
+let fixtures = [];
+try { fixtures = JSON.parse(readFileSync(new URL("data/fixtures.json", rootUrl))).matches || []; } catch {}
+const matches = [], used = new Set();
+for (const f of fixtures) {
+  if (f.s + 3 * 3600 <= from || f.s >= to) continue;
+  const i = cands.findIndex((c, k) => !used.has(k) && Math.abs(c.s - f.s) <= 4 * 3600 && ((sameName(f.a, c.a) && sameName(f.b, c.b)) || (sameName(f.a, c.b) && sameName(f.b, c.a))));
+  let ch = [];
+  if (i >= 0) { used.add(i); ch = cands[i].ch; }
+  matches.push({ ...f, r: f.r || (i >= 0 ? cands[i].r : ""), t: f.t || (i >= 0 ? cands[i].t : ""), e: f.s + (DUR[f.sp] || 7200), ch });
+}
+cands.forEach((c, k) => { if (!used.has(k)) matches.push({ ...c, ch: c.ch }); });
+matches.sort((x, y) => x.s - y.s);
+const withCh = matches.filter((m) => m.ch.length).length;
+
 const sports = Object.fromEntries(SPORTS.map(([id, n, e]) => [id, { n, e }]));
-writeFileSync(new URL("data/sports.json", rootUrl), JSON.stringify({ meta: { generated: now, days: DAYS }, sports, channels, suggest, events }));
+writeFileSync(new URL("data/sports.json", rootUrl), JSON.stringify({ meta: { generated: now, days: DAYS }, sports, channels, suggest, events, matches }));
+console.log(`Partidos: ${matches.length} (${fixtures.length} de fixtures, ${withCh} con canal)`);
 const by = {};
 for (const e of events) by[e[5]] = (by[e[5]] || 0) + 1;
 console.log(`${events.length} eventos deportivos (${foreign} de canales de otros países), ${Object.keys(channels).length} canales`);

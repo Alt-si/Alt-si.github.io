@@ -129,3 +129,24 @@ body[data-view="sports"] #guideBar,body[data-view="sports"] #grid,body[data-view
 .sp-row label:has(input:disabled){opacity:.45}
 .ev .when small{white-space:nowrap}
 .ev .when{width:62px}
+
+/* Vista de torneo */
+.tv-back{margin-left:12px;background:none;border:0;color:var(--accent);padding:8px 0;font:inherit;cursor:pointer}
+.tv-head{margin-left:12px;margin-right:12px;color:var(--ink);background:var(--panel);border-left:4px solid var(--cat,#888);border-radius:10px;padding:12px 14px;margin:4px 0 10px}
+.tv-name{font-size:1.2rem;font-weight:700}
+.tv-meta,.tv-ch{opacity:.75;font-size:.85rem;margin-top:3px}
+.tv-phase{margin-top:6px}
+.tv-rounds{margin:0 12px;overflow-x:auto;flex-wrap:nowrap;padding-bottom:6px}
+.tl{margin:0 12px}
+.mt .live{flex:none;background:#e5322d;color:#fff;font-size:11px;font-weight:700;border-radius:6px;padding:2px 6px}
+.mt{color:var(--ink);display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--cat,#888);border-radius:10px;padding:10px 12px;margin:6px 0;font:inherit;cursor:pointer;position:relative}
+.mt.past{opacity:.5}
+.mt .when{display:flex;flex-direction:column;min-width:44px}
+.mt .vs{display:grid;grid-template-columns:1fr auto 1fr;gap:2px 8px;flex:1;align-items:center}
+.mt .rd{grid-column:1/-1;font-size:.72rem;text-transform:uppercase;letter-spacing:.04em;opacity:.7}
+.rd{font-size:.72rem;opacity:.8}
+.mt .side{font-weight:600;overflow-wrap:anywhere}
+.mt .side:last-of-type{text-align:right}
+.mt .x{opacity:.5;font-size:.75rem}
+.mt .sub{grid-column:1/-1;font-size:.78rem;opacity:.75}
+.tg[data-t]{cursor:pointer;text-decoration:underline dotted}

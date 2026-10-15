@@ -163,3 +163,38 @@ export function participants(title) {
   if (parts.length !== 2 || /,/.test(t)) return [];
   return parts.filter((p) => p.length >= 3 && p.length <= 40 && p.split(" ").length <= 5 && /^\p{L}/u.test(p) && !/\d{3,}/.test(p));
 }
+
+// Fase / ronda a partir de título + descripción (es/en/pt).
+const ROUNDS = [
+  [/\bdieciseisavos de final\b|\bround of 32\b/, "Dieciseisavos de final"],
+  [/\boctavos de final\b|\bround of 16\b|\boitavas de final\b/, "Octavos de final"],
+  [/\bcuartos de final\b|\bquarter ?finals?\b|\bquartas de final\b/, "Cuartos de final"],
+  [/\bsemifinal(?:es)?\b|\bsemi ?finals?\b/, "Semifinal"],
+  [/\btercer (?:puesto|lugar)\b|\bthird place\b/, "Tercer puesto"],
+  [/\bfase de (?:liga|grupos)\b|\bleague phase\b|\bgroup stage\b|\bfase de grupos\b/, "Fase de liga / grupos"],
+  [/\b(?:primera|1ra|1st) ronda\b|\bfirst round\b/, "Primera ronda"],
+  [/\b(?:segunda|2da|2nd) ronda\b|\bsecond round\b/, "Segunda ronda"],
+  [/\b(?:tercera|3ra|3rd) ronda\b|\bthird round\b/, "Tercera ronda"],
+  [/\bplay ?offs?\b|\brepechaje\b/, "Playoffs"],
+  [/\bfinal\b/, "Final"],
+];
+export function roundOf(text) {
+  const t = norm(text);
+  for (const [re, label] of ROUNDS) if (re.test(t)) return label;
+  let m = /\bjornada (\d{1,2})\b/.exec(t); if (m) return "Jornada " + m[1];
+  m = /\bfecha (\d{1,2})\b/.exec(t); if (m) return "Fecha " + m[1];
+  m = /\b(?:ronda|round) (\d{1,2})\b/.exec(t); if (m) return "Ronda " + m[1];
+  return "";
+}
+export const ROUND_RANK = ["Fase de liga / grupos", "Primera ronda", "Segunda ronda", "Tercera ronda", "Dieciseisavos de final", "Octavos de final", "Cuartos de final", "Semifinal", "Tercer puesto", "Final"];
+
+// ¿Es el mismo equipo/jugador? (comparte una palabra de 4+ letras, ignorando palabras genéricas)
+const GENERIC = new Set(["club", "city", "united", "real", "deportivo", "sporting", "athletic", "futbol", "football", "team", "juniors", "jrs", "club"]);
+const toks = (s) => norm(s).split(" ").filter((w) => w.length >= 4 && !GENERIC.has(w));
+export function sameName(a, b) {
+  const na = norm(a), nb = norm(b);
+  if (!na || !nb) return false;
+  if (na === nb) return true;
+  const tb = new Set(toks(b));
+  return toks(a).some((w) => tb.has(w));
+}
