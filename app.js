@@ -222,4 +222,10 @@ function init() {
   buildControls();
   if (await load()) { render(true); }
   if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+  // Instalación en Android/Chrome: el navegador avisa cuando se puede instalar y mostramos el botón.
+  let installEv = null;
+  window.addEventListener("beforeinstallprompt", (e) => { e.preventDefault(); installEv = e; const b = $("#installBtn"); if (b) b.hidden = false; });
+  window.addEventListener("appinstalled", () => { installEv = null; const b = $("#installBtn"); if (b) b.hidden = true; });
+  const ib = $("#installBtn");
+  if (ib) ib.onclick = async () => { if (!installEv) return; installEv.prompt(); try { await installEv.userChoice; } catch {} installEv = null; ib.hidden = true; };
 })();

@@ -1,11 +1,14 @@
 {
+  "id": "./",
   "name": "Guía TV Argentina",
   "short_name": "Guía TV",
-  "description": "Programación de los canales de DIRECTV, Flow y Telecentro en línea de tiempo.",
+  "description": "Programación de la TV argentina en línea de tiempo, para los próximos 5 días.",
   "lang": "es-AR",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
+  "orientation": "any",
+  "categories": ["entertainment"],
   "background_color": "#0f1115",
   "theme_color": "#0f1115",
   "icons": [
