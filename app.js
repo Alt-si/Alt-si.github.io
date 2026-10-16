@@ -33,13 +33,21 @@ const norm = (s) => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toL
 
 let today0 = midnightOf(nowSec());
 
+function chanLabel(ch) {
+  const src = (state.logos || {})[ch.id];
+  if (!src) return `<span class="name">${esc(ch.name)}</span>`;
+  return `<span class="logo" title="${esc(ch.name)}"><img src="${esc(src)}" alt="${esc(ch.name)}" loading="lazy" decoding="async" onerror="this.parentNode.outerHTML='<span class=&quot;name&quot;>'+this.alt.replace(/</g,'&lt;')+'</span>'"></span>`;
+}
+
 async function load() {
   const bust = "?t=" + Math.floor(Date.now() / 600000);
   try {
-    const [ch, epg] = await Promise.all([
+    const [ch, epg, logos] = await Promise.all([
       fetch("data/channels.json" + bust).then((r) => r.json()),
-      fetch("data/epg.json" + bust).then((r) => r.json())
+      fetch("data/epg.json" + bust).then((r) => r.json()),
+      fetch("data/logos.json" + bust).then((r) => (r.ok ? r.json() : {})).catch(() => ({}))
     ]);
+    state.logos = logos || {};
     state.channels = ch.channels;
     state.epg = epg;
     state.loadedAt = Date.now();
@@ -105,7 +113,7 @@ function render(scrollToNow) {
 
   for (const ch of chans) {
     const progs = (state.epg.programs[ch.id] || []).filter((p) => p[1] > d0 && p[0] < d1);
-    html += `<div class="row"><div class="chan"><button class="star" data-ch="${esc(ch.id)}" aria-pressed="${state.favs.has(ch.id)}" aria-label="Favorito">★</button><span class="name">${esc(ch.name)}</span></div><div class="track">`;
+    html += `<div class="row"><div class="chan"><button class="star" data-ch="${esc(ch.id)}" aria-pressed="${state.favs.has(ch.id)}" aria-label="Favorito">★</button>${chanLabel(ch)}</div><div class="track">`;
     if (!progs.length) html += `<div class="empty" style="padding:16px;text-align:left">Sin datos de programación</div>`;
     for (const p of progs) {
       const s = Math.max(p[0], d0), e = Math.min(p[1], d1);

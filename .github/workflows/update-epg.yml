@@ -55,9 +55,13 @@ jobs:
           for f in $files; do grep -o ' channel="[^"]*"' $f | sort | uniq -c | sort -n | head -50; done
           node tools/xmltv-to-json.mjs $files
 
+      - name: Descargar logos de canales
+        continue-on-error: true
+        run: node tools/fetch-logos.mjs
+
       - name: Publicar cambios
         run: |
           git config user.name "epg-bot"
           git config user.email "epg-bot@users.noreply.github.com"
-          git add data/epg.json
+          git add data/epg.json data/logos.json logos
           git diff --cached --quiet || (git commit -m "Actualizar programación" && git push)
