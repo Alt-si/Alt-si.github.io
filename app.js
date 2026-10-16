@@ -33,29 +33,6 @@ const norm = (s) => String(s ?? "").normalize("NFD").replace(/[̀-ͯ]/g, "").toL
 
 let today0 = midnightOf(nowSec());
 
-// Deportes: ¿es transmisión en vivo o repetición/diferido? Las grillas no lo dicen siempre, así que se deduce:
-// 1) marcas explícitas en el título; 2) palabras de repetición/resumen; 3) el mismo partido pasa varias veces: la primera
-// emisión (de día/noche) es la del vivo y las siguientes son repeticiones; las de madrugada sin marca se tratan como diferidas.
-const RE_LIVE = /\((?:en vivo|en directo|live|ao vivo)\)|^(?:en vivo|en directo|live)\b|\ben vivo:|\ben directo\b/i;
-const RE_REPLAY = /repetici|diferido|compact|resumen|lo mejor|replay|reprise|goles de|cl[aá]sico|archivo|melhores|highlights|rewind|best of|\(r\)|\bre:|historia de|\bmejores (?:momentos|jugadas)/i;
-function buildKinds() {
-  const kinds = new Map(), firsts = new Map(), all = [];
-  for (const ch of state.channels) for (const p of state.epg.programs[ch.id] || []) if (categoryOf(ch, p) === "sports") all.push([ch.id, p]);
-  all.sort((a, b) => a[1][0] - b[1][0]);
-  for (const [id, p] of all) {
-    const t = p[2], key = id + "|" + p[0];
-    if (RE_LIVE.test(t)) { kinds.set(key, "live"); continue; }
-    if (RE_REPLAY.test(t) || RE_REPLAY.test(String(p[3] || "").slice(0, 100))) { kinds.set(key, "replay"); continue; }
-    if (!/\s(?:vs\.?|v|x|contra)\s|\s[-–]\s/i.test(t) || /^(?:sportscenter|programa|f\d)/i.test(t)) continue;  // solo partidos "A vs B"
-    const nk = norm(t).replace(/\([^)]*\)/g, "").replace(/[^a-z0-9]+/g, " ").trim();
-    const h = new Date((p[0] + TZ) * 1000).getUTCHours();
-    if (!firsts.has(nk)) { firsts.set(nk, p[0]); kinds.set(key, h < 8 ? "replay" : "live"); }
-    else kinds.set(key, "replay");
-  }
-  state.kinds = kinds;
-}
-const kindOf = (ch, p) => (state.kinds && state.kinds.get(ch.id + "|" + p[0])) || "";
-
 function chanLabel(ch) {
   const src = (state.logos || {})[ch.id];
   if (!src) return `<span class="name">${esc(ch.name)}</span>`;
@@ -73,7 +50,6 @@ async function load() {
     state.logos = logos || {};
     state.channels = ch.channels;
     state.epg = epg;
-    buildKinds();
     state.loadedAt = Date.now();
   } catch (e) {
     $("#grid").innerHTML = '<div class="empty">No se pudo cargar la programación. Revisá tu conexión.</div>';
@@ -146,11 +122,8 @@ function render(scrollToNow) {
       if (p[1] <= now) cls.push("past");
       if (p[0] <= now && now < p[1]) cls.push("live");
       if (q && norm(p[2]).includes(q)) cls.push("hit");
-      const kd = kindOf(ch, p);
-      if (kd) cls.push("k-" + kd);
-      const tag = kd === "live" ? '<i class="kd live">EN VIVO</i>' : kd === "replay" ? '<i class="kd rep">REPETICIÓN</i>' : "";
       html += `<button class="${cls.join(" ")}" style="--s:${sm.toFixed(2)};--d:${dm.toFixed(2)}" data-ch="${esc(ch.id)}" data-s="${p[0]}">` +
-        `<span class="in"><b>${esc(p[2])}</b><small>${tag}${fmtTime(p[0])} – ${fmtTime(p[1])}</small></span></button>`;
+        `<span class="in"><b>${esc(p[2])}</b><small>${fmtTime(p[0])} – ${fmtTime(p[1])}</small></span></button>`;
     }
     html += "</div></div>";
   }
@@ -199,7 +172,7 @@ function openSheet(chId, start) {
   const mins = Math.round((p[1] - p[0]) / 60);
   const dd = new Date((p[0] + TZ) * 1000);
   $("#sheetBody").innerHTML =
-    `<div class="t-${cat}"><span class="tag">${esc(CATS[cat])}</span>${kindOf(ch, p) === "live" ? ' <span class="kd live">EN VIVO</span>' : kindOf(ch, p) === "replay" ? ' <span class="kd rep">REPETICIÓN / DIFERIDO</span>' : ""}</div>` +
+    `<div class="t-${cat}"><span class="tag">${esc(CATS[cat])}</span></div>` +
     `<h2>${esc(p[2])}</h2>` +
     `<div class="meta">${esc(ch.name)} · ${DOW[dd.getUTCDay()]} ${dd.getUTCDate()} ${MON[dd.getUTCMonth()]}, ${fmtTime(p[0])} – ${fmtTime(p[1])} (${mins} min) · ${status}</div>` +
     (p[3] ? `<p>${esc(p[3])}</p>` : `<p class="meta">Sin descripción disponible.</p>`);
