@@ -40,12 +40,12 @@ const RE_LIVE = /\((?:en vivo|en directo|live|ao vivo)\)|^(?:en vivo|en directo|
 const RE_REPLAY = /repetici|diferido|compact|resumen|lo mejor|replay|reprise|goles de|cl[aá]sico|archivo|melhores|highlights|rewind|best of|\(r\)|\bre:|historia de|\bmejores (?:momentos|jugadas)/i;
 function buildKinds() {
   const kinds = new Map(), firsts = new Map(), all = [];
-  for (const ch of state.channels) if (ch.cat === "sports") for (const p of state.epg.programs[ch.id] || []) if (categoryOf(ch, p) === "sports") all.push([ch.id, p]);   // solo canales deportivos
+  for (const ch of state.channels) for (const p of state.epg.programs[ch.id] || []) if (categoryOf(ch, p) === "sports") all.push([ch.id, p]);
   all.sort((a, b) => a[1][0] - b[1][0]);
   for (const [id, p] of all) {
     const t = p[2], key = id + "|" + p[0];
     if (RE_LIVE.test(t)) { kinds.set(key, "live"); continue; }
-    if (RE_REPLAY.test(t)) { kinds.set(key, "replay"); continue; }   // solo por el título
+    if (RE_REPLAY.test(t) || RE_REPLAY.test(String(p[3] || "").slice(0, 100))) { kinds.set(key, "replay"); continue; }
     if (!/\s(?:vs\.?|v|x|contra)\s|\s[-–]\s/i.test(t) || /^(?:sportscenter|programa|f\d)/i.test(t)) continue;  // solo partidos "A vs B"
     const nk = norm(t).replace(/\([^)]*\)/g, "").replace(/[^a-z0-9]+/g, " ").trim();
     const h = new Date((p[0] + TZ) * 1000).getUTCHours();
