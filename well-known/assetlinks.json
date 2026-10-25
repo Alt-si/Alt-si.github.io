@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.altsi.juegosmentales",
+      "sha256_cert_fingerprints": [
+        "4D:D2:14:F8:3D:72:E2:38:DC:97:BE:FB:90:75:93:63:59:8C:0F:46:57:BA:8D:CF:E5:99:A9:3E:EF:85:07:E5"
+      ]
+    }
+  }
+]
