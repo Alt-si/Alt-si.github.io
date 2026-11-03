@@ -31,7 +31,10 @@
       "namespace": "android_app",
       "package_name": "io.github.altsi.mentedespierta",
       "sha256_cert_fingerprints": [
-        "0F:86:E1:87:B1:48:AE:06:1F:3E:FE:BB:34:16:82:36:FF:33:2D:10:5C:C1:72:1D:AB:B7:CF:69:B8:B6:77:85"
+        "0F:86:E1:87:B1:48:AE:06:1F:3E:FE:BB:34:16:82:36:FF:33:2D:10:5C:C1:72:1D:AB:B7:CF:69:B8:B6:77:85",
+        "EF:03:0B:76:FA:DE:71:E5:85:BA:40:C6:6E:1E:C4:66:E0:61:90:17:C5:AA:B4:7C:16:D8:2E:46:0B:BD:5C:0A",
+        "FE:D3:9C:9F:A5:F0:91:12:00:5B:66:35:20:0B:D8:1F:CD:0D:B5:4F:FB:0F:C5:90:C7:9D:66:79:37:ED:8D:4E",
+        "2B:98:CD:3B:AC:CA:6B:6D:16:DD:1B:15:52:83:BF:9F:C5:2B:81:8B:B8:5B:68:9E:23:3B:0C:7B:30:DB:26:70"
       ]
     }
   }
