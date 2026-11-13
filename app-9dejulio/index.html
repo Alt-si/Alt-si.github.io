@@ -293,6 +293,11 @@
   .sem-zoom button{position:absolute;top:14px;right:14px;z-index:2;width:42px;height:42px;border-radius:50%;border:none;background:#fff;font-size:18px;cursor:pointer}
   .sem-zoom-int{width:100%;height:100%;overflow:auto;touch-action:pan-x pan-y pinch-zoom}
   .sem-zoom-int img{width:230%;display:block}
+
+  .sem-pasos{padding-left:20px;display:flex;flex-direction:column;gap:7px;font-size:14px;line-height:1.4}
+  .btn-sem-app{margin-top:12px;display:flex;align-items:center;justify-content:center;gap:10px;background:#0b4fae;color:#fff;
+    border-radius:14px;padding:14px;font-weight:800;font-size:15px;text-decoration:none}
+  .btn-sem-app svg{width:22px;height:22px}
 </style>
 </head>
 <body>
@@ -439,7 +444,7 @@
       <span class="nom">Eventos</span>
     </a>
     <a class="burbuja" href="#" onclick="event.preventDefault();cerrarRadial('util');setTimeout(abrirSem,250)" style="--c:#0891b2;--dx:-152px;--dy:0px">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2.2-5.2A2 2 0 0 1 7 5.5h10a2 2 0 0 1 1.8 1.3L21 12v5h-2"/><path d="M3 12h18"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M9.5 17h5"/></svg>
       <span class="nom">SEM</span>
     </a>
   </div>
@@ -460,7 +465,14 @@
       <div class="sem-card"><h3>Días y horarios de pago</h3><div id="sem-horarios"></div></div>
       <div class="sem-card"><h3>Calles alcanzadas</h3><ul class="sem-calles" id="sem-calles"></ul></div>
       <div class="sem-card"><h3>Cómo cargar saldo</h3>
-        <p>En la app del Estacionamiento Medido elegí <b>“Alias/CVU para transferir”</b>, copiá tu alias o CVU y transferí desde tu home banking o billetera virtual. Cuando se acredita, el saldo queda disponible para estacionar.</p>
+        <ol class="sem-pasos">
+          <li>Abrí la app <b>SEM Mobile</b> y entrá en <b>“Alias/CVU para transferir”</b>.</li>
+          <li>Ahí vas a ver <b>tu propio alias</b> (empieza con <b>SEM9DEJ.</b>) y <b>tu CVU</b>. Copiá cualquiera de los dos.</li>
+          <li>Hacé una transferencia por el monto que quieras desde tu home banking o billetera virtual.</li>
+          <li>Cuando se acredita, el saldo aparece en la app y ya podés estacionar.</li>
+        </ol>
+        <p class="sem-ayuda">Cada usuario tiene su propia cuenta virtual. Si hubo un error o demora en la acreditación, acercate a las oficinas del municipio para gestionar la devolución.</p>
+        <a class="btn-sem-app" href="https://play.google.com/store/apps/details?id=ar.edu.unlp.semmobile" id="sem-app" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2.2-5.2A2 2 0 0 1 7 5.5h10a2 2 0 0 1 1.8 1.3L21 12v5h-2"/><path d="M3 12h18"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M9.5 17h5"/></svg> Abrir la app SEM Mobile</a>
       </div>
       <a class="btn-zonas" id="sem-web" href="https://www.9dejulio.gov.ar/sem" target="_blank" rel="noopener" style="text-decoration:none">Ir a la web del SEM ›</a>
     </div>
@@ -835,11 +847,13 @@ fetch('eventos.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(d=>d&&
 
 
 /* ---------- SEM: estacionamiento medido ---------- */
-let SEM = {"_como_editar": "horarios: días y horas en que hay que pagar. calles: tramos alcanzados (tomados del mapa oficial). geometria: se completa desde Google My Maps (KML) para que el GPS detecte la zona; lineas = calles [[lat,lng],...], poligonos = áreas. tolerancia_m: distancia a la calle que cuenta como 'en zona'.", "horarios": [], "calles": [{"calle": "Salta", "tramo": "de Robbio a Santa Fe"}, {"calle": "Av. San Martín", "tramo": "de San Juan a Santa Fe"}, {"calle": "Av. Mitre", "tramo": "de San Juan a Santa Fe"}, {"calle": "La Rioja", "tramo": "de San Juan a Santa Fe"}, {"calle": "Cavallari", "tramo": "de Mendoza a Hipólito Yrigoyen"}, {"calle": "Mendoza", "tramo": "de Av. San Martín a Cavallari"}, {"calle": "Robbio", "tramo": "de Salta a Cavallari"}, {"calle": "Libertad", "tramo": "de Salta a Tucumán"}, {"calle": "Av. 25 de Mayo", "tramo": "de Salta a Av. San Martín"}, {"calle": "Av. Vedia", "tramo": "de Av. Mitre a Cavallari"}, {"calle": "Hipólito Yrigoyen", "tramo": "de Ramón N. Poratti a Cavallari"}, {"calle": "Santa Fe", "tramo": "de Av. San Martín a La Rioja"}], "geometria": {"lineas": [], "poligonos": []}, "tolerancia_m": 18, "web": "https://www.9dejulio.gov.ar/sem"};
+let SEM = {"_como_editar": "horarios: días y horas en que hay que pagar. calles: tramos alcanzados (tomados del mapa oficial). geometria: se completa desde Google My Maps (KML) para que el GPS detecte la zona; lineas = calles [[lat,lng],...], poligonos = áreas. tolerancia_m: distancia a la calle que cuenta como 'en zona'.", "horarios": [{"dias": [1, 2, 3, 4, 5], "desde": "08:00", "hasta": "15:00"}], "calles": [{"calle": "Salta", "tramo": "de Robbio a Santa Fe"}, {"calle": "Av. San Martín", "tramo": "de San Juan a Santa Fe"}, {"calle": "Av. Mitre", "tramo": "de San Juan a Santa Fe"}, {"calle": "La Rioja", "tramo": "de San Juan a Santa Fe"}, {"calle": "Cavallari", "tramo": "de Mendoza a Hipólito Yrigoyen"}, {"calle": "Mendoza", "tramo": "de Av. San Martín a Cavallari"}, {"calle": "Robbio", "tramo": "de Salta a Cavallari"}, {"calle": "Libertad", "tramo": "de Salta a Tucumán"}, {"calle": "Av. 25 de Mayo", "tramo": "de Salta a Av. San Martín"}, {"calle": "Av. Vedia", "tramo": "de Av. Mitre a Cavallari"}, {"calle": "Hipólito Yrigoyen", "tramo": "de Ramón N. Poratti a Cavallari"}, {"calle": "Santa Fe", "tramo": "de Av. San Martín a La Rioja"}], "geometria": {"lineas": [], "poligonos": []}, "tolerancia_m": 18, "web": "https://www.9dejulio.gov.ar/sem"};
 fetch('sem.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(d=>{ if(d){ SEM=d; pintarSem(); } }).catch(()=>{});
 const DIAS_CORTO=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
 let semWatch=null, semDentroAntes=null;
 function abrirSem(){ irA('p-sem'); pintarSem(); vigilarSem(); }
+if(/Android/i.test(navigator.userAgent)) document.getElementById('sem-app').href=
+  'intent://#Intent;package=ar.edu.unlp.semmobile;S.browser_fallback_url='+encodeURIComponent('https://play.google.com/store/apps/details?id=ar.edu.unlp.semmobile')+';end';
 function cerrarSem(){ if(semWatch!=null){ navigator.geolocation.clearWatch(semWatch); semWatch=null; } irA('p-inicio'); }
 function pintarSem(){
   document.getElementById('sem-calles').innerHTML=SEM.calles.map(c=>`<li><div><b>${c.calle}</b> <span>${c.tramo}</span></div></li>`).join('');
@@ -895,7 +909,7 @@ function vigilarSem(){
       const cobro = !SEM.horarios.length ? 'Revisá los días y horarios de pago.'
         : tramo ? `Ahora se cobra (hasta las ${tramo.hasta} h). Activá tu estacionamiento en la app.`
         : hoy ? `En este momento no se cobra. Hoy se abona de ${hoy}.` : 'Hoy no se cobra.';
-      estadoSem('dentro','🅿️','Estás en zona de estacionamiento medido',(z.calle?`Calle ${z.calle}. `:'')+cobro);
+      estadoSem('dentro','🚗','Estás en zona de estacionamiento medido',(z.calle?`Calle ${z.calle}. `:'')+cobro);
       if(semDentroAntes===false||semDentroAntes===null) navigator.vibrate&&navigator.vibrate([200,100,200]);
       semDentroAntes=true;
     } else {
