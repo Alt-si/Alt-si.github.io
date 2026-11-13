@@ -1,18 +1,53 @@
 """Lee las últimas noticias de www.9dejulio.gov.ar y las guarda en app-9dejulio/noticias.json.
 Lo ejecuta automáticamente la GitHub Action .github/workflows/noticias-9dejulio.yml."""
-import json, re, sys, datetime, urllib.request
+import json, os, re, sys, datetime, urllib.request
 from urllib.parse import urljoin
 from bs4 import BeautifulSoup
 
 BASE = "https://www.9dejulio.gov.ar/"
 SALIDA = "app-9dejulio/noticias.json"
+CARPETA_IMG = "app-9dejulio/noticias-img"   # las portadas se guardan acá
 MAX = 12
 FECHA_RE = re.compile(r"\b(\d{1,2}/\d{1,2}/\d{2,4})\b")
 
-def descargar(url):
-    req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (app-9dejulio)"})
+def bajar(url):
+    req = urllib.request.Request(url.replace(" ", "%20"), headers={"User-Agent": "Mozilla/5.0 (app-9dejulio)"})
     with urllib.request.urlopen(req, timeout=30) as r:
-        return r.read().decode(r.headers.get_content_charset() or "utf-8", "replace")
+        return r.read(), r.headers
+
+def descargar(url):
+    datos, h = bajar(url)
+    return datos.decode(h.get_content_charset() or "utf-8", "replace")
+
+def portada(n):
+    """Imagen de portada de la noticia: la og:image de la nota (tamaño completo) o, si no hay, la de la portada."""
+    try:
+        nota = BeautifulSoup(descargar(n["link"]), "html.parser")
+        og = nota.find("meta", property="og:image")
+        if og and og.get("content"):
+            return urljoin(n["link"], og["content"])
+    except Exception as e:
+        print("  no se pudo leer la nota", n["id"], e)
+    return n["imagen"]
+
+def guardar_imagen(n):
+    """Descarga la portada y devuelve la ruta relativa para la app (o la URL original si falla)."""
+    url = portada(n)
+    if not url:
+        return ""
+    ext = os.path.splitext(url.split("?")[0])[1].lower()
+    ext = ext if ext in (".jpg", ".jpeg", ".png", ".webp", ".gif") else ".jpg"
+    nombre = f"{n['id']}{ext}"
+    destino = os.path.join(CARPETA_IMG, nombre)
+    if not os.path.exists(destino):
+        try:
+            datos, _ = bajar(url)
+            os.makedirs(CARPETA_IMG, exist_ok=True)
+            open(destino, "wb").write(datos)
+        except Exception as e:
+            print("  no se pudo bajar la imagen", url, e)
+            return url
+    return "noticias-img/" + nombre
 
 def limpiar_titulo(t):
     t = " ".join(t.split()).strip(" -–")
@@ -57,6 +92,15 @@ def main():
     lista = lista[:MAX]
     if not lista:
         print("No se encontraron noticias; no se modifica el archivo."); sys.exit(0)
+    for n in lista:
+        n["imagen_original"] = n["imagen"]
+        n["imagen"] = guardar_imagen(n)
+    # borrar portadas de noticias que ya salieron de la lista
+    usadas = {os.path.basename(n["imagen"]) for n in lista}
+    if os.path.isdir(CARPETA_IMG):
+        for f in os.listdir(CARPETA_IMG):
+            if f not in usadas:
+                os.remove(os.path.join(CARPETA_IMG, f))
     try:
         previo = json.load(open(SALIDA, encoding="utf-8"))["noticias"]
     except Exception:

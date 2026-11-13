@@ -20,10 +20,10 @@ jobs:
       - run: python tools/noticias_9dejulio.py
       - name: Guardar cambios
         run: |
-          if [ -n "$(git status --porcelain app-9dejulio/noticias.json)" ]; then
+          if [ -n "$(git status --porcelain app-9dejulio/noticias.json app-9dejulio/noticias-img)" ]; then
             git config user.name "github-actions[bot]"
             git config user.email "41898699+github-actions[bot]@users.noreply.github.com"
-            git add app-9dejulio/noticias.json
+            git add -A app-9dejulio/noticias.json app-9dejulio/noticias-img
             git commit -m "Actualizar noticias de 9 de Julio"
             git push
           fi
