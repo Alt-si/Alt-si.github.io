@@ -1,66 +1,90 @@
 {
- "actualizado": "2026-11-13T17:20:00Z",
+ "actualizado": "2026-11-13T17:57:24Z",
  "fuente": "https://polosancayetano.com.ar/",
  "empresas": [
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/coop_dudignac-logo-300x89.png",
+   "imagen": "polo-empresas/Slider-Polo-9.png",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/12/Slider-Polo-9.png"
+  },
+  {
+   "imagen": "polo-empresas/Slider-Polo-10.png",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/12/Slider-Polo-10.png"
+  },
+  {
+   "imagen": "polo-empresas/Slider-Polo-11.png",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/12/Slider-Polo-11.png"
+  },
+  {
+   "imagen": "polo-empresas/coop_dudignac-logo-300x89.png",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/coop_dudignac-logo-300x89.png"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/camara-comercio_logo_s1.jpg",
+   "imagen": "polo-empresas/camara-comercio_logo_s1.jpg",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/camara-comercio_logo_s1.jpg"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/club-leones_logo.png",
+   "imagen": "polo-empresas/club-leones_logo.png",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/club-leones_logo.png"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/mecano_ganadero-logo-1-300x123.png",
+   "imagen": "polo-empresas/mecano_ganadero-logo-1-300x123.png",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/mecano_ganadero-logo-1-300x123.png"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/INTECH-LOGO-300x300.png",
+   "imagen": "polo-empresas/INTECH-LOGO-300x300.png",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/INTECH-LOGO-300x300.png"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/yomel_logo.png",
+   "imagen": "polo-empresas/yomel_logo.png",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/yomel_logo.png"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/lamadrugada_logo.jpeg",
+   "imagen": "polo-empresas/lamadrugada_logo.jpeg",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/lamadrugada_logo.jpeg"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/ceres_logo.png",
+   "imagen": "polo-empresas/ceres_logo.png",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/ceres_logo.png"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/nutralmix_logo.jpeg",
+   "imagen": "polo-empresas/nutralmix_logo.jpeg",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/nutralmix_logo.jpeg"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/lablanqueada_logo-300x109.png",
+   "imagen": "polo-empresas/lablanqueada_logo-300x109.png",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/lablanqueada_logo-300x109.png"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/logo_nuevastierras-300x280.png",
+   "imagen": "polo-empresas/logo_nuevastierras-300x280.png",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/logo_nuevastierras-300x280.png"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/logo-simple-GGG-300x142.png",
+   "imagen": "polo-empresas/logo-simple-GGG-300x142.png",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/logo-simple-GGG-300x142.png"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/images.png",
+   "imagen": "polo-empresas/images.png",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/images.png"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/Logos-Municipalidad-300x75.png",
+   "imagen": "polo-empresas/Logos-Municipalidad-300x75.png",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/Logos-Municipalidad-300x75.png"
   },
   {
-   "imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/12/SYAFA-ID-9Ao-Definitiva-editable-01-300x225.jpg",
+   "imagen": "polo-empresas/SYAFA-ID-9Ao-Definitiva-editable-01-300x225.jpg",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/12/SYAFA-ID-9Ao-Definitiva-editable-01-300x225.jpg"
+  },
+  {
+   "imagen": "polo-empresas/WhatsApp-Image-2026-08-24-at-7.32.56-AM-768x960.jpeg",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-24-at-7.32.56-AM-768x960.jpeg"
+  },
+  {
+   "imagen": "polo-empresas/WhatsApp-Image-2026-07-14-at-9.29.22-AM-768x960.jpeg",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-14-at-9.29.22-AM-768x960.jpeg"
+  },
+  {
+   "imagen": "polo-empresas/WhatsApp-Image-2026-04-30-at-11.17.56-AM-768x960.jpeg",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-30-at-11.17.56-AM-768x960.jpeg"
   }
  ]
 }
