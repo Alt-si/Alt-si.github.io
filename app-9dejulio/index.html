@@ -325,6 +325,11 @@
   .polo-card h3{color:var(--polo-osc);font-size:17px;font-weight:900;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
   .polo-card p{font-size:14px;line-height:1.5;color:#3b4250}
   .polo-destacado{margin-top:8px;font-weight:800;color:var(--polo-osc)!important}
+  .polo-emp{margin-top:8px}
+  .polo-emp .nov-cab h3{color:var(--polo-osc);font-size:14px}
+  .emp{width:132px;height:84px;flex-shrink:0;background:#fff;border-radius:14px;border:1.5px solid #e3eceb;
+    display:flex;align-items:center;justify-content:center;padding:10px;box-shadow:0 3px 8px rgba(63,111,108,.08)}
+  .emp img{max-width:100%;max-height:100%;object-fit:contain;display:block}
   .polo-mas{display:inline-block;margin-top:10px;font-weight:800;font-size:14px;color:var(--polo)}
 </style>
 </head>
@@ -543,6 +548,10 @@
         <p>El Espacio de Ideas y Sugerencias es un lugar abierto a la participación y el intercambio. Su propósito es recoger propuestas, opiniones y aportes que contribuyan a mejorar los proyectos.</p>
       </div>
       <button class="sumate" onclick="abrirIdeas()"><span>IDEAS</span></button>
+      <section class="novedades polo-emp">
+        <div class="nov-cab"><h3>Empresas que nos acompañan</h3></div>
+        <div class="nov-ventana"><div class="nov-pista"></div></div>
+      </section>
       <div style="height:10px"></div>
     </div>
   </div>
@@ -907,6 +916,13 @@ const cintaPolo=crearCinta(document.querySelector('#p-estudia .nov-ventana'),{ta
       :`<div class="nov-img polo-sin"><img src="img/san-cayetano-icono.png" alt=""></div>`}
     <div class="nov-txt">${n.fecha?`<small>${n.fecha}</small>`:''}<p>${n.titulo}</p></div></a>`});
 cintaPolo.pintar(POLO_RESPALDO);
+const EMPRESAS_RESPALDO=[{"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/coop_dudignac-logo-300x89.png", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/coop_dudignac-logo-300x89.png"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/camara-comercio_logo_s1.jpg", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/camara-comercio_logo_s1.jpg"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/club-leones_logo.png", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/club-leones_logo.png"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/mecano_ganadero-logo-1-300x123.png", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/mecano_ganadero-logo-1-300x123.png"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/INTECH-LOGO-300x300.png", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/INTECH-LOGO-300x300.png"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/yomel_logo.png", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/yomel_logo.png"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/lamadrugada_logo.jpeg", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/lamadrugada_logo.jpeg"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/ceres_logo.png", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/ceres_logo.png"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/nutralmix_logo.jpeg", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/nutralmix_logo.jpeg"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/lablanqueada_logo-300x109.png", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/lablanqueada_logo-300x109.png"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/logo_nuevastierras-300x280.png", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/logo_nuevastierras-300x280.png"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/logo-simple-GGG-300x142.png", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/logo-simple-GGG-300x142.png"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/images.png", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/images.png"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/Logos-Municipalidad-300x75.png", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/Logos-Municipalidad-300x75.png"}, {"imagen": "https://polosancayetano.com.ar/wp-content/uploads/2025/12/SYAFA-ID-9Ao-Definitiva-editable-01-300x225.jpg", "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/12/SYAFA-ID-9Ao-Definitiva-editable-01-300x225.jpg"}];
+const cintaEmp=crearCinta(document.querySelector('#p-estudia .polo-emp .nov-ventana'),{tarjeta:e=>
+  `<div class="emp"><img src="${e.imagen}" alt="Empresa que acompaña al Polo" loading="lazy" data-o="${e.imagen_original||''}"
+     onerror="if(this.dataset.o&&this.src!==this.dataset.o){this.src=this.dataset.o}else{this.parentNode.remove()}"></div>`});
+cintaEmp.pintar(EMPRESAS_RESPALDO);
+fetch('polo-empresas.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null)
+  .then(d=>{ if(d&&d.empresas&&d.empresas.length) cintaEmp.pintar(d.empresas); }).catch(()=>{});
 fetch('polo.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null)
   .then(d=>{ if(d&&d.noticias&&d.noticias.length) cintaPolo.pintar(d.noticias); }).catch(()=>{});
 

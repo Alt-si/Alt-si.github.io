@@ -98,5 +98,67 @@ def main():
               open(SALIDA, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     print(f"{len(lista)} novedades del Polo guardadas.")
 
+# ---------------- Empresas que acompañan (logos del carrusel de la portada) ----------------
+SALIDA_EMP = "app-9dejulio/polo-empresas.json"
+CARPETA_EMP = "app-9dejulio/polo-empresas"
+
+def logos_portada():
+    from bs4 import BeautifulSoup
+    sopa = BeautifulSoup(bajar(BASE).decode("utf-8", "replace"), "html.parser")
+    titulo = sopa.find(string=re.compile(r"empresas", re.I))
+    if not titulo:
+        return []
+    nodo = titulo.parent
+    for _ in range(8):                      # subir hasta el bloque que contiene los logos
+        if len(nodo.find_all("img")) >= 3 or nodo.parent is None:
+            break
+        nodo = nodo.parent
+    if len(nodo.find_all("img")) < 3:       # el carrusel puede estar en el bloque siguiente
+        sig = nodo.find_next(lambda t: t.name in ("div", "section") and len(t.find_all("img")) >= 3)
+        nodo = sig or nodo
+    urls = []
+    for img in nodo.find_all("img"):
+        src = img.get("data-src") or img.get("data-lazy-src") or img.get("src") or ""
+        if src.startswith("data:") or "/wp-content/uploads/" not in src:
+            continue
+        src = urllib.request.urljoin(BASE, src).replace("http://", "https://")
+        if src not in urls:
+            urls.append(src)
+    return urls
+
+def actualizar_empresas():
+    try:
+        urls = logos_portada()
+    except Exception as e:
+        print("No se pudieron leer los logos:", e); return
+    if not urls:
+        print("No se encontraron logos de empresas; no se modifica."); return
+    os.makedirs(CARPETA_EMP, exist_ok=True)
+    lista, usadas = [], set()
+    for u in urls:
+        nombre = re.sub(r"[^A-Za-z0-9._-]", "", os.path.basename(u.split("?")[0]))[:80]
+        destino = os.path.join(CARPETA_EMP, nombre)
+        local = "polo-empresas/" + nombre
+        if not os.path.exists(destino):
+            try:
+                open(destino, "wb").write(bajar(u))
+            except Exception as e:
+                print("  no se pudo bajar", u, e); local = u
+        usadas.add(nombre); lista.append({"imagen": local, "imagen_original": u})
+    for f in os.listdir(CARPETA_EMP):
+        if f not in usadas:
+            os.remove(os.path.join(CARPETA_EMP, f))
+    try:
+        if json.load(open(SALIDA_EMP, encoding="utf-8"))["empresas"] == lista:
+            print("Empresas sin cambios."); return
+    except Exception:
+        pass
+    json.dump({"actualizado": datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"), "fuente": BASE, "empresas": lista},
+              open(SALIDA_EMP, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    print(f"{len(lista)} logos de empresas guardados.")
+
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    finally:
+        actualizar_empresas()
