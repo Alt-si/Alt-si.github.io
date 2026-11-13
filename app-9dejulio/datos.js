@@ -11,12 +11,6 @@ export const AREAS = {
   "otros":         { nombre: "Otros",         color: "#6b7280" },
 };
 
-export const ESTADOS = {
-  nueva:           { txt: "Nueva",                  color: "#c8102e" },
-  en_camino:       { txt: "Agente en camino",       color: "#ea580c" },
-  con_infraccion:  { txt: "Infracción labrada",     color: "#1d4ed8" },
-  sin_infraccion:  { txt: "Verificada sin infracción", color: "#15803d" },
-};
 
 /* ---------- utilidades ---------- */
 export function distanciaM(a, b) {
@@ -142,7 +136,8 @@ async function crearFirebase() {
    con la app del vecino en una pestaña y la del agente en otra).
    ===================================================================== */
 function crearDemo() {
-  const K_DEN = "demo9dj-denuncias", K_AG = "demo9dj-agentes", K_YO = "demo9dj-agente-actual";
+  const K_DEN = "demo9dj-denuncias", K_AG = "demo9dj-agentes";
+  const K_YO = "demo9dj-agente-" + (document.documentElement.dataset.area || "x");   // sesión separada por mini app
   const canal = "BroadcastChannel" in window ? new BroadcastChannel("demo9dj") : null;
   const leer = k => { try { return JSON.parse(localStorage.getItem(k)) || {}; } catch { return {}; } };
   const escribir = (k, v) => { localStorage.setItem(k, JSON.stringify(v)); canal && canal.postMessage(k); avisar(k); };
@@ -160,9 +155,9 @@ function crearDemo() {
       t[id] = { ...d, id, estado: "nueva", creada: Date.now() }; escribir(K_DEN, t); return id;
     },
     async agenteActual() { const uid = localStorage.getItem(K_YO); return uid ? leer(K_AG)[uid] || null : null; },
-    async ingresar(nombre) {
-      const ag = leer(K_AG), uid = "A-" + nombre.toLowerCase().replace(/\W+/g, "-");
-      ag[uid] = ag[uid] || { uid, nombre, area: "transito", habilitado: true };
+    async ingresar(nombre, area) {
+      const ag = leer(K_AG), uid = "A-" + area + "-" + nombre.toLowerCase().replace(/\W+/g, "-");
+      ag[uid] = ag[uid] || { uid, nombre, area, habilitado: true };
       escribir(K_AG, ag); localStorage.setItem(K_YO, uid); return ag[uid];
     },
     async crearPerfil() { return this.agenteActual(); },

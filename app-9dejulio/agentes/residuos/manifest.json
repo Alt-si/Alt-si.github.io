@@ -1,0 +1,17 @@
+{
+ "name": "Personal de Residuos · 9 de Julio",
+ "short_name": "Residuos",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#f6f4f2",
+ "theme_color": "#d91c90",
+ "icons": [
+  {
+   "src": "icono.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "any maskable"
+  }
+ ]
+}

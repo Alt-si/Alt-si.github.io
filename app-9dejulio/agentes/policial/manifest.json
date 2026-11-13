@@ -1,0 +1,17 @@
+{
+ "name": "Personal Policial · 9 de Julio",
+ "short_name": "Policial",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#f6f4f2",
+ "theme_color": "#1d4ed8",
+ "icons": [
+  {
+   "src": "icono.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "any maskable"
+  }
+ ]
+}

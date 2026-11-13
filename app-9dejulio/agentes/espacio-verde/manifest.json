@@ -1,0 +1,17 @@
+{
+ "name": "Personal de Espacios Verdes · 9 de Julio",
+ "short_name": "Esp. verde",
+ "start_url": "./",
+ "scope": "./",
+ "display": "standalone",
+ "background_color": "#f6f4f2",
+ "theme_color": "#15803d",
+ "icons": [
+  {
+   "src": "icono.svg",
+   "sizes": "any",
+   "type": "image/svg+xml",
+   "purpose": "any maskable"
+  }
+ ]
+}

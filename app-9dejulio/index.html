@@ -234,11 +234,12 @@
   .nov-cab{display:flex;justify-content:space-between;align-items:baseline;padding:0 4px 8px}
   .nov-cab h3{font-size:16px;font-weight:800;color:var(--primario);text-transform:uppercase;letter-spacing:.5px}
   .nov-cab a{font-size:13px;font-weight:700;color:var(--primario);text-decoration:none}
-  .nov-ventana{overflow:hidden;margin:0 -20px;padding:2px 0 6px;
+  .nov-ventana{overflow-x:auto;overflow-y:hidden;scrollbar-width:none;-webkit-overflow-scrolling:touch;touch-action:pan-x pan-y;cursor:grab;margin:0 -20px;padding:2px 20px 6px;
     -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-  .nov-pista{display:flex;gap:12px;width:max-content;animation:cinta var(--dur,60s) linear infinite}
-  .nov-ventana:hover .nov-pista,.nov-ventana.pausa .nov-pista{animation-play-state:paused}
-  @keyframes cinta{from{transform:translateX(-50%)}to{transform:translateX(0)}}  /* de izquierda a derecha */
+  .nov-pista{display:flex;gap:12px;width:max-content}
+  .nov-ventana::-webkit-scrollbar{display:none}
+  .nov-ventana.arrastrando{cursor:grabbing;user-select:none}
+  .nov-ventana.arrastrando a{pointer-events:none}
   .nov{width:230px;flex-shrink:0;background:#fff;border-radius:14px;overflow:hidden;text-decoration:none;color:var(--texto);
     box-shadow:0 4px 12px rgba(217,28,144,.10);display:flex;flex-direction:column}
   .nov-img{width:100%;height:125px;object-fit:cover;display:block;background:var(--primario-claro)}
@@ -246,7 +247,6 @@
   .nov-txt small{font-size:11px;font-weight:700;color:var(--primario)}
   .nov-txt p{font-size:13px;font-weight:600;line-height:1.3;margin-top:3px;
     display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-  @media (prefers-reduced-motion:reduce){.nov-pista{animation:none}.nov-ventana{overflow-x:auto}}
   footer{padding-top:12px!important}
 </style>
 </head>
@@ -651,15 +651,37 @@ function pintarNovedades(lista){
   const html=lista.map(tarjeta).join('');
   const p=document.getElementById('nov-pista');
   p.innerHTML=html+html;                          // duplicado para que el giro sea continuo
-  p.style.setProperty('--dur',(lista.length*6)+'s');
+  requestAnimationFrame(()=>{ ven.scrollLeft = p.scrollWidth/2; });
 }
+const ven=document.querySelector('.nov-ventana');
 pintarNovedades(NOVEDADES_RESPALDO);
 fetch('noticias.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null)
   .then(d=>{ if(d&&d.noticias&&d.noticias.length) pintarNovedades(d.noticias); }).catch(()=>{});
-// en el celular: tocar y mantener pausa la cinta
-const ven=document.querySelector('.nov-ventana');
-ven.addEventListener('touchstart',()=>ven.classList.add('pausa'),{passive:true});
-ven.addEventListener('touchend',()=>setTimeout(()=>ven.classList.remove('pausa'),1500));
+/* La cinta avanza sola de izquierda a derecha; con el dedo (o el mouse) se puede
+   adelantar y retroceder. Después de tocarla, vuelve a moverse sola a los 4 s. */
+let novPausaHasta=0, novPos=null;
+const VEL_NOV=0.5;                                   // píxeles por cuadro (~30 px/s)
+function pausarNov(ms=4000){ novPausaHasta=Date.now()+ms; novPos=null; }
+ven.addEventListener('touchstart',()=>pausarNov(60000),{passive:true});
+ven.addEventListener('touchend',()=>pausarNov(4000),{passive:true});
+ven.addEventListener('wheel',()=>pausarNov(),{passive:true});
+ven.addEventListener('scroll',()=>{                  // vuelta infinita: el contenido está duplicado
+  const mitad=document.getElementById('nov-pista').scrollWidth/2; if(!mitad) return;
+  if(ven.scrollLeft<=2){ ven.scrollLeft+=mitad; novPos=null; }
+  else if(ven.scrollLeft>=mitad*2-ven.clientWidth-2){ ven.scrollLeft-=mitad; novPos=null; }
+},{passive:true});
+// arrastre con mouse (computadora)
+let arr=null;
+ven.addEventListener('mousedown',e=>{ arr={x:e.clientX,s:ven.scrollLeft,mov:false}; pausarNov(60000); });
+window.addEventListener('mousemove',e=>{ if(!arr) return; const dx=e.clientX-arr.x; if(Math.abs(dx)>4){arr.mov=true;ven.classList.add('arrastrando');} ven.scrollLeft=arr.s-dx; });
+window.addEventListener('mouseup',()=>{ if(!arr) return; setTimeout(()=>ven.classList.remove('arrastrando'),0); arr=null; pausarNov(4000); });
+(function moverNov(){
+  if(Date.now()>novPausaHasta && ven.offsetParent){
+    if(novPos===null) novPos=ven.scrollLeft;
+    novPos-=VEL_NOV; ven.scrollLeft=novPos;     // restar = el contenido se corre hacia la derecha
+  }
+  requestAnimationFrame(moverNov);
+})();
 </script>
 <script type="module">
   try{
