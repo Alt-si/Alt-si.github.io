@@ -1,0 +1,14 @@
+{
+ "_como_cargar": "Agregar cada evento dentro de 'eventos' copiando el formato de 'ejemplo'. fecha y hasta en formato AAAA-MM-DD. hora, lugar, descripcion, imagen, link y hasta son opcionales. Los eventos pasados se ocultan solos.",
+ "ejemplo": {
+  "titulo": "Nombre del evento",
+  "fecha": "2026-12-05",
+  "hasta": "2026-12-07",
+  "hora": "20:00 h",
+  "lugar": "Plaza Belgrano",
+  "descripcion": "Breve descripción.",
+  "imagen": "https://...",
+  "link": "https://www.9dejulio.gov.ar/noticia.php?id=..."
+ },
+ "eventos": []
+}
