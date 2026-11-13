@@ -133,25 +133,25 @@
   .indic li{margin:2px 0}
 
   /* ====== MENÚ DE EMERGENCIAS ====== */
-  #emerg{position:absolute;inset:0;z-index:50;pointer-events:none}
-  #emerg .velo{position:absolute;inset:0;background:rgba(40,0,25,.55);backdrop-filter:blur(3px);
+  .radial{position:absolute;inset:0;z-index:50;pointer-events:none}
+  .radial .velo{position:absolute;inset:0;background:rgba(40,0,25,.55);backdrop-filter:blur(3px);
     opacity:0;transition:opacity .25s}
-  #emerg.abierto{pointer-events:auto}
-  #emerg.abierto .velo{opacity:1}
-  #emerg .centro{position:absolute;background:var(--emergencia);color:#fff;border:none;border-radius:var(--radio);
+  .radial.abierto{pointer-events:auto}
+  .radial.abierto .velo{opacity:1}
+  .radial .centro{position:absolute;background:var(--cc,var(--emergencia));color:var(--ct,#fff);border:none;border-radius:var(--radio);
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-weight:700;font-size:15px;
     cursor:pointer;opacity:0;transition:opacity .2s;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-  #emerg.abierto .centro{opacity:1}
-  #emerg .centro .x{font-size:30px;line-height:1}
+  .radial.abierto .centro{opacity:1}
+  .radial .centro .x{font-size:30px;line-height:1}
   .burbuja{position:absolute;width:104px;height:104px;margin:-52px 0 0 -52px;border-radius:50%;
     background:#fff;text-decoration:none;color:var(--texto);
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;
     box-shadow:0 10px 28px rgba(0,0,0,.35);border:4px solid var(--c);
     transform:translate(0,0) scale(.2);opacity:0;
     transition:transform .35s cubic-bezier(.34,1.56,.64,1),opacity .2s}
-  #emerg.abierto .burbuja{opacity:1;transform:translate(var(--dx),var(--dy)) scale(1)}
-  #emerg.abierto .burbuja:nth-of-type(2){transition-delay:.04s}
-  #emerg.abierto .burbuja:nth-of-type(3){transition-delay:.08s}
+  .radial.abierto .burbuja{opacity:1;transform:translate(var(--dx),var(--dy)) scale(1)}
+  .radial.abierto .burbuja:nth-of-type(2){transition-delay:.04s}
+  .radial.abierto .burbuja:nth-of-type(3){transition-delay:.08s}
   .burbuja:active{filter:brightness(.92)}
   .burbuja svg{width:28px;height:28px;color:var(--c)}
   .burbuja .nom{font-size:13px;font-weight:800}
@@ -214,6 +214,17 @@
   .placa-extra b{color:var(--texto)}
   .placa-extra .mini{width:34px;height:34px;background:var(--zc);border-radius:3px;flex-shrink:0}
   .placa-nota{margin-top:8px;font-size:12px;font-style:italic;color:var(--texto-suave)}
+  .radial.abierto .burbuja:nth-of-type(4){transition-delay:.12s}
+  .radial.abierto .burbuja:nth-of-type(5){transition-delay:.16s}
+  .radial.abierto .burbuja:nth-of-type(6){transition-delay:.20s}
+  #denun .burbuja{width:94px;height:94px;margin:-47px 0 0 -47px}
+  #denun .burbuja .nom{font-size:11.5px;padding:0 6px;text-align:center;line-height:1.1}
+  .form-den{background:#fff;border-radius:var(--radio);padding:18px;display:flex;flex-direction:column;gap:12px}
+  .form-den label{font-size:13px;font-weight:700;color:var(--texto)}
+  .form-den textarea,.form-den input{width:100%;border:1.5px solid #e6dde3;border-radius:12px;padding:12px;font:inherit;font-size:15px}
+  .form-den textarea{min-height:110px;resize:vertical}
+  .btn-prim{background:var(--primario);color:#fff;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit}
+  .den-tag{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:30px;color:#fff;font-weight:800;font-size:14px;align-self:flex-start}
 </style>
 </head>
 <body>
@@ -228,12 +239,12 @@
   <main>
 
     <div class="grilla">
-      <button class="btn emergencia" onclick="abrirEmergencias(this)">
+      <button class="btn emergencia" onclick="abrirRadial('emerg',this)">
         <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>
         Emergencias
       </button>
 
-      <button class="btn">
+      <button class="btn" onclick="abrirRadial('denun',this)">
         <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
         Denuncias
       </button>
@@ -305,10 +316,49 @@
     </div>
   </div>
 
+  <!-- ================= MENÚ DENUNCIAS ================= -->
+  <div id="denun" class="radial" style="--cc:#fff;--ct:var(--primario)">
+    <div class="velo" onclick="cerrarRadial('denun')"></div>
+    <button class="centro" onclick="cerrarRadial('denun')"><span class="x">✕</span>Cerrar</button>
+    <a class="burbuja" href="#" onclick="event.preventDefault();abrirDenuncia('transito')" style="--c:#ea580c;--dx:0px;--dy:-152px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="7" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="17" r="1.6"/></svg><span class="nom">Tránsito</span>
+    </a>
+    <a class="burbuja" href="#" onclick="event.preventDefault();abrirDenuncia('policial')" style="--c:#1d4ed8;--dx:-108px;--dy:-108px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 7.5l1.3 2.7 3 .4-2.2 2 .6 3-2.7-1.5-2.7 1.5.6-3-2.2-2 3-.4z"/></svg><span class="nom">Policial</span>
+    </a>
+    <a class="burbuja" href="#" onclick="event.preventDefault();abrirDenuncia('residuos')" style="--c:#d91c90;--dx:-152px;--dy:0px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg><span class="nom">Residuos</span>
+    </a>
+    <a class="burbuja" href="#" onclick="event.preventDefault();abrirDenuncia('espacio-verde')" style="--c:#15803d;--dx:-108px;--dy:108px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22v-6"/><path d="M12 16c-4 0-7-2.5-7-6 0-3 2.5-5 4-5.5C9.5 2.5 11 2 12 2s2.5.5 3 2.5c1.5.5 4 2.5 4 5.5 0 3.5-3 6-7 6z"/></svg><span class="nom">Espacio verde</span>
+    </a>
+    <a class="burbuja" href="#" onclick="event.preventDefault();abrirDenuncia('otros')" style="--c:#6b7280;--dx:0px;--dy:152px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="19" cy="12" r="1.8"/></svg><span class="nom">Otros</span>
+    </a>
+  </div>
+
+  <!-- ================= PANTALLA DENUNCIA ================= -->
+  <div class="pantalla" id="p-denuncia">
+    <div class="barra">
+      <button class="volver" onclick="irA('p-inicio')" aria-label="Volver">‹</button>
+      <h1>Nueva denuncia</h1>
+    </div>
+    <div class="contenido">
+      <form class="form-den" onsubmit="event.preventDefault();enviarDenuncia()">
+        <span class="den-tag" id="den-tag"></span>
+        <label>¿Qué pasó?<textarea id="den-desc" placeholder="Contanos el problema con el mayor detalle posible" required></textarea></label>
+        <label>¿Dónde? <input id="den-dir" placeholder="Calle y altura, o referencia"></label>
+        <label>Foto (opcional) <input type="file" accept="image/*" capture="environment"></label>
+        <button class="btn-prim" type="submit">Enviar denuncia</button>
+        <small style="color:var(--texto-suave);text-align:center">Prototipo: el envío todavía no está conectado.</small>
+      </form>
+    </div>
+  </div>
+
   <!-- ================= MENÚ EMERGENCIAS ================= -->
-  <div id="emerg">
-    <div class="velo" onclick="cerrarEmergencias()"></div>
-    <button class="centro" id="emerg-centro" onclick="cerrarEmergencias()"><span class="x">✕</span>Cerrar</button>
+  <div id="emerg" class="radial">
+    <div class="velo" onclick="cerrarRadial('emerg')"></div>
+    <button class="centro" onclick="cerrarRadial('emerg')"><span class="x">✕</span>Cerrar</button>
 
     <!-- hacia ARRIBA -->
     <a class="burbuja" href="tel:100" style="--c:#e85d04;--dx:0px;--dy:-128px">
@@ -512,16 +562,26 @@ function abrirZonas(){
 }
 
 /* ---------- menú de emergencias ---------- */
-function abrirEmergencias(btn){
+function abrirRadial(id,btn){
   const tel=document.querySelector('.telefono').getBoundingClientRect(), r=btn.getBoundingClientRect();
-  const cx=r.left-tel.left+r.width/2, cy=r.top-tel.top+r.height/2;
-  const c=document.getElementById('emerg-centro');
-  Object.assign(c.style,{left:(r.left-tel.left)+'px',top:(r.top-tel.top)+'px',width:r.width+'px',height:r.height+'px'});
-  document.querySelectorAll('#emerg .burbuja').forEach(b=>{b.style.left=cx+'px';b.style.top=cy+'px'});
-  document.getElementById('emerg').classList.add('abierto');
+  const cx=r.left-tel.left+r.width/2, cy=r.top-tel.top+r.height/2, m=document.getElementById(id);
+  Object.assign(m.querySelector('.centro').style,{left:(r.left-tel.left)+'px',top:(r.top-tel.top)+'px',width:r.width+'px',height:r.height+'px'});
+  m.querySelectorAll('.burbuja').forEach(b=>{b.style.left=cx+'px';b.style.top=cy+'px'});
+  m.classList.add('abierto');
 }
-function cerrarEmergencias(){ document.getElementById('emerg').classList.remove('abierto'); }
-document.querySelectorAll('#emerg .burbuja').forEach(b=>b.addEventListener('click',()=>setTimeout(cerrarEmergencias,300)));
+function cerrarRadial(id){ document.getElementById(id).classList.remove('abierto'); }
+const TIPOS_DEN={"transito":["Tránsito","#ea580c"],"policial":["Policial","#1d4ed8"],"residuos":["Residuos","#d91c90"],
+  "espacio-verde":["Espacio verde","#15803d"],"otros":["Otros","#6b7280"]};
+function abrirDenuncia(k){
+  cerrarRadial('denun');
+  const [n,c]=TIPOS_DEN[k], t=document.getElementById('den-tag');
+  t.textContent='Denuncia · '+n; t.style.background=c;
+  setTimeout(()=>irA('p-denuncia'),250);
+}
+function enviarDenuncia(){
+  document.querySelector('.form-den').innerHTML='<div style="text-align:center;padding:30px 10px"><div style="font-size:46px">✅</div><h2 style="margin:10px 0 6px">¡Denuncia recibida!</h2><p style="color:var(--texto-suave)">(Prototipo: todavía no se envía a ningún lado.)</p><button class="btn-prim" style="margin-top:18px;width:100%" onclick="location.reload()">Volver al inicio</button></div>';
+}
+document.querySelectorAll('#emerg .burbuja').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>cerrarRadial('emerg'),300)));
 </script>
 </body>
 </html>
