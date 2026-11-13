@@ -299,15 +299,6 @@
     border-radius:14px;padding:14px;font-weight:800;font-size:15px;text-decoration:none}
   .btn-sem-app svg{width:22px;height:22px}
 
-  .sem-dato{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f0eaee}
-  .sem-dato div{flex:1;min-width:0}
-  .sem-dato small{display:block;font-size:12px;color:var(--texto-suave)}
-  .sem-dato b{font-size:16px;word-break:break-all}
-  .sem-dato button{border:2px solid #0b4fae;background:#fff;color:#0b4fae;border-radius:10px;padding:8px 12px;font-weight:800;font-family:inherit;cursor:pointer}
-  .sem-dato button.ok{background:#15803d;border-color:#15803d;color:#fff}
-  .sem-campo{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:700;margin-bottom:10px}
-  .sem-campo input{border:1.5px solid #e6dde3;border-radius:12px;padding:12px;font:inherit;font-size:15px}
-  .sem-err{color:#c8102e;font-size:13px;font-weight:600;margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -474,11 +465,11 @@
       </div>
       <div class="sem-card"><h3>Días y horarios de pago</h3><div id="sem-horarios"></div></div>
       <div class="sem-card"><h3>Calles alcanzadas</h3><ul class="sem-calles" id="sem-calles"></ul></div>
-      <div class="sem-card"><h3>Mi alias y CVU</h3><div id="sem-cuenta"></div></div>
       <div class="sem-card"><h3>Cómo cargar saldo</h3>
         <ol class="sem-pasos">
-          <li>Abrí la app <b>SEM Mobile</b> y entrá en <b>“Alias/CVU para transferir”</b>.</li>
-          <li>Ahí vas a ver <b>tu propio alias</b> (empieza con <b>SEM9DEJ.</b>) y <b>tu CVU</b>. Copiá cualquiera de los dos.</li>
+          <li>Abrí la app <b>SEM Mobile</b> con el botón de abajo.</li>
+          <li>Entrá en <b>Transacciones</b> → <b>“Alias/CVU para transferir”</b>.</li>
+          <li>Ahí vas a ver <b>tu propio alias</b> (empieza con <b>SEM9DEJ.</b>) y <b>tu CVU</b>, con un botón para copiarlos.</li>
           <li>Hacé una transferencia por el monto que quieras desde tu home banking o billetera virtual.</li>
           <li>Cuando se acredita, el saldo aparece en la app y ya podés estacionar.</li>
         </ol>
@@ -862,45 +853,13 @@ let SEM = {"_como_editar": "horarios: días y horas en que hay que pagar. calles
 fetch('sem.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(d=>{ if(d){ SEM=d; pintarSem(); } }).catch(()=>{});
 const DIAS_CORTO=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
 let semWatch=null, semDentroAntes=null;
-function abrirSem(){ irA('p-sem'); pintarSem(); pintarCuentaSem(); vigilarSem(); }
+function abrirSem(){ irA('p-sem'); pintarSem(); vigilarSem(); }
 /* Android: abre la app SEM Mobile si está instalada; si no, la ficha de Play Store */
 if(/Android/i.test(navigator.userAgent)){
   const a=document.getElementById('sem-app');
   a.href='intent:#Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;package=ar.edu.unlp.semmobile;S.browser_fallback_url='
     +encodeURIComponent('https://play.google.com/store/apps/details?id=ar.edu.unlp.semmobile')+';end';
   a.removeAttribute('target');
-}
-/* Mi alias y CVU: cada vecino guarda los suyos una vez y después los copia con un toque */
-function leerCuentaSem(){ try{ return JSON.parse(localStorage.getItem('sem-cuenta'))||{}; }catch(e){ return {}; } }
-function pintarCuentaSem(){
-  const c=leerCuentaSem(), el=document.getElementById('sem-cuenta');
-  if(c.alias||c.cvu){
-    el.innerHTML=`<div class="sem-dato"><div><small>Alias</small><b>${c.alias||'—'}</b></div>${c.alias?`<button onclick="copiarSem('${c.alias}',this)">Copiar</button>`:''}</div>
-      <div class="sem-dato"><div><small>CVU</small><b>${c.cvu||'—'}</b></div>${c.cvu?`<button onclick="copiarSem('${c.cvu}',this)">Copiar</button>`:''}</div>
-      <button class="link-gps ver" style="margin-top:4px" onclick="editarCuentaSem()">Cambiar mis datos</button>`;
-  } else editarCuentaSem();
-}
-function editarCuentaSem(){
-  const c=leerCuentaSem();
-  document.getElementById('sem-cuenta').innerHTML=`<p class="sem-ayuda" style="margin:0 0 10px">Guardá tu alias y CVU una sola vez (los ves en la app SEM Mobile, en “Alias/CVU para transferir”). Quedan guardados solo en este celular.</p>
-    <label class="sem-campo">Alias<input id="sem-alias" value="${c.alias||''}" placeholder="SEM9DEJ.…" autocapitalize="characters"></label>
-    <label class="sem-campo">CVU<input id="sem-cvu" value="${c.cvu||''}" placeholder="22 números" inputmode="numeric"></label>
-    <div id="sem-err"></div>
-    <button class="btn-sem-app" style="width:100%;border:none;cursor:pointer" onclick="guardarCuentaSem()">Guardar mis datos</button>
-    <a class="btn-zonas" style="margin-top:10px;text-decoration:none;border-color:#0b4fae;color:#0b4fae" href="${document.getElementById('sem-app').href}">Abrir SEM Mobile para ver mis datos</a>`;
-}
-function guardarCuentaSem(){
-  const alias=document.getElementById('sem-alias').value.trim().toUpperCase(), cvu=document.getElementById('sem-cvu').value.replace(/\D/g,'');
-  const err=document.getElementById('sem-err');
-  if(!alias&&!cvu){ err.innerHTML='<p class="sem-err">Completá al menos uno de los dos.</p>'; return; }
-  if(cvu&&cvu.length!==22){ err.innerHTML='<p class="sem-err">El CVU tiene 22 números (tiene '+cvu.length+').</p>'; return; }
-  try{ localStorage.setItem('sem-cuenta',JSON.stringify({alias,cvu})); }catch(e){}
-  pintarCuentaSem();
-}
-async function copiarSem(t,b){
-  try{ await navigator.clipboard.writeText(t); }
-  catch(e){ const x=document.createElement('textarea'); x.value=t; document.body.appendChild(x); x.select(); document.execCommand('copy'); x.remove(); }
-  const o=b.textContent; b.textContent='¡Copiado!'; b.classList.add('ok'); setTimeout(()=>{b.textContent=o;b.classList.remove('ok');},1800);
 }
 function cerrarSem(){ if(semWatch!=null){ navigator.geolocation.clearWatch(semWatch); semWatch=null; } irA('p-inicio'); }
 function pintarSem(){
