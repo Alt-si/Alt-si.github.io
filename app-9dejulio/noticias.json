@@ -1,7 +1,23 @@
 {
- "actualizado": "2026-11-13T14:23:30Z",
+ "actualizado": "2026-11-13T15:56:59Z",
  "fuente": "https://www.9dejulio.gov.ar/index.php",
  "noticias": [
+  {
+   "id": 9900,
+   "titulo": "Se entregaron certificados a personal de seguridad y tránsito",
+   "fecha": "13/11/26",
+   "imagen": "noticias-img/9900.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9900",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/9c9732d5416c2633d379b3678021d327certificados seguridad (1).jpeg"
+  },
+  {
+   "id": 9899,
+   "titulo": "Servicios públicos: cómo funcionará la recolección de residuos el lunes 16",
+   "fecha": "13/11/26",
+   "imagen": "noticias-img/9899.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9899",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/7708a072a74ecc783cd8f556941f00b0residuos (1).jpeg"
+  },
   {
    "id": 9898,
    "titulo": "Se abre la preinscripción en el centro de desarrollo infantil",
@@ -81,22 +97,6 @@
    "imagen": "noticias-img/9889.png",
    "link": "https://www.9dejulio.gov.ar/noticia.php?id=9889",
    "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/10c6abcf98027cb97766a3f766f91bf4ensayos abiertos quiroga.png"
-  },
-  {
-   "id": 9888,
-   "titulo": "Finalizó el curso de desarrollo de videojuegos",
-   "fecha": "10/11/26",
-   "imagen": "noticias-img/9888.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9888",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/55635a6b5d564053fdf663a31d0720c5videojuegos (1).jpeg"
-  },
-  {
-   "id": 9887,
-   "titulo": "Finalizó la diplomatura en administración y gestión industrial",
-   "fecha": "10/11/26",
-   "imagen": "http://www.9dejulio.gov.ar/images/uploads/256415dbb9bf38597096da4be0efa183gestión industrial (1).jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9887",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/256415dbb9bf38597096da4be0efa183gestión industrial (1).jpeg"
   }
  ]
 }
