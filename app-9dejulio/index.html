@@ -319,7 +319,12 @@
   .sumate span{font-size:30px;font-weight:900;letter-spacing:2px}
   .sumate:active{transform:scale(.95)}
   @keyframes latePolo{50%{box-shadow:0 14px 30px rgba(63,111,108,.45),0 0 0 14px rgba(95,149,146,.15),inset 0 -6px 0 rgba(0,0,0,.12)}}
-  .polo-pie{text-align:center;color:var(--texto-suave);font-size:13px;margin-top:4px}
+  .polo-card{display:block;background:#fff;border-radius:var(--radio);padding:18px;text-decoration:none;color:var(--texto);
+    border:1.5px solid #dbe8e6;border-left:6px solid var(--polo);box-shadow:0 6px 16px rgba(63,111,108,.10)}
+  .polo-card h3{color:var(--polo-osc);font-size:17px;font-weight:900;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px}
+  .polo-card p{font-size:14px;line-height:1.5;color:#3b4250}
+  .polo-destacado{margin-top:8px;font-weight:800;color:var(--polo-osc)!important}
+  .polo-mas{display:inline-block;margin-top:10px;font-weight:800;font-size:14px;color:var(--polo)}
 </style>
 </head>
 <body>
@@ -521,10 +526,21 @@
         <div class="nov-cab"><h3>Novedades</h3><a href="https://polosancayetano.com.ar/" target="_blank" rel="noopener">Ver todas ›</a></div>
         <div class="nov-ventana"><div class="nov-pista"></div></div>
       </section>
-      <a class="sumate" href="https://polosancayetano.com.ar/sumate/" target="_blank" rel="noopener">
-        <span>SUMATE</span>
+      <a class="polo-card" href="https://polosancayetano.com.ar/sumate/" target="_blank" rel="noopener">
+        <h3>Sumate</h3>
+        <p>Te invitamos a sumarte al Centro de Desarrollo Socio Productivo, un espacio de colaboración, innovación y crecimiento colectivo. Nuestro objetivo es impulsar proyectos que generen valor social y productivo en la comunidad.</p>
+        <p class="polo-destacado">¡Sumate y sé parte del cambio!</p>
+        <span class="polo-mas">Quiero sumarme ›</span>
       </a>
-      <p class="polo-pie">Cursos, diplomaturas y formación para el trabajo en 9 de Julio.</p>
+      <a class="polo-card" href="https://polosancayetano.com.ar/centro-de-formacion/" target="_blank" rel="noopener">
+        <h3>Espacio de formación</h3>
+        <p>El Espacio de Formación es un espacio dedicado al aprendizaje, la capacitación y el desarrollo integral de las personas. Su propósito es brindar herramientas que fortalezcan las competencias laborales y personales, promoviendo la inclusión, la innovación y el crecimiento colectivo.</p>
+        <span class="polo-mas">Ver cursos ›</span>
+      </a>
+      <div class="polo-card">
+        <h3>Escuchamos tus ideas</h3>
+        <p>El Espacio de Ideas y Sugerencias es un lugar abierto a la participación y el intercambio. Su propósito es recoger propuestas, opiniones y aportes que contribuyan a mejorar los proyectos.</p>
+      </div>
     </div>
   </div>
 
@@ -813,6 +829,13 @@ document.querySelectorAll('#emerg .burbuja').forEach(b=>b.addEventListener('clic
 const NOVEDADES_RESPALDO = [{"id": 9893, "titulo": "Se continúa con el retiro de vehículos abandonados en la vía pública", "fecha": "12/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9893", "imagen": "https://www.9dejulio.gov.ar/images/uploads/cb6af05667492fa622c717fb50213775retiro%20autos%20(2).jpeg"}, {"id": 9892, "titulo": "La importancia del yoga en los adultos mayores", "fecha": "12/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9892", "imagen": "https://www.9dejulio.gov.ar/images/uploads/39d39616849da29f4eb01dcc45b35c5freflexiones%20yoga.jpeg"}, {"id": 9891, "titulo": "Avanza el ordenamiento catastral y urbano en las localidades del partido", "fecha": "12/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9891", "imagen": "https://www.9dejulio.gov.ar/images/uploads/398d631947d58efad8fc3d3b140b2a82ordenamiento%20%20localidades%20(2).jpeg"}, {"id": 9890, "titulo": "El estacionamiento medido incorpora una nueva función para cargar saldo desde el celular", "fecha": "12/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9890", "imagen": "https://www.9dejulio.gov.ar/images/uploads/ac8ee133027add1ceccb6a08ad3c514bSEM%20saldo%20celu%20(1).jpeg"}, {"id": 9889, "titulo": "“Ensayos abiertos”: la música llegará a Facundo Quiroga", "fecha": "10/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9889", "imagen": "https://www.9dejulio.gov.ar/images/uploads/10c6abcf98027cb97766a3f766f91bf4ensayos%20abiertos%20quiroga.png"}, {"id": 9888, "titulo": "Finalizó el curso de desarrollo de videojuegos", "fecha": "10/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9888", "imagen": "https://www.9dejulio.gov.ar/images/uploads/55635a6b5d564053fdf663a31d0720c5videojuegos%20(1).jpeg"}, {"id": 9887, "titulo": "Finalizó la diplomatura en administración y gestión industrial", "fecha": "10/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9887", "imagen": "https://www.9dejulio.gov.ar/images/uploads/256415dbb9bf38597096da4be0efa183gesti%C3%B3n%20industrial%20(1).jpeg"}, {"id": 9886, "titulo": "Buena convocatoria en el primer encuentro creativo de reutilización textil", "fecha": "10/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9886", "imagen": "https://www.9dejulio.gov.ar/images/uploads/081b5db959f2f5ef4ff0f10afd1c5c44encuentro%20textil%20(2).jpeg"}, {"id": 9885, "titulo": "Recolección de residuos: cómo funcionarán los servicios durante los feriados", "fecha": "6/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9885", "imagen": "https://www.9dejulio.gov.ar/images/uploads/eb48d4af391f94ac39e560f57ca1d96bresiduos%20(3).jpeg"}, {"id": 9884, "titulo": "Presentación del libro “Sable alemán – Lanzas mapuches”", "fecha": "6/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9884", "imagen": "https://www.9dejulio.gov.ar/images/uploads/e3fe33d011496b323e6d6a854825b719libro%20museo.jpeg"}];
 /* Cinta de novedades reutilizable: avanza sola de izquierda a derecha; con el dedo
    (o el mouse) se adelanta y retrocede, y vuelve a moverse sola a los 4 s. */
+/* Solo novedades del último año (fecha "d/m/aa"). Las que no tienen fecha se muestran. */
+function esDelUltimoAnio(n){
+  const m=/^(\d{1,2})\/(\d{1,2})\/(\d{2,4})$/.exec((n.fecha||'').trim()); if(!m) return true;
+  const a=+m[3]<100 ? 2000+ +m[3] : +m[3], f=new Date(a,+m[2]-1,+m[1]);
+  const limite=new Date(); limite.setFullYear(limite.getFullYear()-1);
+  return f>=limite;
+}
 function crearCinta(ven, opciones={}){
   const pista=ven.querySelector('.nov-pista');
   let pausaHasta=0, pos=null, arr=null;
@@ -841,6 +864,8 @@ function crearCinta(ven, opciones={}){
       <img class="nov-img" src="${n.imagen}" alt="" loading="lazy" data-o="${n.imagen_original||''}" onerror="if(this.dataset.o){this.src=this.dataset.o;this.dataset.o=''}else{this.style.visibility='hidden'}">
       <div class="nov-txt"><small>${n.fecha}</small><p>${n.titulo}</p></div></a>`);
   return { pintar(lista){
+    lista=lista.filter(esDelUltimoAnio);
+    ven.closest('section').style.display = lista.length ? '' : 'none';
     const html=lista.map(tarjeta).join('');
     pista.innerHTML=html+html;                     // duplicado para que el giro sea continuo
     requestAnimationFrame(()=>{ ven.scrollLeft = pista.scrollWidth/2; pos=null; });
