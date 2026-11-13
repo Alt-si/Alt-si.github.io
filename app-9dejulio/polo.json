@@ -1,5 +1,78 @@
-{"actualizado":"2026-11-13T17:00:00Z","fuente":"https://polosancayetano.com.ar/","noticias":[
-{"id":"estudia-en-9-de-julio","titulo":"Estudiá en 9 de Julio","fecha":"","link":"https://polosancayetano.com.ar/estudia-en-9-de-julio/","imagen":""},
-{"id":"desarrollo-de-videojuegos","titulo":"Desarrollo de Videojuegos","fecha":"","link":"https://polosancayetano.com.ar/desarrollo-de-videojuegos/","imagen":""},
-{"id":"mes-del-trabajo","titulo":"Mes del Trabajo","fecha":"","link":"https://polosancayetano.com.ar/mes-del-trabajo/","imagen":""}
-]}
+{
+ "actualizado": "2026-11-13T17:00:32Z",
+ "fuente": "https://polosancayetano.com.ar/",
+ "noticias": [
+  {
+   "id": "1741",
+   "titulo": "Estudiá en 9 de Julio",
+   "fecha": "24/8/26",
+   "link": "https://polosancayetano.com.ar/estudia-en-9-de-julio/",
+   "imagen": "polo-img/1741.jpeg",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-24-at-7.32.56-AM.jpeg"
+  },
+  {
+   "id": "1734",
+   "titulo": "Desarrollo de Videojuegos",
+   "fecha": "14/7/26",
+   "link": "https://polosancayetano.com.ar/desarrollo-de-videojuegos/",
+   "imagen": "polo-img/1734.jpeg",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-14-at-9.29.22-AM.jpeg"
+  },
+  {
+   "id": "1729",
+   "titulo": "MEs del trabajo",
+   "fecha": "30/4/26",
+   "link": "https://polosancayetano.com.ar/mes-del-trabajo/",
+   "imagen": "polo-img/1729.jpeg",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-30-at-11.17.56-AM.jpeg"
+  },
+  {
+   "id": "1716",
+   "titulo": "Ronda de negocios",
+   "fecha": "17/4/26",
+   "link": "https://polosancayetano.com.ar/ronda-de-negocios/",
+   "imagen": "polo-img/1716.jpeg",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-17-at-12.00.55-PM.jpeg"
+  },
+  {
+   "id": "1710",
+   "titulo": "CURSO DE ROBÓTICA PARA NIÑOS Y ADOLESCENTES",
+   "fecha": "27/1/26",
+   "link": "https://polosancayetano.com.ar/curso-de-robotica-para-ninos-y-adolescentes/",
+   "imagen": "polo-img/1710.png",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2026/01/robotica.png"
+  },
+  {
+   "id": "1670",
+   "titulo": "curso básico de impresión 3d",
+   "fecha": "27/11/25",
+   "link": "https://polosancayetano.com.ar/curso-basico-de-impresion-3d/",
+   "imagen": "polo-img/1670.jpeg",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/curso_impresion_3d.jpeg"
+  },
+  {
+   "id": "1476",
+   "titulo": "Curso Introducción a las Finanzas: Herramientas Prácticas para Tomar Mejores Decisiones Económicas",
+   "fecha": "7/11/25",
+   "link": "https://polosancayetano.com.ar/nueva-noticia-2/",
+   "imagen": "polo-img/1476.jpeg",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-12-at-10.23.50-AM.jpeg"
+  },
+  {
+   "id": "1474",
+   "titulo": "Curso Introducción al Paisajismo: Diseño, Naturaleza y Creación de Espacios que Inspiran",
+   "fecha": "7/11/25",
+   "link": "https://polosancayetano.com.ar/nueva-noticia/",
+   "imagen": "polo-img/1474.jpeg",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/WhatsApp-Image-2025-11-12-at-10.23.51-AM.jpeg"
+  },
+  {
+   "id": "1256",
+   "titulo": "Curso Introduccion a la ia para la Producción Local: De la Teoría a la Aplicación en el Polo TecnológicoCurso Introduccion a la ia",
+   "fecha": "24/10/25",
+   "link": "https://polosancayetano.com.ar/curso-ia/",
+   "imagen": "polo-img/1256.jpeg",
+   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/10/curso_ia-scaled.jpeg"
+  }
+ ]
+}
