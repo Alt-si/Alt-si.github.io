@@ -448,6 +448,10 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3v-5l2.2-5.2A2 2 0 0 1 7 5.5h10a2 2 0 0 1 1.8 1.3L21 12v5h-2"/><path d="M3 12h18"/><circle cx="7.5" cy="17" r="2"/><circle cx="16.5" cy="17" r="2"/><path d="M9.5 17h5"/></svg>
       <span class="nom">SEM</span>
     </a>
+    <a class="burbuja" href="#" onclick="event.preventDefault();cerrarRadial('util');setTimeout(()=>irA('p-estudia'),250)" style="--c:#ea580c;--dx:-108px;--dy:108px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10L12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/><path d="M22 10v6"/></svg>
+      <span class="nom">Estudiá con nosotros</span>
+    </a>
   </div>
 
   <!-- ================= PANTALLA SEM ================= -->
@@ -482,6 +486,17 @@
   <div class="sem-zoom" id="sem-zoom" onclick="if(event.target===this||event.target.tagName==='BUTTON')this.classList.remove('ver')">
     <button aria-label="Cerrar">✕</button>
     <div class="sem-zoom-int"><img src="img/mapa-sem.jpg" alt="Mapa del estacionamiento medido"></div>
+  </div>
+
+  <!-- ================= PANTALLA ESTUDIÁ CON NOSOTROS ================= -->
+  <div class="pantalla" id="p-estudia">
+    <div class="barra">
+      <button class="volver" onclick="irA('p-inicio')" aria-label="Volver">‹</button>
+      <h1>Estudiá con nosotros</h1>
+    </div>
+    <div class="contenido">
+      <div class="vacio">🎓<br><b>Muy pronto</b><br>Acá vas a encontrar los cursos, talleres y carreras que ofrece el municipio.</div>
+    </div>
   </div>
 
   <!-- ================= PANTALLA EVENTOS ================= -->
@@ -809,6 +824,9 @@ window.addEventListener('mouseup',()=>{ if(!arr) return; setTimeout(()=>ven.clas
 
 /* ---------- teléfonos útiles (agregar o editar acá) ---------- */
 const TELEFONOS = [   // los de Emergencias (Bomberos, Policía, CLYSA) no van acá
+  { grupo: "Municipalidad", items: [
+    { nombre: "Municipalidad de 9 de Julio", numero: "(02317) 610000 · líneas rotativas", tel: "02317610000" },
+  ]},
   { grupo: "Violencia de género", items: [
     { nombre: "Línea 144", numero: "144 · gratuita, las 24 h", tel: "144" },
     { nombre: "Área de Género municipal", numero: "(02317) 610073 · Balcarce 735", tel: "02317610073" },
