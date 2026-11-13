@@ -268,6 +268,31 @@
   .ev-info .ev-dato{color:var(--texto);font-weight:600}
   .ev-img{width:100%;border-radius:12px;margin-top:8px;max-height:180px;object-fit:cover}
   .ev-mes{font-size:12px;font-weight:800;color:#7c3aed;text-transform:uppercase;letter-spacing:1px;margin:6px 4px -2px}
+
+  /* ====== SEM ====== */
+  .sem-estado{border-radius:var(--radio);padding:16px;display:flex;gap:12px;align-items:center;background:#fff;box-shadow:0 6px 14px rgba(0,0,0,.06)}
+  .sem-estado .ico{font-size:30px;line-height:1}
+  .sem-estado b{display:block;font-size:16px}
+  .sem-estado small{font-size:12.5px;opacity:.85;display:block;margin-top:2px}
+  .sem-estado.dentro{background:#0b4fae;color:#fff;animation:latidoSem 1.4s ease 2}
+  .sem-estado.fuera{background:#e3f5ea;color:#14532d}
+  @keyframes latidoSem{50%{transform:scale(1.02);box-shadow:0 0 0 6px rgba(11,79,174,.25)}}
+  .sem-card{background:#fff;border-radius:var(--radio);padding:16px;box-shadow:0 6px 14px rgba(217,28,144,.06)}
+  .sem-card h3{font-size:15px;font-weight:800;color:#0b4fae;margin-bottom:10px;text-transform:uppercase;letter-spacing:.4px}
+  .sem-card p{font-size:14px;line-height:1.45;color:var(--texto)}
+  .sem-mapa{width:100%;border-radius:12px;display:block;cursor:zoom-in}
+  .sem-ayuda{display:block;font-size:12px;color:var(--texto-suave);margin-top:8px}
+  .sem-calles{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .sem-calles li{font-size:14px;display:flex;gap:8px}
+  .sem-calles li::before{content:"";width:6px;border-radius:3px;background:#0b4fae;flex-shrink:0}
+  .sem-calles span{color:var(--texto-suave)}
+  .sem-hor{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0eaee;font-size:14px}
+  .sem-hor:last-child{border:none}
+  .sem-zoom{position:absolute;inset:0;z-index:60;background:rgba(0,0,0,.85);display:none}
+  .sem-zoom.ver{display:block}
+  .sem-zoom button{position:absolute;top:14px;right:14px;z-index:2;width:42px;height:42px;border-radius:50%;border:none;background:#fff;font-size:18px;cursor:pointer}
+  .sem-zoom-int{width:100%;height:100%;overflow:auto;touch-action:pan-x pan-y pinch-zoom}
+  .sem-zoom-int img{width:230%;display:block}
 </style>
 </head>
 <body>
@@ -413,10 +438,36 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/></svg>
       <span class="nom">Eventos</span>
     </a>
-    <a class="burbuja" href="https://www.9dejulio.gov.ar/sem" target="_blank" rel="noopener" onclick="setTimeout(()=>cerrarRadial('util'),300)" style="--c:#0891b2;--dx:-152px;--dy:0px">
+    <a class="burbuja" href="#" onclick="event.preventDefault();cerrarRadial('util');setTimeout(abrirSem,250)" style="--c:#0891b2;--dx:-152px;--dy:0px">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="4"/><path d="M9 17V7h4a3 3 0 0 1 0 6H9"/></svg>
       <span class="nom">SEM</span>
     </a>
+  </div>
+
+  <!-- ================= PANTALLA SEM ================= -->
+  <div class="pantalla" id="p-sem">
+    <div class="barra">
+      <button class="volver" onclick="cerrarSem()" aria-label="Volver">‹</button>
+      <h1>Estacionamiento medido</h1>
+    </div>
+    <div class="contenido">
+      <div class="sem-estado" id="sem-estado"></div>
+      <div class="sem-card">
+        <h3>Mapa de la zona</h3>
+        <img src="img/mapa-sem.jpg" alt="Calles con estacionamiento medido (en azul)" class="sem-mapa" onclick="document.getElementById('sem-zoom').classList.add('ver')">
+        <small class="sem-ayuda">En azul, las calles con estacionamiento medido. Tocá el mapa para agrandarlo.</small>
+      </div>
+      <div class="sem-card"><h3>Días y horarios de pago</h3><div id="sem-horarios"></div></div>
+      <div class="sem-card"><h3>Calles alcanzadas</h3><ul class="sem-calles" id="sem-calles"></ul></div>
+      <div class="sem-card"><h3>Cómo cargar saldo</h3>
+        <p>En la app del Estacionamiento Medido elegí <b>“Alias/CVU para transferir”</b>, copiá tu alias o CVU y transferí desde tu home banking o billetera virtual. Cuando se acredita, el saldo queda disponible para estacionar.</p>
+      </div>
+      <a class="btn-zonas" id="sem-web" href="https://www.9dejulio.gov.ar/sem" target="_blank" rel="noopener" style="text-decoration:none">Ir a la web del SEM ›</a>
+    </div>
+  </div>
+  <div class="sem-zoom" id="sem-zoom" onclick="if(event.target===this||event.target.tagName==='BUTTON')this.classList.remove('ver')">
+    <button aria-label="Cerrar">✕</button>
+    <div class="sem-zoom-int"><img src="img/mapa-sem.jpg" alt="Mapa del estacionamiento medido"></div>
   </div>
 
   <!-- ================= PANTALLA EVENTOS ================= -->
@@ -782,6 +833,78 @@ function pintarEventos(lista){
 pintarEventos([]);
 fetch('eventos.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(d=>d&&pintarEventos(d.eventos)).catch(()=>{});
 
+
+/* ---------- SEM: estacionamiento medido ---------- */
+let SEM = {"_como_editar": "horarios: días y horas en que hay que pagar. calles: tramos alcanzados (tomados del mapa oficial). geometria: se completa desde Google My Maps (KML) para que el GPS detecte la zona; lineas = calles [[lat,lng],...], poligonos = áreas. tolerancia_m: distancia a la calle que cuenta como 'en zona'.", "horarios": [], "calles": [{"calle": "Salta", "tramo": "de Robbio a Santa Fe"}, {"calle": "Av. San Martín", "tramo": "de San Juan a Santa Fe"}, {"calle": "Av. Mitre", "tramo": "de San Juan a Santa Fe"}, {"calle": "La Rioja", "tramo": "de San Juan a Santa Fe"}, {"calle": "Cavallari", "tramo": "de Mendoza a Hipólito Yrigoyen"}, {"calle": "Mendoza", "tramo": "de Av. San Martín a Cavallari"}, {"calle": "Robbio", "tramo": "de Salta a Cavallari"}, {"calle": "Libertad", "tramo": "de Salta a Tucumán"}, {"calle": "Av. 25 de Mayo", "tramo": "de Salta a Av. San Martín"}, {"calle": "Av. Vedia", "tramo": "de Av. Mitre a Cavallari"}, {"calle": "Hipólito Yrigoyen", "tramo": "de Ramón N. Poratti a Cavallari"}, {"calle": "Santa Fe", "tramo": "de Av. San Martín a La Rioja"}], "geometria": {"lineas": [], "poligonos": []}, "tolerancia_m": 18, "web": "https://www.9dejulio.gov.ar/sem"};
+fetch('sem.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null).then(d=>{ if(d){ SEM=d; pintarSem(); } }).catch(()=>{});
+const DIAS_CORTO=['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+let semWatch=null, semDentroAntes=null;
+function abrirSem(){ irA('p-sem'); pintarSem(); vigilarSem(); }
+function cerrarSem(){ if(semWatch!=null){ navigator.geolocation.clearWatch(semWatch); semWatch=null; } irA('p-inicio'); }
+function pintarSem(){
+  document.getElementById('sem-calles').innerHTML=SEM.calles.map(c=>`<li><div><b>${c.calle}</b> <span>${c.tramo}</span></div></li>`).join('');
+  document.getElementById('sem-horarios').innerHTML = SEM.horarios.length
+    ? SEM.horarios.map(h=>`<div class="sem-hor"><b>${unirDiasCorto(h.dias)}</b><span>${h.desde} a ${h.hasta} h</span></div>`).join('')
+    : '<p style="color:var(--texto-suave)">Horarios a confirmar.</p>';
+  if(SEM.web) document.getElementById('sem-web').href=SEM.web;
+}
+function unirDiasCorto(ds){
+  const o=[1,2,3,4,5,6,0].filter(d=>ds.includes(d));
+  if(o.join()==='1,2,3,4,5') return 'Lunes a viernes';
+  if(o.join()==='1,2,3,4,5,6') return 'Lunes a sábado';
+  if(o.length===7) return 'Todos los días';
+  return o.map(d=>DIAS_CORTO[d]).join(', ');
+}
+/* ¿se cobra en este momento? */
+function semCobraAhora(){
+  const ahora=new Date(), d=ahora.getDay(), m=ahora.getHours()*60+ahora.getMinutes();
+  const aMin=t=>{const [h,mm]=t.split(':').map(Number); return h*60+(mm||0);};
+  const tramo=SEM.horarios.find(h=>h.dias.includes(d) && m>=aMin(h.desde) && m<aMin(h.hasta));
+  const hoy=SEM.horarios.filter(h=>h.dias.includes(d)).map(h=>`${h.desde} a ${h.hasta} h`).join(' y ');
+  return {tramo, hoy};
+}
+/* distancia en metros de un punto a un tramo de calle */
+function distSegmento(p,a,b){
+  const k=111320, kx=k*Math.cos(p[0]*Math.PI/180);
+  const ax=(a[1]-p[1])*kx, ay=(a[0]-p[0])*k, bx=(b[1]-p[1])*kx, by=(b[0]-p[0])*k;
+  const dx=bx-ax, dy=by-ay, L=dx*dx+dy*dy;
+  let t=L? -(ax*dx+ay*dy)/L : 0; t=Math.max(0,Math.min(1,t));
+  return Math.hypot(ax+t*dx, ay+t*dy);
+}
+function enZonaSem(lat,lng){
+  const g=SEM.geometria||{}, p=[lat,lng];
+  for(const pol of (g.poligonos||[])) if(puntoEnPoligono(lat,lng,pol.puntos||pol)) return {calle:pol.nombre||null};
+  let mejor=null;
+  for(const l of (g.lineas||[])){ const pts=l.puntos||l;
+    for(let i=0;i<pts.length-1;i++){ const d=distSegmento(p,pts[i],pts[i+1]); if(!mejor||d<mejor.d) mejor={d,calle:l.nombre||null}; } }
+  return mejor && mejor.d <= (SEM.tolerancia_m||18) ? mejor : null;
+}
+function estadoSem(clase,ico,titulo,detalle){
+  const e=document.getElementById('sem-estado'); e.className='sem-estado '+(clase||'');
+  e.innerHTML=`<div class="ico">${ico}</div><div><b>${titulo}</b>${detalle?`<small>${detalle}</small>`:''}</div>`;
+}
+function vigilarSem(){
+  const hayGeo=(SEM.geometria?.lineas?.length||0)+(SEM.geometria?.poligonos?.length||0)>0;
+  if(!navigator.geolocation){ estadoSem('','📍','Sin GPS disponible','Fijate en el mapa si tu calle está marcada en azul.'); return; }
+  estadoSem('','📍','Buscando tu ubicación…');
+  semWatch=navigator.geolocation.watchPosition(pos=>{
+    const {latitude:la, longitude:ln, accuracy:ac}=pos.coords;
+    if(!hayGeo){ estadoSem('','🗺️','Detección automática en preparación',`Tu ubicación: ${la.toFixed(5)}, ${ln.toFixed(5)} (±${Math.round(ac)} m). Mientras tanto, revisá el mapa.`); return; }
+    const z=enZonaSem(la,ln), {tramo,hoy}=semCobraAhora();
+    if(z){
+      const cobro = !SEM.horarios.length ? 'Revisá los días y horarios de pago.'
+        : tramo ? `Ahora se cobra (hasta las ${tramo.hasta} h). Activá tu estacionamiento en la app.`
+        : hoy ? `En este momento no se cobra. Hoy se abona de ${hoy}.` : 'Hoy no se cobra.';
+      estadoSem('dentro','🅿️','Estás en zona de estacionamiento medido',(z.calle?`Calle ${z.calle}. `:'')+cobro);
+      if(semDentroAntes===false||semDentroAntes===null) navigator.vibrate&&navigator.vibrate([200,100,200]);
+      semDentroAntes=true;
+    } else {
+      estadoSem('fuera','✅','No estás en zona de estacionamiento medido',`Ubicación tomada con precisión de ±${Math.round(ac)} m.`);
+      semDentroAntes=false;
+    }
+  },()=>estadoSem('','📍','No pudimos acceder a tu ubicación','Activá el GPS o revisá en el mapa si tu calle está marcada en azul.'),
+  {enableHighAccuracy:true,maximumAge:15000,timeout:15000});
+}
 </script>
 <script type="module">
   try{

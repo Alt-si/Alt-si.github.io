@@ -1,0 +1,21 @@
+{
+ "_como_editar": "horarios: días y horas en que hay que pagar. calles: tramos alcanzados (tomados del mapa oficial). geometria: se completa desde Google My Maps (KML) para que el GPS detecte la zona; lineas = calles [[lat,lng],...], poligonos = áreas. tolerancia_m: distancia a la calle que cuenta como 'en zona'.",
+ "horarios": [],
+ "calles": [
+  { "calle": "Salta", "tramo": "de Robbio a Santa Fe" },
+  { "calle": "Av. San Martín", "tramo": "de San Juan a Santa Fe" },
+  { "calle": "Av. Mitre", "tramo": "de San Juan a Santa Fe" },
+  { "calle": "La Rioja", "tramo": "de San Juan a Santa Fe" },
+  { "calle": "Cavallari", "tramo": "de Mendoza a Hipólito Yrigoyen" },
+  { "calle": "Mendoza", "tramo": "de Av. San Martín a Cavallari" },
+  { "calle": "Robbio", "tramo": "de Salta a Cavallari" },
+  { "calle": "Libertad", "tramo": "de Salta a Tucumán" },
+  { "calle": "Av. 25 de Mayo", "tramo": "de Salta a Av. San Martín" },
+  { "calle": "Av. Vedia", "tramo": "de Av. Mitre a Cavallari" },
+  { "calle": "Hipólito Yrigoyen", "tramo": "de Ramón N. Poratti a Cavallari" },
+  { "calle": "Santa Fe", "tramo": "de Av. San Martín a La Rioja" }
+ ],
+ "geometria": { "lineas": [], "poligonos": [] },
+ "tolerancia_m": 18,
+ "web": "https://www.9dejulio.gov.ar/sem"
+}
