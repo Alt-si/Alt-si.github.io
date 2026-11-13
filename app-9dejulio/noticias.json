@@ -1,12 +1,102 @@
-{"actualizado":"2026-11-13T12:45:00Z","fuente":"https://www.9dejulio.gov.ar/index.php","noticias":[
-{"id":9893,"titulo":"Se continúa con el retiro de vehículos abandonados en la vía pública","fecha":"12/11/26","link":"https://www.9dejulio.gov.ar/noticia.php?id=9893","imagen":"https://www.9dejulio.gov.ar/images/uploads/cb6af05667492fa622c717fb50213775retiro%20autos%20(2).jpeg"},
-{"id":9892,"titulo":"La importancia del yoga en los adultos mayores","fecha":"12/11/26","link":"https://www.9dejulio.gov.ar/noticia.php?id=9892","imagen":"https://www.9dejulio.gov.ar/images/uploads/39d39616849da29f4eb01dcc45b35c5freflexiones%20yoga.jpeg"},
-{"id":9891,"titulo":"Avanza el ordenamiento catastral y urbano en las localidades del partido","fecha":"12/11/26","link":"https://www.9dejulio.gov.ar/noticia.php?id=9891","imagen":"https://www.9dejulio.gov.ar/images/uploads/398d631947d58efad8fc3d3b140b2a82ordenamiento%20%20localidades%20(2).jpeg"},
-{"id":9890,"titulo":"El estacionamiento medido incorpora una nueva función para cargar saldo desde el celular","fecha":"12/11/26","link":"https://www.9dejulio.gov.ar/noticia.php?id=9890","imagen":"https://www.9dejulio.gov.ar/images/uploads/ac8ee133027add1ceccb6a08ad3c514bSEM%20saldo%20celu%20(1).jpeg"},
-{"id":9889,"titulo":"“Ensayos abiertos”: la música llegará a Facundo Quiroga","fecha":"10/11/26","link":"https://www.9dejulio.gov.ar/noticia.php?id=9889","imagen":"https://www.9dejulio.gov.ar/images/uploads/10c6abcf98027cb97766a3f766f91bf4ensayos%20abiertos%20quiroga.png"},
-{"id":9888,"titulo":"Finalizó el curso de desarrollo de videojuegos","fecha":"10/11/26","link":"https://www.9dejulio.gov.ar/noticia.php?id=9888","imagen":"https://www.9dejulio.gov.ar/images/uploads/55635a6b5d564053fdf663a31d0720c5videojuegos%20(1).jpeg"},
-{"id":9887,"titulo":"Finalizó la diplomatura en administración y gestión industrial","fecha":"10/11/26","link":"https://www.9dejulio.gov.ar/noticia.php?id=9887","imagen":"https://www.9dejulio.gov.ar/images/uploads/256415dbb9bf38597096da4be0efa183gesti%C3%B3n%20industrial%20(1).jpeg"},
-{"id":9886,"titulo":"Buena convocatoria en el primer encuentro creativo de reutilización textil","fecha":"10/11/26","link":"https://www.9dejulio.gov.ar/noticia.php?id=9886","imagen":"https://www.9dejulio.gov.ar/images/uploads/081b5db959f2f5ef4ff0f10afd1c5c44encuentro%20textil%20(2).jpeg"},
-{"id":9885,"titulo":"Recolección de residuos: cómo funcionarán los servicios durante los feriados","fecha":"6/11/26","link":"https://www.9dejulio.gov.ar/noticia.php?id=9885","imagen":"https://www.9dejulio.gov.ar/images/uploads/eb48d4af391f94ac39e560f57ca1d96bresiduos%20(3).jpeg"},
-{"id":9884,"titulo":"Presentación del libro “Sable alemán – Lanzas mapuches”","fecha":"6/11/26","link":"https://www.9dejulio.gov.ar/noticia.php?id=9884","imagen":"https://www.9dejulio.gov.ar/images/uploads/e3fe33d011496b323e6d6a854825b719libro%20museo.jpeg"}
-]}
+{
+ "actualizado": "2026-11-13T14:23:30Z",
+ "fuente": "https://www.9dejulio.gov.ar/index.php",
+ "noticias": [
+  {
+   "id": 9898,
+   "titulo": "13/11/26 - se abre la preinscripción en el centro de desarrollo infantil",
+   "fecha": "13/11/26",
+   "imagen": "noticias-img/9898.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9898",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/d293e3473dcc9ad68c4a07337bbcfdbecdi.jpeg"
+  },
+  {
+   "id": 9897,
+   "titulo": "13/11/26 - remendadora de mundos: el arte de transformar retazos en historias",
+   "fecha": "13/11/26",
+   "imagen": "noticias-img/9897.jpg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9897",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/8df2a51480d1ea8eb8f52c5d2ba44f89remendadora-11.jpg"
+  },
+  {
+   "id": 9896,
+   "titulo": "13/11/26 - la omic brinda recomendaciones para evitar fraudes",
+   "fecha": "13/11/26",
+   "imagen": "noticias-img/9896.jpg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9896",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/b43fa157566b0a31020227ae7f3d7822omic.jpg"
+  },
+  {
+   "id": 9895,
+   "titulo": "13/11/26 - alerta a la comunidad por venta ilegal de lotes municipales",
+   "fecha": "13/11/26",
+   "imagen": "noticias-img/9895.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9895",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/5d4c39254542a1464d1db1d9070e595aventa ilegal de lotes .jpeg"
+  },
+  {
+   "id": 9894,
+   "titulo": "13/11/26 - asueto por el día del empleado municipal",
+   "fecha": "13/11/26",
+   "imagen": "noticias-img/9894.jpg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9894",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/d736fe894c6a9cfcfb9eac28b9975abeASUETO.jpg"
+  },
+  {
+   "id": 9893,
+   "titulo": "12/11/26 - se continúa con el retiro de vehículos abandonados en la vía pública",
+   "fecha": "12/11/26",
+   "imagen": "noticias-img/9893.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9893",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/cb6af05667492fa622c717fb50213775retiro autos (2).jpeg"
+  },
+  {
+   "id": 9892,
+   "titulo": "12/11/26 - la importancia del yoga en los adultos mayores",
+   "fecha": "12/11/26",
+   "imagen": "noticias-img/9892.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9892",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/39d39616849da29f4eb01dcc45b35c5freflexiones yoga.jpeg"
+  },
+  {
+   "id": 9891,
+   "titulo": "12/11/26 - avanza el ordenamiento catastral y urbano en las localidades del partido",
+   "fecha": "12/11/26",
+   "imagen": "noticias-img/9891.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9891",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/398d631947d58efad8fc3d3b140b2a82ordenamiento  localidades (2).jpeg"
+  },
+  {
+   "id": 9890,
+   "titulo": "12/11/26 - el estacionamiento medido incorpora una nueva función para cargar saldo desde el celular",
+   "fecha": "12/11/26",
+   "imagen": "noticias-img/9890.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9890",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/ac8ee133027add1ceccb6a08ad3c514bSEM saldo celu (1).jpeg"
+  },
+  {
+   "id": 9889,
+   "titulo": "10/11/26 - “ensayos abiertos”: la música llegará a facundo quiroga",
+   "fecha": "10/11/26",
+   "imagen": "noticias-img/9889.png",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9889",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/10c6abcf98027cb97766a3f766f91bf4ensayos abiertos quiroga.png"
+  },
+  {
+   "id": 9888,
+   "titulo": "10/11/26 - finalizó el curso de desarrollo de videojuegos",
+   "fecha": "10/11/26",
+   "imagen": "noticias-img/9888.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9888",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/55635a6b5d564053fdf663a31d0720c5videojuegos (1).jpeg"
+  },
+  {
+   "id": 9887,
+   "titulo": "10/11/26 - finalizó la diplomatura en administración y gestión industrial",
+   "fecha": "10/11/26",
+   "imagen": "http://www.9dejulio.gov.ar/images/uploads/256415dbb9bf38597096da4be0efa183gestión industrial (1).jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9887",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/256415dbb9bf38597096da4be0efa183gestión industrial (1).jpeg"
+  }
+ ]
+}
