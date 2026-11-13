@@ -217,8 +217,8 @@
   .radial.abierto .burbuja:nth-of-type(4){transition-delay:.12s}
   .radial.abierto .burbuja:nth-of-type(5){transition-delay:.16s}
   .radial.abierto .burbuja:nth-of-type(6){transition-delay:.20s}
-  #denun .burbuja{width:94px;height:94px;margin:-47px 0 0 -47px}
-  #denun .burbuja .nom{font-size:11.5px;padding:0 6px;text-align:center;line-height:1.1}
+  #denun .burbuja,#util .burbuja{width:94px;height:94px;margin:-47px 0 0 -47px}
+  #util .burbuja .nom,#denun .burbuja .nom{font-size:11.5px;padding:0 6px;text-align:center;line-height:1.1}
   .form-den{background:#fff;border-radius:var(--radio);padding:18px;display:flex;flex-direction:column;gap:12px}
   .form-den label{font-size:13px;font-weight:700;color:var(--texto)}
   .form-den textarea,.form-den input{width:100%;border:1.5px solid #e6dde3;border-radius:12px;padding:12px;font:inherit;font-size:15px}
@@ -248,6 +248,14 @@
   .nov-txt p{font-size:13px;font-weight:600;line-height:1.3;margin-top:3px;
     display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
   footer{padding-top:12px!important}
+
+  .tel{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px 14px;box-shadow:0 4px 10px rgba(217,28,144,.06)}
+  .tel .info{flex:1;min-width:0}
+  .tel b{display:block;font-size:15px}
+  .tel small{font-size:13px;color:var(--texto-suave)}
+  .tel a{width:46px;height:46px;border-radius:14px;background:var(--primario);color:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+  .tel a svg{width:22px;height:22px}
+  .tel-grupo{font-size:12px;font-weight:800;color:var(--primario);text-transform:uppercase;letter-spacing:1px;margin:6px 4px -2px}
 </style>
 </head>
 <body>
@@ -267,7 +275,17 @@
         Emergencias
       </button>
 
-      <button class="btn" id="btn-utiles" onclick="abrirRadial('denun',this)">
+      <button class="btn" onclick="abrirRadial('denun',this)">
+        <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
+        Denuncias
+      </button>
+
+      <button class="btn" onclick="abrirResiduos()">
+        <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M10 11v6M14 11v6"/></svg></span>
+        Residuos
+      </button>
+
+      <button class="btn" id="btn-utiles" onclick="abrirRadial('util',this)">
         <span class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6.5a2.5 2.5 0 0 0 0 5H19v-5"/><path d="M9 7h6M9 11h6"/></svg></span>
         Útiles
       </button>
@@ -367,6 +385,27 @@
         <small id="den-modo" style="color:var(--texto-suave);text-align:center"></small>
       </form>
     </div>
+  </div>
+
+  <!-- ================= MENÚ ÚTILES ================= -->
+  <!-- Para agregar botones: copiar una "burbuja". Posiciones en abanico hacia arriba e izquierda:
+       1º (0,-152)  2º (-108,-108)  3º (-152,0)  4º (-108,108) -->
+  <div id="util" class="radial" style="--cc:#fff;--ct:var(--primario)">
+    <div class="velo" onclick="cerrarRadial('util')"></div>
+    <button class="centro" onclick="cerrarRadial('util')"><span class="x">✕</span>Cerrar</button>
+    <a class="burbuja" href="#" onclick="event.preventDefault();cerrarRadial('util');setTimeout(()=>irA('p-telefonos'),250)" style="--c:#d91c90;--dx:0px;--dy:-152px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      <span class="nom">Teléfonos</span>
+    </a>
+  </div>
+
+  <!-- ================= PANTALLA TELÉFONOS ================= -->
+  <div class="pantalla" id="p-telefonos">
+    <div class="barra">
+      <button class="volver" onclick="irA('p-inicio')" aria-label="Volver">‹</button>
+      <h1>Teléfonos útiles</h1>
+    </div>
+    <div class="contenido" id="lista-tel"></div>
   </div>
 
   <!-- ================= MENÚ EMERGENCIAS ================= -->
@@ -678,6 +717,21 @@ window.addEventListener('mouseup',()=>{ if(!arr) return; setTimeout(()=>ven.clas
     const m = await import('./datos.js');
     window.datosDenuncias = m.datos; window.comprimirFoto = m.comprimirFoto;
   }catch(e){ console.warn('Envío de denuncias no disponible', e); }
+
+/* ---------- teléfonos útiles (agregar o editar acá) ---------- */
+const TELEFONOS = [
+  { grupo: "Emergencias", items: [
+    { nombre: "Bomberos", numero: "100", tel: "100" },
+    { nombre: "Policía", numero: "101", tel: "101" },
+  ]},
+  { grupo: "Servicios", items: [
+    { nombre: "CLYSA", numero: "(02317) 431200", tel: "02317431200" },
+  ]},
+];
+const ICO_TEL='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>';
+document.getElementById('lista-tel').innerHTML = TELEFONOS.map(g=>`<div class="tel-grupo">${g.grupo}</div>`+
+  g.items.map(t=>`<div class="tel"><div class="info"><b>${t.nombre}</b><small>${t.numero}</small></div>
+    <a href="tel:${t.tel}" aria-label="Llamar a ${t.nombre}">${ICO_TEL}</a></div>`).join('')).join('');
 </script>
 </body>
 </html>
