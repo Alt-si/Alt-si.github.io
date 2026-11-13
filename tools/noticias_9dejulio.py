@@ -51,10 +51,11 @@ def guardar_imagen(n):
 
 def limpiar_titulo(t):
     t = " ".join(t.split()).strip(" -–")
+    t = re.sub(r"^\d{1,2}/\d{1,2}/\d{2,4}\s*[-–|:]?\s*", "", t)   # sacar la fecha pegada al título
     # la web publica los títulos en MAYÚSCULAS: pasarlos a oración
     if t.isupper():
         t = t.capitalize()
-    return t
+    return t[:1].upper() + t[1:]
 
 def main():
     sopa = BeautifulSoup(descargar(BASE + "index.php"), "html.parser")
