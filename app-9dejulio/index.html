@@ -312,6 +312,7 @@
   .nov.polo .nov-txt small{color:var(--polo)}
   .polo-sin{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e9f2f1,#d3e4e2)}
   .polo-sin img{width:64px;opacity:.9}
+  button.sumate{border:none;cursor:pointer;font-family:inherit}
   .sumate{align-self:center;width:170px;height:170px;border-radius:50%;margin:10px 0 0;text-decoration:none;
     background:radial-gradient(circle at 30% 30%,#7fb3af,var(--polo) 55%,var(--polo-osc));color:#fff;
     display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(63,111,108,.45),inset 0 -6px 0 rgba(0,0,0,.12);
@@ -541,6 +542,25 @@
         <h3>Escuchamos tus ideas</h3>
         <p>El Espacio de Ideas y Sugerencias es un lugar abierto a la participación y el intercambio. Su propósito es recoger propuestas, opiniones y aportes que contribuyan a mejorar los proyectos.</p>
       </div>
+      <button class="sumate" onclick="abrirIdeas()"><span>IDEAS</span></button>
+      <div style="height:10px"></div>
+    </div>
+  </div>
+
+  <!-- ================= PANTALLA IDEAS ================= -->
+  <div class="pantalla" id="p-ideas" style="--polo:#5f9592;--polo-osc:#3f6f6c">
+    <div class="barra polo-barra">
+      <button class="volver" onclick="irA('p-estudia')" aria-label="Volver">‹</button>
+      <h1>Escuchamos tus ideas</h1>
+    </div>
+    <div class="contenido">
+      <form class="form-den" id="form-ideas" onsubmit="event.preventDefault();enviarIdea()">
+        <label>Tu idea o sugerencia<textarea id="idea-txt" required placeholder="Contanos tu propuesta, opinión o aporte"></textarea></label>
+        <label>Tu nombre (opcional)<input id="idea-nom"></label>
+        <label>Teléfono o correo para contactarte (opcional)<input id="idea-contacto"></label>
+        <button class="btn-prim" type="submit" style="background:var(--polo)">Enviar idea</button>
+        <small style="color:var(--texto-suave);text-align:center">Prototipo: el envío todavía no está conectado.</small>
+      </form>
     </div>
   </div>
 
@@ -1012,6 +1032,16 @@ function vigilarSem(){
     }
   },()=>estadoSem('','📍','No pudimos acceder a tu ubicación','Activá el GPS o revisá en el mapa si tu calle está marcada en azul.'),
   {enableHighAccuracy:true,maximumAge:15000,timeout:15000});
+}
+
+/* ---------- Ideas y sugerencias (Polo) ---------- */
+const FORM_IDEAS_HTML=document.getElementById('form-ideas').innerHTML;
+function abrirIdeas(){ document.getElementById('form-ideas').innerHTML=FORM_IDEAS_HTML; irA('p-ideas'); }
+function enviarIdea(){
+  // TODO: definir a dónde llegan las ideas (base de datos, correo, planilla…)
+  document.getElementById('form-ideas').innerHTML=`<div style="text-align:center;padding:30px 10px"><div style="font-size:46px">💡</div>
+    <h2 style="margin:10px 0 6px">¡Gracias por tu idea!</h2><p style="color:var(--texto-suave)">(Prototipo: todavía no se envía a ningún lado.)</p>
+    <button class="btn-prim" type="button" style="margin-top:18px;width:100%;background:var(--polo)" onclick="irA('p-estudia')">Volver</button></div>`;
 }
 </script>
 <script type="module">
