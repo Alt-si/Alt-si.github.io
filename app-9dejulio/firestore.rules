@@ -1,0 +1,54 @@
+rules_version = '2';
+// Reglas de seguridad de la base de datos (Firestore).
+// Copiar y pegar en: Firebase → Firestore Database → Reglas → Publicar.
+service cloud.firestore {
+  match /databases/{base}/documents {
+
+    function perfil() { return get(/databases/$(base)/documents/agentes/$(request.auth.uid)).data; }
+    function esAgente() {
+      return request.auth != null
+        && exists(/databases/$(base)/documents/agentes/$(request.auth.uid))
+        && perfil().habilitado == true;
+    }
+    function esDeMiArea(tipo) { return esAgente() && perfil().area == tipo; }
+
+    // ---------- Denuncias ----------
+    match /denuncias/{id} {
+      // Cualquier vecino (sesión anónima) puede crear una denuncia nueva a su nombre.
+      allow create: if request.auth != null
+        && request.resource.data.vecinoUid == request.auth.uid
+        && request.resource.data.estado == 'nueva'
+        && request.resource.data.tipo in ['transito', 'policial', 'residuos', 'espacio-verde', 'otros']
+        && request.resource.data.descripcion is string
+        && request.resource.data.descripcion.size() > 0
+        && request.resource.data.descripcion.size() < 3000;
+
+      // La ven los agentes del área que corresponde y el vecino que la hizo.
+      allow read: if esDeMiArea(resource.data.tipo)
+        || (request.auth != null && resource.data.vecinoUid == request.auth.uid);
+
+      // Solo los agentes del área la actualizan (tomar, cerrar, labrar infracción),
+      // sin poder cambiar el tipo, el texto del vecino ni quién la hizo.
+      allow update: if esDeMiArea(resource.data.tipo)
+        && request.resource.data.tipo == resource.data.tipo
+        && request.resource.data.descripcion == resource.data.descripcion
+        && request.resource.data.vecinoUid == resource.data.vecinoUid;
+
+      allow delete: if false;
+    }
+
+    // ---------- Agentes ----------
+    match /agentes/{uid} {
+      // Cada agente crea su propio perfil, que queda pendiente (habilitado: false)
+      // hasta que un administrador lo habilita desde la consola de Firebase.
+      allow create: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.habilitado == false;
+      allow read: if (request.auth != null && request.auth.uid == uid) || esAgente();
+      // Puede actualizar su ubicación y estado, pero no habilitarse ni cambiarse de área.
+      allow update: if request.auth != null && request.auth.uid == uid
+        && request.resource.data.habilitado == resource.data.habilitado
+        && request.resource.data.area == resource.data.area;
+      allow delete: if false;
+    }
+  }
+}

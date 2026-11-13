@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ea580c">
+<link rel="manifest" href="manifest.json">
+<title>Agentes de Tránsito · 9 de Julio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --area:#ea580c; --area-osc:#b84306; --area-claro:#fff1e8;
+    --muni:#d91c90; --fondo:#f6f4f2; --texto:#1b2333; --suave:#6b7280; --borde:#e7e2de;
+    --rojo:#c8102e; --verde:#15803d; --azul:#1d4ed8;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Montserrat","Segoe UI",Roboto,Arial,sans-serif;background:var(--fondo);color:var(--texto);min-height:100vh}
+  button{font-family:inherit;cursor:pointer}
+  .app{max-width:520px;margin:0 auto;min-height:100vh;display:flex;flex-direction:column;background:var(--fondo)}
+
+  header{background:linear-gradient(180deg,var(--area),var(--area-osc));color:#fff;padding:calc(14px + env(safe-area-inset-top)) 18px 16px;
+    border-radius:0 0 22px 22px;position:sticky;top:0;z-index:5}
+  .h-fila{display:flex;align-items:center;gap:12px}
+  .h-ico{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center}
+  .h-ico svg{width:24px;height:24px}
+  .h-tit{flex:1}
+  .h-tit small{display:block;font-size:11px;opacity:.85;letter-spacing:1.5px;text-transform:uppercase}
+  .h-tit b{font-size:19px;font-weight:800}
+  .h-salir{background:rgba(255,255,255,.18);border:none;color:#fff;border-radius:10px;padding:8px 10px;font-size:12px;font-weight:700}
+  .servicio{margin-top:14px;display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.14);border-radius:14px;padding:10px 12px}
+  .servicio .txt{flex:1;font-size:13px;line-height:1.3}
+  .servicio .txt b{display:block;font-size:14px}
+  .switch{position:relative;width:52px;height:30px;border-radius:30px;background:rgba(255,255,255,.35);border:none;flex-shrink:0;transition:background .2s}
+  .switch::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;transition:left .2s}
+  .switch.on{background:#22c55e}.switch.on::after{left:25px}
+
+  .demo-aviso{margin:12px 16px 0;background:#fff8db;border:1px solid #f5d76e;color:#7a5b00;border-radius:12px;padding:10px 12px;font-size:12.5px;line-height:1.4}
+  .avisos-btn{margin:12px 16px 0;background:#fff;border:2px dashed var(--area);color:var(--area-osc);border-radius:12px;padding:11px;font-weight:800;font-size:13.5px}
+
+  .tabs{display:flex;gap:6px;padding:14px 16px 6px}
+  .tab{flex:1;border:none;background:#fff;border-radius:12px;padding:10px 4px;font-weight:700;font-size:13px;color:var(--suave);position:relative}
+  .tab.sel{background:var(--texto);color:#fff}
+  .tab .n{display:inline-block;min-width:20px;padding:1px 6px;border-radius:10px;background:var(--rojo);color:#fff;font-size:11px;margin-left:4px}
+  .lista{padding:8px 16px 30px;display:flex;flex-direction:column;gap:12px}
+  .vacio{text-align:center;color:var(--suave);padding:40px 10px;font-size:14px}
+  .vacio div{font-size:40px;margin-bottom:8px}
+
+  .card{background:#fff;border-radius:16px;padding:14px;box-shadow:0 3px 10px rgba(0,0,0,.05);display:flex;gap:12px;border:none;text-align:left;width:100%;color:inherit;
+    border-left:5px solid var(--c,var(--area))}
+  .card.nueva{animation:destello 1.2s ease 2}
+  @keyframes destello{50%{box-shadow:0 0 0 4px rgba(234,88,12,.35)}}
+  .card img{width:74px;height:74px;border-radius:12px;object-fit:cover;flex-shrink:0;background:var(--area-claro)}
+  .card .sinfoto{width:74px;height:74px;border-radius:12px;background:var(--area-claro);display:flex;align-items:center;justify-content:center;color:var(--area);flex-shrink:0}
+  .card .cuerpo{flex:1;min-width:0}
+  .card .arriba{display:flex;justify-content:space-between;gap:6px;font-size:11.5px;color:var(--suave);font-weight:600}
+  .card p{font-size:14px;font-weight:600;margin:4px 0 6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .chip{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:800;padding:3px 8px;border-radius:20px;background:var(--fondo);color:var(--texto);margin:2px 4px 0 0}
+  .chip.cerca{background:#dcfce7;color:var(--verde)}
+  .chip.estado{color:#fff;background:var(--c)}
+
+  /* hoja de detalle */
+  .hoja{position:fixed;inset:0;z-index:20;display:none}
+  .hoja.abierta{display:block}
+  .hoja .velo{position:absolute;inset:0;background:rgba(0,0,0,.45)}
+  .hoja .panel{position:absolute;left:0;right:0;bottom:0;max-width:520px;margin:0 auto;max-height:92vh;overflow-y:auto;background:var(--fondo);
+    border-radius:22px 22px 0 0;padding:10px 18px calc(22px + env(safe-area-inset-bottom));animation:sube .25s ease}
+  @keyframes sube{from{transform:translateY(40%);opacity:.4}}
+  .agarre{width:44px;height:5px;border-radius:3px;background:#cfc8c2;margin:4px auto 12px}
+  .panel h2{font-size:19px;font-weight:800;margin-bottom:4px}
+  .panel .meta{font-size:12.5px;color:var(--suave);margin-bottom:12px}
+  .panel .foto{width:100%;border-radius:14px;max-height:260px;object-fit:cover;margin-bottom:12px}
+  .bloque{background:#fff;border-radius:14px;padding:12px 14px;margin-bottom:10px;font-size:14px;line-height:1.45}
+  .bloque small{display:block;font-size:11px;font-weight:800;color:var(--suave);text-transform:uppercase;letter-spacing:.5px;margin-bottom:3px}
+  .acciones{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+  .b{border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:800;color:#fff;background:var(--area);display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+  .b.sec{background:#fff;color:var(--texto);border:2px solid var(--borde)}
+  .b.azul{background:var(--azul)} .b.verde{background:var(--verde)}
+  .b.chico{padding:11px;font-size:14px}
+  .b:disabled{opacity:.55}
+  .fila2{display:flex;gap:10px}.fila2>*{flex:1}
+
+  form.inf{display:flex;flex-direction:column;gap:12px}
+  form.inf label{font-size:12.5px;font-weight:800;display:flex;flex-direction:column;gap:5px}
+  form.inf input,form.inf select,form.inf textarea{border:1.5px solid var(--borde);border-radius:12px;padding:12px;font:inherit;font-size:15px;background:#fff;font-weight:500}
+  form.inf textarea{min-height:80px;resize:vertical}
+  #patente{font-size:24px;font-weight:900;letter-spacing:3px;text-transform:uppercase;text-align:center}
+  .ayuda{font-size:11.5px;color:var(--suave);font-weight:500}
+  .error{background:#fde8ec;color:var(--rojo);border-radius:10px;padding:10px 12px;font-size:13px;font-weight:600}
+
+  /* ingreso */
+  .ingreso{flex:1;display:flex;flex-direction:column;justify-content:center;padding:30px 24px}
+  .ingreso .logo{width:76px;height:76px;border-radius:20px;background:var(--area);color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+  .ingreso .logo svg{width:40px;height:40px}
+  .ingreso h1{text-align:center;font-size:23px;font-weight:900}
+  .ingreso p.sub{text-align:center;color:var(--suave);font-size:14px;margin:4px 0 24px}
+  .ingreso .muni{text-align:center;color:var(--muni);font-weight:800;font-size:12px;letter-spacing:2px;margin-top:24px}
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--texto);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;font-weight:600;z-index:40;max-width:90%;text-align:center;display:none}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<div class="hoja" id="hoja"><div class="velo" onclick="cerrarHoja()"></div><div class="panel" id="panel"></div></div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { datos, AREAS, ESTADOS, distanciaM, textoDistancia, aFecha, comprimirFoto, ubicacionActual, AGENTE_ACTIVO_MIN } from "../datos.js";
+
+const AREA = new URLSearchParams(location.search).get("area") || "transito";
+const INFO = AREAS[AREA];
+const ICONO = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="7" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="17" r="1.6"/></svg>`;
+
+const TIPOS_INFRACCION = [
+  "Estacionamiento en lugar prohibido", "Estacionamiento en doble fila", "Estacionamiento sobre la vereda",
+  "Estacionamiento en rampa para personas con discapacidad", "Obstrucción de garage / entrada de vehículos",
+  "Estacionamiento en parada de colectivo", "Vehículo abandonado en la vía pública", "Estacionamiento medido sin abonar",
+  "Circular en contramano", "Ruidos molestos / escape libre", "Otra",
+];
+const MOTIVOS_SIN = ["El vehículo ya no estaba", "No constituye infracción", "No se encontró la dirección", "Denuncia duplicada", "Otro"];
+
+let yo = null, denuncias = [], agentes = [], miPos = null, pestaña = "nuevas", vistas = null, watchId = null, abiertaId = null;
+const $ = id => document.getElementById(id);
+const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+function toast(m, ms = 2600) { const t = $("toast"); t.textContent = m; t.style.display = "block"; clearTimeout(t._t); t._t = setTimeout(() => t.style.display = "none", ms); }
+function hace(t) {
+  const d = aFecha(t); if (!d) return "recién";
+  const m = Math.round((Date.now() - d) / 60000);
+  if (m < 1) return "recién"; if (m < 60) return `hace ${m} min`;
+  const h = Math.round(m / 60); if (h < 24) return `hace ${h} h`;
+  return d.toLocaleDateString("es-AR", { day: "2-digit", month: "2-digit" }) + " " + d.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" });
+}
+
+/* ================= INGRESO ================= */
+async function inicio() {
+  yo = await datos.agenteActual();
+  if (!yo) return pantallaIngreso();
+  if (yo.sinPerfil) return pantallaPerfil();
+  if (!yo.habilitado) return pantallaPendiente();
+  if (yo.area !== AREA) return pantallaIngreso(`Tu usuario es del área ${AREAS[yo.area]?.nombre || yo.area}.`);
+  pantallaPrincipal();
+}
+function pantallaIngreso(error) {
+  const demo = datos.modo === "demo";
+  $("app").innerHTML = `<div class="ingreso">
+    <div class="logo">${ICONO}</div>
+    <h1>Agentes de ${INFO.nombre}</h1>
+    <p class="sub">Municipalidad de 9 de Julio</p>
+    <form class="inf" id="f-ing">
+      ${error ? `<div class="error">${esc(error)}</div>` : ""}
+      ${demo
+        ? `<div class="demo-aviso" style="margin:0">Modo demo: ingresá solo con tu nombre. Para probar con varios agentes, abrí otra pestaña con otro nombre.</div>
+           <label>Tu nombre<input id="i-nom" required placeholder="Ej: Agente Gómez"></label>`
+        : `<label>Correo<input id="i-mail" type="email" required autocomplete="username"></label>
+           <label>Contraseña<input id="i-clave" type="password" required autocomplete="current-password"></label>`}
+      <button class="b" type="submit">Ingresar</button>
+    </form>
+    <div class="muni">NUEVE DE JULIO · MUNICIPALIDAD</div>
+  </div>`;
+  $("f-ing").onsubmit = async e => {
+    e.preventDefault(); const b = e.target.querySelector("button"); b.disabled = true;
+    try { demo ? await datos.ingresar($("i-nom").value.trim()) : await datos.ingresar($("i-mail").value.trim(), $("i-clave").value); inicio(); }
+    catch (err) { pantallaIngreso("Correo o contraseña incorrectos."); }
+  };
+}
+function pantallaPerfil() {
+  $("app").innerHTML = `<div class="ingreso"><div class="logo">${ICONO}</div><h1>Completá tu perfil</h1>
+    <p class="sub">Es la primera vez que ingresás.</p>
+    <form class="inf" id="f-per"><label>Nombre y apellido<input id="p-nom" required></label>
+    <button class="b" type="submit">Solicitar acceso a ${INFO.nombre}</button></form></div>`;
+  $("f-per").onsubmit = async e => { e.preventDefault(); await datos.crearPerfil($("p-nom").value.trim(), AREA); inicio(); };
+}
+function pantallaPendiente() {
+  $("app").innerHTML = `<div class="ingreso"><div class="logo">${ICONO}</div><h1>Acceso pendiente</h1>
+    <p class="sub">Tu usuario (${esc(yo.email)}) quedó registrado. Un administrador tiene que habilitarlo para que empieces a recibir denuncias.</p>
+    <button class="b" onclick="location.reload()">Ya me habilitaron</button>
+    <button class="b sec" style="margin-top:10px" id="b-salir">Salir</button></div>`;
+  $("b-salir").onclick = async () => { await datos.salir(); location.reload(); };
+}
+
+/* ================= PRINCIPAL ================= */
+function pantallaPrincipal() {
+  const avisosOk = "Notification" in window && Notification.permission === "granted";
+  $("app").innerHTML = `
+    <header>
+      <div class="h-fila"><div class="h-ico">${ICONO}</div>
+        <div class="h-tit"><small>Agentes de ${INFO.nombre}</small><b>${esc(yo.nombre)}</b></div>
+        <button class="h-salir" id="b-salir">Salir</button></div>
+      <div class="servicio"><div class="txt" id="srv-txt"></div><button class="switch" id="sw" aria-label="En servicio"></button></div>
+    </header>
+    ${datos.modo === "demo" ? `<div class="demo-aviso"><b>Modo demo.</b> Las denuncias que hagas desde la app del vecino en este mismo celular aparecen acá al instante.</div>` : ""}
+    ${avisosOk ? "" : `<button class="avisos-btn" id="b-avisos">🔔 Activar avisos de denuncias nuevas</button>`}
+    <div class="tabs">
+      <button class="tab" data-t="nuevas">Nuevas</button>
+      <button class="tab" data-t="mias">Mis casos</button>
+      <button class="tab" data-t="historial">Historial</button>
+    </div>
+    <div class="lista" id="lista"></div>`;
+  $("b-salir").onclick = async () => { await servicio(false); await datos.salir(); location.reload(); };
+  $("sw").onclick = () => servicio(!$("sw").classList.contains("on"));
+  $("b-avisos") && ($("b-avisos").onclick = activarAvisos);
+  document.querySelectorAll(".tab").forEach(t => t.onclick = () => { pestaña = t.dataset.t; pintar(); });
+  datos.escucharDenuncias(AREA, lista => { detectarNuevas(lista); denuncias = lista; pintar(); if (abiertaId) abrirDetalle(abiertaId, true); });
+  datos.escucharAgentes(AREA, l => { agentes = l; pintar(); });
+  let quiere = true; try { quiere = localStorage.getItem("srv-" + yo.uid) !== "0"; } catch {}
+  servicio(quiere);
+}
+
+async function servicio(on) {
+  const sw = $("sw"); if (!sw) return;
+  sw.classList.toggle("on", on);
+  try { localStorage.setItem("srv-" + yo.uid, on ? "1" : "0"); } catch {}
+  if (watchId != null) { navigator.geolocation.clearWatch(watchId); watchId = null; }
+  if (on && navigator.geolocation) {
+    $("srv-txt").innerHTML = "<b>En servicio</b>Buscando tu ubicación…";
+    let ultimo = 0;
+    watchId = navigator.geolocation.watchPosition(p => {
+      miPos = { lat: p.coords.latitude, lng: p.coords.longitude, precision: Math.round(p.coords.accuracy) };
+      $("srv-txt").innerHTML = `<b>En servicio</b>Ubicación activa (±${miPos.precision} m)`;
+      if (Date.now() - ultimo > 45000) { ultimo = Date.now(); datos.publicarUbicacion(yo, miPos).catch(console.error); }
+      pintar();
+    }, () => { $("srv-txt").innerHTML = "<b>En servicio</b>⚠️ Sin acceso a la ubicación: activá el GPS"; },
+    { enableHighAccuracy: true, maximumAge: 20000 });
+  } else {
+    $("srv-txt").innerHTML = "<b>Fuera de servicio</b>No recibís avisos de cercanía";
+    await datos.fueraDeServicio(yo).catch(() => {});
+  }
+}
+
+/* el agente en servicio más cercano a la denuncia */
+function masCercano(d) {
+  if (!d.ubicacion) return null;
+  const limite = Date.now() - AGENTE_ACTIVO_MIN * 60000;
+  let mejor = null;
+  for (const a of agentes) {
+    const pos = a.uid === yo.uid ? (miPos || a.ubicacion) : a.ubicacion;
+    if (!a.enServicio || !pos || (a.uid !== yo.uid && (aFecha(a.visto) || 0) < limite)) continue;
+    const m = distanciaM(pos, d.ubicacion);
+    if (m != null && (!mejor || m < mejor.m)) mejor = { uid: a.uid, nombre: a.nombre, m };
+  }
+  return mejor;
+}
+
+function filtrar() {
+  if (pestaña === "nuevas") return denuncias.filter(d => d.estado === "nueva")
+    .sort((a, b) => (distanciaM(miPos, a.ubicacion) ?? 1e9) - (distanciaM(miPos, b.ubicacion) ?? 1e9));
+  if (pestaña === "mias") return denuncias.filter(d => d.estado === "en_camino" && d.agenteUid === yo.uid);
+  return denuncias.filter(d => d.estado === "con_infraccion" || d.estado === "sin_infraccion" || (d.estado === "en_camino" && d.agenteUid !== yo.uid));
+}
+
+function pintar() {
+  const l = $("lista"); if (!l) return;
+  const nN = denuncias.filter(d => d.estado === "nueva").length, nM = denuncias.filter(d => d.estado === "en_camino" && d.agenteUid === yo.uid).length;
+  document.querySelectorAll(".tab").forEach(t => {
+    t.classList.toggle("sel", t.dataset.t === pestaña);
+    const n = t.dataset.t === "nuevas" ? nN : t.dataset.t === "mias" ? nM : 0;
+    t.innerHTML = { nuevas: "Nuevas", mias: "Mis casos", historial: "Historial" }[t.dataset.t] + (n ? `<span class="n">${n}</span>` : "");
+  });
+  const items = filtrar();
+  if (!items.length) {
+    l.innerHTML = `<div class="vacio"><div>${pestaña === "nuevas" ? "✅" : pestaña === "mias" ? "🚗" : "📋"}</div>${
+      { nuevas: "No hay denuncias pendientes.", mias: "No tenés casos en curso.", historial: "Todavía no hay casos cerrados." }[pestaña]}</div>`;
+    return;
+  }
+  l.innerHTML = items.map(d => {
+    const e = ESTADOS[d.estado], dist = distanciaM(miPos, d.ubicacion), mc = d.estado === "nueva" ? masCercano(d) : null;
+    return `<button class="card ${d._recien ? "nueva" : ""}" style="--c:${e.color}" data-id="${d.id}">
+      ${d.foto ? `<img src="${d.foto}" alt="">` : `<div class="sinfoto">${ICONO}</div>`}
+      <div class="cuerpo">
+        <div class="arriba"><span>${hace(d.creada)}</span><span>${dist != null ? "📍 " + textoDistancia(dist) : ""}</span></div>
+        <p>${esc(d.descripcion)}</p>
+        ${d.estado !== "nueva" ? `<span class="chip estado" style="--c:${e.color}">${e.txt}</span>` : ""}
+        ${mc ? (mc.uid === yo.uid ? `<span class="chip cerca">⭐ Sos el más cercano</span>` : `<span class="chip">Más cerca: ${esc(mc.nombre)} (${textoDistancia(mc.m)})</span>`) : ""}
+        ${d.agenteNombre && d.estado !== "nueva" ? `<span class="chip">👮 ${esc(d.agenteNombre)}</span>` : ""}
+        ${d.infraccion?.patente ? `<span class="chip">🚘 ${esc(d.infraccion.patente)}</span>` : ""}
+      </div></button>`;
+  }).join("");
+  l.querySelectorAll(".card").forEach(c => c.onclick = () => abrirDetalle(c.dataset.id));
+}
+
+/* ================= AVISOS ================= */
+async function activarAvisos() {
+  if (!("Notification" in window)) return toast("Este celular no permite avisos desde el navegador.");
+  const p = await Notification.requestPermission();
+  if (p === "granted") { $("b-avisos")?.remove(); sonar(); toast("Avisos activados ✔"); }
+  else toast("Sin permiso para avisos: igual vas a escuchar un sonido con la app abierta.");
+}
+let ctxAudio = null;
+function sonar() {
+  try {
+    ctxAudio = ctxAudio || new (window.AudioContext || window.webkitAudioContext)();
+    [0, 0.22, 0.44].forEach((t, i) => {
+      const o = ctxAudio.createOscillator(), g = ctxAudio.createGain();
+      o.frequency.value = i === 2 ? 1175 : 880; o.connect(g); g.connect(ctxAudio.destination);
+      g.gain.setValueAtTime(0.25, ctxAudio.currentTime + t); g.gain.exponentialRampToValueAtTime(0.001, ctxAudio.currentTime + t + 0.18);
+      o.start(ctxAudio.currentTime + t); o.stop(ctxAudio.currentTime + t + 0.2);
+    });
+  } catch {}
+  navigator.vibrate && navigator.vibrate([250, 120, 250]);
+}
+async function notificar(d) {
+  sonar();
+  const dist = distanciaM(miPos, d.ubicacion);
+  const titulo = `🚨 Nueva denuncia de ${INFO.nombre}`, cuerpo = `${d.descripcion}${dist != null ? ` · a ${textoDistancia(dist)}` : ""}`;
+  if ("Notification" in window && Notification.permission === "granted") {
+    try { const reg = await navigator.serviceWorker?.getRegistration(); reg ? reg.showNotification(titulo, { body: cuerpo, tag: d.id, icon: "icono.svg", vibrate: [250, 120, 250] }) : new Notification(titulo, { body: cuerpo }); } catch {}
+  }
+  toast(titulo);
+}
+function detectarNuevas(lista) {
+  const ids = new Set(lista.filter(d => d.estado === "nueva").map(d => d.id));
+  if (vistas) lista.forEach(d => { d._recien = d.estado === "nueva" && !vistas.has(d.id); if (d._recien) notificar(d); });
+  vistas = ids;
+}
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(() => {});
+
+/* ================= DETALLE ================= */
+window.cerrarHoja = () => { $("hoja").classList.remove("abierta"); abiertaId = null; };
+function abrirDetalle(id, refresco) {
+  const d = denuncias.find(x => x.id === id); if (!d) return cerrarHoja();
+  if (refresco && $("panel").querySelector("form")) return;      // no pisar un formulario a medio completar
+  abiertaId = id;
+  const e = ESTADOS[d.estado], dist = distanciaM(miPos, d.ubicacion), mio = d.agenteUid === yo.uid;
+  const destino = d.ubicacion ? `${d.ubicacion.lat},${d.ubicacion.lng}` : encodeURIComponent((d.direccion || "") + ", 9 de Julio, Buenos Aires");
+  const inf = d.infraccion;
+  $("panel").innerHTML = `<div class="agarre"></div>
+    <span class="chip estado" style="--c:${e.color}">${e.txt}</span>
+    <h2 style="margin-top:8px">Denuncia ${esc(id.slice(-6).toUpperCase())}</h2>
+    <div class="meta">${hace(d.creada)}${dist != null ? " · a " + textoDistancia(dist) + " de vos" : ""}${d.agenteNombre ? " · 👮 " + esc(d.agenteNombre) : ""}</div>
+    ${d.foto ? `<img class="foto" src="${d.foto}" alt="Foto de la denuncia">` : ""}
+    <div class="bloque"><small>Qué denuncia el vecino</small>${esc(d.descripcion)}</div>
+    <div class="bloque"><small>Dónde</small>${esc(d.direccion || "Sin dirección escrita")}${d.ubicacion ? `<br><span class="ayuda">GPS del vecino (±${d.ubicacion.precision || "?"} m)</span>` : ""}</div>
+    ${inf ? `<div class="bloque"><small>Infracción labrada</small>
+        <b style="font-size:20px;letter-spacing:2px">${esc(inf.patente)}</b><br>${esc(inf.tipoVehiculo)} ${esc(inf.marcaModelo || "")} ${esc(inf.color || "")}<br>
+        <b>${esc(inf.tipo)}</b>${inf.acta ? `<br>Acta N° ${esc(inf.acta)}` : ""}${inf.observaciones ? `<br>${esc(inf.observaciones)}` : ""}
+        <br><span class="ayuda">${aFecha(d.cerrada)?.toLocaleString("es-AR") || ""}</span></div>
+        ${inf.foto ? `<img class="foto" src="${inf.foto}" alt="Foto de la infracción">` : ""}` : ""}
+    ${d.estado === "sin_infraccion" ? `<div class="bloque"><small>Resultado</small>Sin infracción: ${esc(d.motivo)}${d.observaciones ? `<br>${esc(d.observaciones)}` : ""}</div>` : ""}
+    <div class="acciones" id="acciones">
+      <a class="b sec" href="https://www.google.com/maps/dir/?api=1&destination=${destino}" target="_blank" rel="noopener">🧭 Cómo llegar</a>
+      ${d.estado === "nueva" ? `<button class="b" id="b-voy">🚗 Voy yo</button>` : ""}
+      ${d.estado === "en_camino" && mio ? `
+        <button class="b azul" id="b-inf">📝 Labrar infracción</button>
+        <button class="b verde" id="b-sin">✔ Verificado: sin infracción</button>
+        <button class="b sec chico" id="b-lib">Liberar (que la tome otro agente)</button>` : ""}
+      <button class="b sec chico" onclick="cerrarHoja()">Cerrar</button>
+    </div>`;
+  $("hoja").classList.add("abierta");
+  $("b-voy") && ($("b-voy").onclick = async ev => {
+    ev.target.disabled = true;
+    try { await datos.tomarDenuncia(id, yo); toast("Tomaste la denuncia. ¡En camino!"); pestaña = "mias"; pintar(); }
+    catch (err) { toast(err.message || "No se pudo tomar."); cerrarHoja(); }
+  });
+  $("b-inf") && ($("b-inf").onclick = () => formInfraccion(d));
+  $("b-sin") && ($("b-sin").onclick = () => formSinInfraccion(d));
+  $("b-lib") && ($("b-lib").onclick = async () => { await datos.liberarDenuncia(id); toast("Denuncia liberada"); cerrarHoja(); });
+}
+
+function formInfraccion(d) {
+  $("panel").innerHTML = `<div class="agarre"></div><h2>Labrar infracción</h2>
+    <div class="meta">Denuncia ${esc(d.id.slice(-6).toUpperCase())} · ${esc(d.direccion || "")}</div>
+    <form class="inf" id="f-inf">
+      <label>Patente<input id="patente" required maxlength="9" placeholder="AB123CD" autocomplete="off" autocapitalize="characters">
+        <span class="ayuda">Formatos: AB123CD (Mercosur) o ABC123. Motos: A123BCD o 123ABC.</span></label>
+      <div class="fila2">
+        <label>Vehículo<select id="veh"><option>Auto</option><option>Camioneta</option><option>Moto</option><option>Camión</option><option>Utilitario</option><option>Otro</option></select></label>
+        <label>Color<input id="color" placeholder="Ej: Gris"></label>
+      </div>
+      <label>Marca y modelo<input id="marca" placeholder="Ej: Fiat Cronos"></label>
+      <label>Infracción<select id="tipo" required>${TIPOS_INFRACCION.map(t => `<option>${t}</option>`).join("")}</select></label>
+      <label>N° de acta (si corresponde)<input id="acta" inputmode="numeric"></label>
+      <label>Observaciones<textarea id="obs" placeholder="Detalle de lo constatado"></textarea></label>
+      <label>Foto del vehículo / constatación<input id="f-foto" type="file" accept="image/*" capture="environment"></label>
+      <div id="f-err"></div>
+      <button class="b azul" type="submit">Guardar infracción</button>
+      <button class="b sec chico" type="button" id="b-volver">Volver</button>
+    </form>`;
+  $("patente").oninput = e => e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+  $("b-volver").onclick = () => { $("panel").innerHTML = ""; abrirDetalle(d.id); };
+  $("f-inf").onsubmit = async e => {
+    e.preventDefault();
+    const pat = $("patente").value;
+    if (!/^([A-Z]{2}\d{3}[A-Z]{2}|[A-Z]{3}\d{3}|[A-Z]\d{3}[A-Z]{3}|\d{3}[A-Z]{3})$/.test(pat)) {
+      $("f-err").innerHTML = `<div class="error">Revisá la patente: "${esc(pat)}" no tiene un formato válido.</div>`; $("patente").focus(); return;
+    }
+    const b = e.target.querySelector("button[type=submit]"); b.disabled = true; b.textContent = "Guardando…";
+    try {
+      const pos = miPos || await ubicacionActual();
+      await datos.cerrarDenuncia(d.id, { estado: "con_infraccion", infraccion: {
+        patente: pat, tipoVehiculo: $("veh").value, color: $("color").value.trim(), marcaModelo: $("marca").value.trim(),
+        tipo: $("tipo").value, acta: $("acta").value.trim(), observaciones: $("obs").value.trim(),
+        foto: await comprimirFoto($("f-foto").files[0]), ubicacion: pos || null,
+        agenteUid: yo.uid, agenteNombre: yo.nombre, fecha: Date.now() } });
+      toast(`Infracción guardada · ${pat}`); pestaña = "historial"; $("panel").innerHTML = ""; cerrarHoja(); pintar();
+    } catch (err) { console.error(err); b.disabled = false; b.textContent = "Guardar infracción"; $("f-err").innerHTML = `<div class="error">No se pudo guardar. Revisá la conexión.</div>`; }
+  };
+}
+function formSinInfraccion(d) {
+  $("panel").innerHTML = `<div class="agarre"></div><h2>Verificado sin infracción</h2>
+    <form class="inf" id="f-sin">
+      <label>Motivo<select id="motivo">${MOTIVOS_SIN.map(t => `<option>${t}</option>`).join("")}</select></label>
+      <label>Observaciones<textarea id="obs2"></textarea></label>
+      <button class="b verde" type="submit">Cerrar denuncia</button>
+      <button class="b sec chico" type="button" id="b-volver">Volver</button>
+    </form>`;
+  $("b-volver").onclick = () => { $("panel").innerHTML = ""; abrirDetalle(d.id); };
+  $("f-sin").onsubmit = async e => {
+    e.preventDefault();
+    await datos.cerrarDenuncia(d.id, { estado: "sin_infraccion", motivo: $("motivo").value, observaciones: $("obs2").value.trim() });
+    toast("Denuncia cerrada"); pestaña = "historial"; $("panel").innerHTML = ""; cerrarHoja(); pintar();
+  };
+}
+
+setInterval(pintar, 60000);   // refresca los "hace X min"
+inicio();
+</script>
+</body>
+</html>
