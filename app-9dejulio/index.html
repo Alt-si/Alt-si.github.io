@@ -225,6 +225,26 @@
   .form-den textarea{min-height:110px;resize:vertical}
   .btn-prim{background:var(--primario);color:#fff;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit}
   .den-tag{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:30px;color:#fff;font-weight:800;font-size:14px;align-self:flex-start}
+
+  /* ====== NOVEDADES (cinta animada) ====== */
+  .novedades{margin-top:auto;padding-top:18px}
+  .nov-cab{display:flex;justify-content:space-between;align-items:baseline;padding:0 4px 8px}
+  .nov-cab h3{font-size:16px;font-weight:800;color:var(--primario);text-transform:uppercase;letter-spacing:.5px}
+  .nov-cab a{font-size:13px;font-weight:700;color:var(--primario);text-decoration:none}
+  .nov-ventana{overflow:hidden;margin:0 -20px;padding:2px 0 6px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+  .nov-pista{display:flex;gap:12px;width:max-content;animation:cinta var(--dur,60s) linear infinite}
+  .nov-ventana:hover .nov-pista,.nov-ventana.pausa .nov-pista{animation-play-state:paused}
+  @keyframes cinta{from{transform:translateX(-50%)}to{transform:translateX(0)}}  /* de izquierda a derecha */
+  .nov{width:230px;flex-shrink:0;background:#fff;border-radius:14px;overflow:hidden;text-decoration:none;color:var(--texto);
+    box-shadow:0 4px 12px rgba(217,28,144,.10);display:flex;flex-direction:column}
+  .nov-img{height:110px;background:var(--primario-claro) center/cover no-repeat}
+  .nov-txt{padding:9px 11px 11px}
+  .nov-txt small{font-size:11px;font-weight:700;color:var(--primario)}
+  .nov-txt p{font-size:13px;font-weight:600;line-height:1.3;margin-top:3px;
+    display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  @media (prefers-reduced-motion:reduce){.nov-pista{animation:none}.nov-ventana{overflow-x:auto}}
+  footer{padding-top:12px!important}
 </style>
 </head>
 <body>
@@ -264,6 +284,11 @@
         Tránsito
       </button>
     </div>
+
+    <section class="novedades">
+      <div class="nov-cab"><h3>Novedades</h3><a href="https://www.9dejulio.gov.ar/noticias.php" target="_blank" rel="noopener">Ver todas ›</a></div>
+      <div class="nov-ventana"><div class="nov-pista" id="nov-pista"></div></div>
+    </section>
 
     <footer>Municipalidad de 9 de Julio · Provincia de Buenos Aires</footer>
   </main>
@@ -582,6 +607,25 @@ function enviarDenuncia(){
   document.querySelector('.form-den').innerHTML='<div style="text-align:center;padding:30px 10px"><div style="font-size:46px">✅</div><h2 style="margin:10px 0 6px">¡Denuncia recibida!</h2><p style="color:var(--texto-suave)">(Prototipo: todavía no se envía a ningún lado.)</p><button class="btn-prim" style="margin-top:18px;width:100%" onclick="location.reload()">Volver al inicio</button></div>';
 }
 document.querySelectorAll('#emerg .burbuja').forEach(b=>b.addEventListener('click',()=>setTimeout(()=>cerrarRadial('emerg'),300)));
+
+/* ---------- novedades ---------- */
+const NOVEDADES_RESPALDO = [{"id": 9893, "titulo": "Se continúa con el retiro de vehículos abandonados en la vía pública", "fecha": "12/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9893", "imagen": "https://www.9dejulio.gov.ar/images/uploads/cb6af05667492fa622c717fb50213775retiro%20autos%20(2).jpeg"}, {"id": 9892, "titulo": "La importancia del yoga en los adultos mayores", "fecha": "12/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9892", "imagen": "https://www.9dejulio.gov.ar/images/uploads/39d39616849da29f4eb01dcc45b35c5freflexiones%20yoga.jpeg"}, {"id": 9891, "titulo": "Avanza el ordenamiento catastral y urbano en las localidades del partido", "fecha": "12/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9891", "imagen": "https://www.9dejulio.gov.ar/images/uploads/398d631947d58efad8fc3d3b140b2a82ordenamiento%20%20localidades%20(2).jpeg"}, {"id": 9890, "titulo": "El estacionamiento medido incorpora una nueva función para cargar saldo desde el celular", "fecha": "12/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9890", "imagen": "https://www.9dejulio.gov.ar/images/uploads/ac8ee133027add1ceccb6a08ad3c514bSEM%20saldo%20celu%20(1).jpeg"}, {"id": 9889, "titulo": "“Ensayos abiertos”: la música llegará a Facundo Quiroga", "fecha": "10/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9889", "imagen": "https://www.9dejulio.gov.ar/images/uploads/10c6abcf98027cb97766a3f766f91bf4ensayos%20abiertos%20quiroga.png"}, {"id": 9888, "titulo": "Finalizó el curso de desarrollo de videojuegos", "fecha": "10/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9888", "imagen": "https://www.9dejulio.gov.ar/images/uploads/55635a6b5d564053fdf663a31d0720c5videojuegos%20(1).jpeg"}, {"id": 9887, "titulo": "Finalizó la diplomatura en administración y gestión industrial", "fecha": "10/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9887", "imagen": "https://www.9dejulio.gov.ar/images/uploads/256415dbb9bf38597096da4be0efa183gesti%C3%B3n%20industrial%20(1).jpeg"}, {"id": 9886, "titulo": "Buena convocatoria en el primer encuentro creativo de reutilización textil", "fecha": "10/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9886", "imagen": "https://www.9dejulio.gov.ar/images/uploads/081b5db959f2f5ef4ff0f10afd1c5c44encuentro%20textil%20(2).jpeg"}, {"id": 9885, "titulo": "Recolección de residuos: cómo funcionarán los servicios durante los feriados", "fecha": "6/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9885", "imagen": "https://www.9dejulio.gov.ar/images/uploads/eb48d4af391f94ac39e560f57ca1d96bresiduos%20(3).jpeg"}, {"id": 9884, "titulo": "Presentación del libro “Sable alemán – Lanzas mapuches”", "fecha": "6/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9884", "imagen": "https://www.9dejulio.gov.ar/images/uploads/e3fe33d011496b323e6d6a854825b719libro%20museo.jpeg"}];
+function pintarNovedades(lista){
+  const tarjeta=n=>`<a class="nov" href="${n.link}" target="_blank" rel="noopener">
+      <div class="nov-img" style="background-image:url('${n.imagen}')"></div>
+      <div class="nov-txt"><small>${n.fecha}</small><p>${n.titulo}</p></div></a>`;
+  const html=lista.map(tarjeta).join('');
+  const p=document.getElementById('nov-pista');
+  p.innerHTML=html+html;                          // duplicado para que el giro sea continuo
+  p.style.setProperty('--dur',(lista.length*6)+'s');
+}
+pintarNovedades(NOVEDADES_RESPALDO);
+fetch('noticias.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null)
+  .then(d=>{ if(d&&d.noticias&&d.noticias.length) pintarNovedades(d.noticias); }).catch(()=>{});
+// en el celular: tocar y mantener pausa la cinta
+const ven=document.querySelector('.nov-ventana');
+ven.addEventListener('touchstart',()=>ven.classList.add('pausa'),{passive:true});
+ven.addEventListener('touchend',()=>setTimeout(()=>ven.classList.remove('pausa'),1500));
 </script>
 </body>
 </html>
