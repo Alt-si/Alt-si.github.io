@@ -886,7 +886,8 @@ function editarCuentaSem(){
     <label class="sem-campo">Alias<input id="sem-alias" value="${c.alias||''}" placeholder="SEM9DEJ.…" autocapitalize="characters"></label>
     <label class="sem-campo">CVU<input id="sem-cvu" value="${c.cvu||''}" placeholder="22 números" inputmode="numeric"></label>
     <div id="sem-err"></div>
-    <button class="btn-sem-app" style="width:100%;border:none;cursor:pointer" onclick="guardarCuentaSem()">Guardar mis datos</button>`;
+    <button class="btn-sem-app" style="width:100%;border:none;cursor:pointer" onclick="guardarCuentaSem()">Guardar mis datos</button>
+    <a class="btn-zonas" style="margin-top:10px;text-decoration:none;border-color:#0b4fae;color:#0b4fae" href="${document.getElementById('sem-app').href}">Abrir SEM Mobile para ver mis datos</a>`;
 }
 function guardarCuentaSem(){
   const alias=document.getElementById('sem-alias').value.trim().toUpperCase(), cvu=document.getElementById('sem-cvu').value.replace(/\D/g,'');
