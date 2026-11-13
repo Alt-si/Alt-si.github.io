@@ -559,7 +559,7 @@
         <label>Tu nombre (opcional)<input id="idea-nom"></label>
         <label>Teléfono o correo para contactarte (opcional)<input id="idea-contacto"></label>
         <button class="btn-prim" type="submit" style="background:var(--polo)">Enviar idea</button>
-        <small style="color:var(--texto-suave);text-align:center">Prototipo: el envío todavía no está conectado.</small>
+        <small style="color:var(--texto-suave);text-align:center">Tu idea le llega al equipo del Polo por correo.</small>
       </form>
     </div>
   </div>
@@ -1037,11 +1037,30 @@ function vigilarSem(){
 /* ---------- Ideas y sugerencias (Polo) ---------- */
 const FORM_IDEAS_HTML=document.getElementById('form-ideas').innerHTML;
 function abrirIdeas(){ document.getElementById('form-ideas').innerHTML=FORM_IDEAS_HTML; irA('p-ideas'); }
-function enviarIdea(){
-  // TODO: definir a dónde llegan las ideas (base de datos, correo, planilla…)
-  document.getElementById('form-ideas').innerHTML=`<div style="text-align:center;padding:30px 10px"><div style="font-size:46px">💡</div>
-    <h2 style="margin:10px 0 6px">¡Gracias por tu idea!</h2><p style="color:var(--texto-suave)">(Prototipo: todavía no se envía a ningún lado.)</p>
+const CORREO_IDEAS='info@polotecnologico.net';
+async function enviarIdea(){
+  const f=document.getElementById('form-ideas'), b=f.querySelector('button[type=submit]');
+  const idea=document.getElementById('idea-txt').value.trim(), nom=document.getElementById('idea-nom').value.trim(),
+        cont=document.getElementById('idea-contacto').value.trim();
+  b.disabled=true; b.textContent='Enviando…';
+  const gracias=extra=>f.innerHTML=`<div style="text-align:center;padding:30px 10px"><div style="font-size:46px">💡</div>
+    <h2 style="margin:10px 0 6px">¡Gracias por tu idea!</h2><p style="color:var(--texto-suave)">${extra}</p>
     <button class="btn-prim" type="button" style="margin-top:18px;width:100%;background:var(--polo)" onclick="irA('p-estudia')">Volver</button></div>`;
+  try{
+    // FormSubmit reenvía el formulario al correo del Polo (sin servidor propio)
+    const r=await fetch('https://formsubmit.co/ajax/'+CORREO_IDEAS,{method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({_subject:'Nueva idea desde la app de 9 de Julio', _template:'table', _captcha:'false',
+        Idea:idea, Nombre:nom||'(sin nombre)', Contacto:cont||'(sin datos)'})});
+    const d=await r.json().catch(()=>({}));
+    if(!r.ok || d.success===false || d.success==='false') throw new Error(d.message||r.status);
+    gracias('Le llegó al equipo del Polo San Cayetano.');
+  }catch(e){
+    // si falla, se abre el correo del celular con el mensaje ya escrito
+    const cuerpo=`${idea}\n\nNombre: ${nom||'-'}\nContacto: ${cont||'-'}`;
+    const mailto=`mailto:${CORREO_IDEAS}?subject=${encodeURIComponent('Idea desde la app de 9 de Julio')}&body=${encodeURIComponent(cuerpo)}`;
+    gracias(`No pudimos enviarla automáticamente.<br><a href="${mailto}" style="color:var(--polo);font-weight:800">Tocá acá para enviarla por correo</a>`);
+  }
 }
 </script>
 <script type="module">
