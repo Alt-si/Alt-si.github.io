@@ -299,6 +299,27 @@
     border-radius:14px;padding:14px;font-weight:800;font-size:15px;text-decoration:none}
   .btn-sem-app svg{width:22px;height:22px}
 
+
+  /* ====== POLO SAN CAYETANO ====== */
+  #p-estudia{--polo:#5f9592;--polo-osc:#3f6f6c;background:#fff}
+  .polo-barra{background:linear-gradient(180deg,var(--polo),var(--polo-osc))}
+  .polo-cont{align-items:stretch;gap:18px;padding-top:24px}
+  .polo-logo{padding:4px 8px}
+  .polo-logo img{width:100%;display:block}
+  .polo-nov{margin-top:0;padding-top:4px}
+  .polo-nov .nov-cab h3,.polo-nov .nov-cab a{color:var(--polo-osc)}
+  .nov.polo{box-shadow:0 4px 12px rgba(63,111,108,.15)}
+  .nov.polo .nov-txt small{color:var(--polo)}
+  .polo-sin{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e9f2f1,#d3e4e2)}
+  .polo-sin img{width:64px;opacity:.9}
+  .sumate{align-self:center;width:170px;height:170px;border-radius:50%;margin:10px 0 0;text-decoration:none;
+    background:radial-gradient(circle at 30% 30%,#7fb3af,var(--polo) 55%,var(--polo-osc));color:#fff;
+    display:flex;align-items:center;justify-content:center;box-shadow:0 14px 30px rgba(63,111,108,.45),inset 0 -6px 0 rgba(0,0,0,.12);
+    animation:latePolo 2.4s ease-in-out infinite}
+  .sumate span{font-size:30px;font-weight:900;letter-spacing:2px}
+  .sumate:active{transform:scale(.95)}
+  @keyframes latePolo{50%{box-shadow:0 14px 30px rgba(63,111,108,.45),0 0 0 14px rgba(95,149,146,.15),inset 0 -6px 0 rgba(0,0,0,.12)}}
+  .polo-pie{text-align:center;color:var(--texto-suave);font-size:13px;margin-top:4px}
 </style>
 </head>
 <body>
@@ -336,7 +357,7 @@
 
     <section class="novedades">
       <div class="nov-cab"><h3>Novedades</h3><a href="https://www.9dejulio.gov.ar/noticias.php" target="_blank" rel="noopener">Ver todas ›</a></div>
-      <div class="nov-ventana"><div class="nov-pista" id="nov-pista"></div></div>
+      <div class="nov-ventana"><div class="nov-pista"></div></div>
     </section>
 
     <footer>Municipalidad de 9 de Julio · Provincia de Buenos Aires</footer>
@@ -490,12 +511,20 @@
 
   <!-- ================= PANTALLA ESTUDIÁ CON NOSOTROS ================= -->
   <div class="pantalla" id="p-estudia">
-    <div class="barra">
+    <div class="barra polo-barra">
       <button class="volver" onclick="irA('p-inicio')" aria-label="Volver">‹</button>
       <h1>Estudiá con nosotros</h1>
     </div>
-    <div class="contenido">
-      <div class="vacio">🎓<br><b>Muy pronto</b><br>Acá vas a encontrar los cursos, talleres y carreras que ofrece el municipio.</div>
+    <div class="contenido polo-cont">
+      <div class="polo-logo"><img src="img/san-cayetano.png" alt="Centro de Desarrollo Socio-Productivo San Cayetano"></div>
+      <section class="novedades polo-nov">
+        <div class="nov-cab"><h3>Novedades</h3><a href="https://polosancayetano.com.ar/" target="_blank" rel="noopener">Ver todas ›</a></div>
+        <div class="nov-ventana"><div class="nov-pista"></div></div>
+      </section>
+      <a class="sumate" href="https://polosancayetano.com.ar/sumate/" target="_blank" rel="noopener">
+        <span>SUMATE</span>
+      </a>
+      <p class="polo-pie">Cursos, diplomaturas y formación para el trabajo en 9 de Julio.</p>
     </div>
   </div>
 
@@ -782,44 +811,59 @@ document.querySelectorAll('#emerg .burbuja').forEach(b=>b.addEventListener('clic
 
 /* ---------- novedades ---------- */
 const NOVEDADES_RESPALDO = [{"id": 9893, "titulo": "Se continúa con el retiro de vehículos abandonados en la vía pública", "fecha": "12/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9893", "imagen": "https://www.9dejulio.gov.ar/images/uploads/cb6af05667492fa622c717fb50213775retiro%20autos%20(2).jpeg"}, {"id": 9892, "titulo": "La importancia del yoga en los adultos mayores", "fecha": "12/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9892", "imagen": "https://www.9dejulio.gov.ar/images/uploads/39d39616849da29f4eb01dcc45b35c5freflexiones%20yoga.jpeg"}, {"id": 9891, "titulo": "Avanza el ordenamiento catastral y urbano en las localidades del partido", "fecha": "12/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9891", "imagen": "https://www.9dejulio.gov.ar/images/uploads/398d631947d58efad8fc3d3b140b2a82ordenamiento%20%20localidades%20(2).jpeg"}, {"id": 9890, "titulo": "El estacionamiento medido incorpora una nueva función para cargar saldo desde el celular", "fecha": "12/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9890", "imagen": "https://www.9dejulio.gov.ar/images/uploads/ac8ee133027add1ceccb6a08ad3c514bSEM%20saldo%20celu%20(1).jpeg"}, {"id": 9889, "titulo": "“Ensayos abiertos”: la música llegará a Facundo Quiroga", "fecha": "10/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9889", "imagen": "https://www.9dejulio.gov.ar/images/uploads/10c6abcf98027cb97766a3f766f91bf4ensayos%20abiertos%20quiroga.png"}, {"id": 9888, "titulo": "Finalizó el curso de desarrollo de videojuegos", "fecha": "10/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9888", "imagen": "https://www.9dejulio.gov.ar/images/uploads/55635a6b5d564053fdf663a31d0720c5videojuegos%20(1).jpeg"}, {"id": 9887, "titulo": "Finalizó la diplomatura en administración y gestión industrial", "fecha": "10/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9887", "imagen": "https://www.9dejulio.gov.ar/images/uploads/256415dbb9bf38597096da4be0efa183gesti%C3%B3n%20industrial%20(1).jpeg"}, {"id": 9886, "titulo": "Buena convocatoria en el primer encuentro creativo de reutilización textil", "fecha": "10/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9886", "imagen": "https://www.9dejulio.gov.ar/images/uploads/081b5db959f2f5ef4ff0f10afd1c5c44encuentro%20textil%20(2).jpeg"}, {"id": 9885, "titulo": "Recolección de residuos: cómo funcionarán los servicios durante los feriados", "fecha": "6/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9885", "imagen": "https://www.9dejulio.gov.ar/images/uploads/eb48d4af391f94ac39e560f57ca1d96bresiduos%20(3).jpeg"}, {"id": 9884, "titulo": "Presentación del libro “Sable alemán – Lanzas mapuches”", "fecha": "6/11/26", "link": "https://www.9dejulio.gov.ar/noticia.php?id=9884", "imagen": "https://www.9dejulio.gov.ar/images/uploads/e3fe33d011496b323e6d6a854825b719libro%20museo.jpeg"}];
-function pintarNovedades(lista){
-  const tarjeta=n=>`<a class="nov" href="${n.link}" target="_blank" rel="noopener">
+/* Cinta de novedades reutilizable: avanza sola de izquierda a derecha; con el dedo
+   (o el mouse) se adelanta y retrocede, y vuelve a moverse sola a los 4 s. */
+function crearCinta(ven, opciones={}){
+  const pista=ven.querySelector('.nov-pista');
+  let pausaHasta=0, pos=null, arr=null;
+  const VEL=0.5;                                   // píxeles por cuadro (~30 px/s)
+  const pausar=(ms=4000)=>{ pausaHasta=Date.now()+ms; pos=null; };
+  ven.addEventListener('touchstart',()=>pausar(60000),{passive:true});
+  ven.addEventListener('touchend',()=>pausar(4000),{passive:true});
+  ven.addEventListener('wheel',()=>pausar(),{passive:true});
+  ven.addEventListener('scroll',()=>{              // vuelta infinita: el contenido está duplicado
+    const mitad=pista.scrollWidth/2; if(!mitad||mitad<=ven.clientWidth) return;
+    if(ven.scrollLeft<=2){ ven.scrollLeft+=mitad; pos=null; }
+    else if(ven.scrollLeft>=mitad*2-ven.clientWidth-2){ ven.scrollLeft-=mitad; pos=null; }
+  },{passive:true});
+  ven.addEventListener('mousedown',e=>{ arr={x:e.clientX,s:ven.scrollLeft}; pausar(60000); });
+  window.addEventListener('mousemove',e=>{ if(!arr) return; const dx=e.clientX-arr.x; if(Math.abs(dx)>4) ven.classList.add('arrastrando'); ven.scrollLeft=arr.s-dx; });
+  window.addEventListener('mouseup',()=>{ if(!arr) return; setTimeout(()=>ven.classList.remove('arrastrando'),0); arr=null; pausar(4000); });
+  (function mover(){
+    if(Date.now()>pausaHasta && ven.offsetParent && pista.scrollWidth/2>ven.clientWidth){
+      if(ven.scrollLeft<=2){ ven.scrollLeft+=pista.scrollWidth/2; pos=null; }   // p. ej. si se pintó con la pantalla oculta
+      if(pos===null) pos=ven.scrollLeft;
+      pos-=VEL; ven.scrollLeft=pos;                // restar = el contenido se corre hacia la derecha
+    }
+    requestAnimationFrame(mover);
+  })();
+  const tarjeta=opciones.tarjeta||(n=>`<a class="nov" href="${n.link}" target="_blank" rel="noopener">
       <img class="nov-img" src="${n.imagen}" alt="" loading="lazy" data-o="${n.imagen_original||''}" onerror="if(this.dataset.o){this.src=this.dataset.o;this.dataset.o=''}else{this.style.visibility='hidden'}">
-      <div class="nov-txt"><small>${n.fecha}</small><p>${n.titulo}</p></div></a>`;
-  const html=lista.map(tarjeta).join('');
-  const p=document.getElementById('nov-pista');
-  p.innerHTML=html+html;                          // duplicado para que el giro sea continuo
-  requestAnimationFrame(()=>{ ven.scrollLeft = p.scrollWidth/2; });
+      <div class="nov-txt"><small>${n.fecha}</small><p>${n.titulo}</p></div></a>`);
+  return { pintar(lista){
+    const html=lista.map(tarjeta).join('');
+    pista.innerHTML=html+html;                     // duplicado para que el giro sea continuo
+    requestAnimationFrame(()=>{ ven.scrollLeft = pista.scrollWidth/2; pos=null; });
+  }};
 }
-const ven=document.querySelector('.nov-ventana');
-pintarNovedades(NOVEDADES_RESPALDO);
+const cintaMuni=crearCinta(document.querySelector('#p-inicio .nov-ventana'));
+cintaMuni.pintar(NOVEDADES_RESPALDO);
 fetch('noticias.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null)
-  .then(d=>{ if(d&&d.noticias&&d.noticias.length) pintarNovedades(d.noticias); }).catch(()=>{});
-/* La cinta avanza sola de izquierda a derecha; con el dedo (o el mouse) se puede
-   adelantar y retroceder. Después de tocarla, vuelve a moverse sola a los 4 s. */
-let novPausaHasta=0, novPos=null;
-const VEL_NOV=0.5;                                   // píxeles por cuadro (~30 px/s)
-function pausarNov(ms=4000){ novPausaHasta=Date.now()+ms; novPos=null; }
-ven.addEventListener('touchstart',()=>pausarNov(60000),{passive:true});
-ven.addEventListener('touchend',()=>pausarNov(4000),{passive:true});
-ven.addEventListener('wheel',()=>pausarNov(),{passive:true});
-ven.addEventListener('scroll',()=>{                  // vuelta infinita: el contenido está duplicado
-  const mitad=document.getElementById('nov-pista').scrollWidth/2; if(!mitad) return;
-  if(ven.scrollLeft<=2){ ven.scrollLeft+=mitad; novPos=null; }
-  else if(ven.scrollLeft>=mitad*2-ven.clientWidth-2){ ven.scrollLeft-=mitad; novPos=null; }
-},{passive:true});
-// arrastre con mouse (computadora)
-let arr=null;
-ven.addEventListener('mousedown',e=>{ arr={x:e.clientX,s:ven.scrollLeft,mov:false}; pausarNov(60000); });
-window.addEventListener('mousemove',e=>{ if(!arr) return; const dx=e.clientX-arr.x; if(Math.abs(dx)>4){arr.mov=true;ven.classList.add('arrastrando');} ven.scrollLeft=arr.s-dx; });
-window.addEventListener('mouseup',()=>{ if(!arr) return; setTimeout(()=>ven.classList.remove('arrastrando'),0); arr=null; pausarNov(4000); });
-(function moverNov(){
-  if(Date.now()>novPausaHasta && ven.offsetParent){
-    if(novPos===null) novPos=ven.scrollLeft;
-    novPos-=VEL_NOV; ven.scrollLeft=novPos;     // restar = el contenido se corre hacia la derecha
-  }
-  requestAnimationFrame(moverNov);
-})();
+  .then(d=>{ if(d&&d.noticias&&d.noticias.length) cintaMuni.pintar(d.noticias); }).catch(()=>{});
+
+/* ---------- Polo San Cayetano (Estudiá con nosotros) ---------- */
+const POLO_RESPALDO=[
+{"id":"estudia-en-9-de-julio","titulo":"Estudiá en 9 de Julio","fecha":"","link":"https://polosancayetano.com.ar/estudia-en-9-de-julio/","imagen":""},
+{"id":"desarrollo-de-videojuegos","titulo":"Desarrollo de Videojuegos","fecha":"","link":"https://polosancayetano.com.ar/desarrollo-de-videojuegos/","imagen":""},
+{"id":"mes-del-trabajo","titulo":"Mes del Trabajo","fecha":"","link":"https://polosancayetano.com.ar/mes-del-trabajo/","imagen":""}
+];
+const cintaPolo=crearCinta(document.querySelector('#p-estudia .nov-ventana'),{tarjeta:n=>`<a class="nov polo" href="${n.link}" target="_blank" rel="noopener">
+    ${n.imagen?`<img class="nov-img" src="${n.imagen}" alt="" loading="lazy" data-o="${n.imagen_original||''}" onerror="if(this.dataset.o){this.src=this.dataset.o;this.dataset.o=''}else{this.outerHTML='<div class=&quot;nov-img polo-sin&quot;><img src=&quot;img/san-cayetano-icono.png&quot; alt=&quot;&quot;></div>'}">`
+      :`<div class="nov-img polo-sin"><img src="img/san-cayetano-icono.png" alt=""></div>`}
+    <div class="nov-txt">${n.fecha?`<small>${n.fecha}</small>`:''}<p>${n.titulo}</p></div></a>`});
+cintaPolo.pintar(POLO_RESPALDO);
+fetch('polo.json',{cache:'no-cache'}).then(r=>r.ok?r.json():null)
+  .then(d=>{ if(d&&d.noticias&&d.noticias.length) cintaPolo.pintar(d.noticias); }).catch(()=>{});
 
 
 /* ---------- teléfonos útiles (agregar o editar acá) ---------- */
