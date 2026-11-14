@@ -1,7 +1,15 @@
 {
- "actualizado": "2026-11-13T15:56:59Z",
+ "actualizado": "2026-11-14T19:55:52Z",
  "fuente": "https://www.9dejulio.gov.ar/index.php",
  "noticias": [
+  {
+   "id": 9901,
+   "titulo": "Quiroga vivió una emotiva jornada musical con la primera edición de “expo canto”",
+   "fecha": "14/11/26",
+   "imagen": "noticias-img/9901.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9901",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/7267a184e49fd4cc782c260b9d3b471eIMG9664.jpeg"
+  },
   {
    "id": 9900,
    "titulo": "Se entregaron certificados a personal de seguridad y tránsito",
@@ -89,14 +97,6 @@
    "imagen": "noticias-img/9890.jpeg",
    "link": "https://www.9dejulio.gov.ar/noticia.php?id=9890",
    "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/ac8ee133027add1ceccb6a08ad3c514bSEM saldo celu (1).jpeg"
-  },
-  {
-   "id": 9889,
-   "titulo": "“ensayos abiertos”: la música llegará a facundo quiroga",
-   "fecha": "10/11/26",
-   "imagen": "noticias-img/9889.png",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9889",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/10c6abcf98027cb97766a3f766f91bf4ensayos abiertos quiroga.png"
   }
  ]
 }
