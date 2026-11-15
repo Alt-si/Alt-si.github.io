@@ -224,7 +224,17 @@
   .form-den label{font-size:13px;font-weight:700;color:var(--texto)}
   .form-den textarea,.form-den input{width:100%;border:1.5px solid #e6dde3;border-radius:12px;padding:12px;font:inherit;font-size:15px}
   .form-den textarea{min-height:110px;resize:vertical}
-  .den-gps{font-size:13px;color:var(--texto-suave);background:var(--fondo);border-radius:10px;padding:9px 12px;margin-top:-4px}
+  .den-gps{font-size:13px;color:var(--texto-suave);background:var(--fondo);border-radius:10px;padding:9px 12px}
+  .den-gps.mal{color:#c8102e;background:#fde8ec}
+  .den-bloque{display:flex;flex-direction:column;gap:6px}
+  .den-bloque>b{font-size:13px}
+  .den-nota{font-size:11.5px;color:var(--texto-suave);line-height:1.35}
+  .btn-foto{border:2px dashed var(--primario);background:var(--primario-claro);color:var(--primario);border-radius:14px;padding:16px;
+    font:inherit;font-size:15px;font-weight:800;cursor:pointer;width:100%}
+  .den-foto-prev{position:relative}
+  .den-foto-prev img{width:100%;border-radius:12px;display:block}
+  .den-foto-prev button{position:absolute;right:8px;bottom:8px;border:none;border-radius:10px;background:rgba(0,0,0,.6);color:#fff;
+    padding:8px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
   .den-gps.ok{color:#15803d;background:#e3f5ea}
   .btn-prim:disabled{opacity:.6}
   .btn-prim{background:var(--primario);color:#fff;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit}
@@ -447,17 +457,21 @@
   <!-- ================= PANTALLA DENUNCIA ================= -->
   <div class="pantalla" id="p-denuncia">
     <div class="barra">
-      <button class="volver" onclick="irA('p-inicio')" aria-label="Volver">‹</button>
+      <button class="volver" onclick="dejarDeSeguirDen();irA('p-inicio')" aria-label="Volver">‹</button>
       <h1>Nueva denuncia</h1>
     </div>
     <div class="contenido">
       <form class="form-den" id="form-den" onsubmit="event.preventDefault();enviarDenuncia()">
         <span class="den-tag" id="den-tag"></span>
         <label>¿Qué pasó?<textarea id="den-desc" placeholder="Contanos el problema con el mayor detalle posible" required></textarea></label>
-        <label>¿Dónde? <input id="den-dir" placeholder="Calle y altura, o referencia"></label>
-        <div class="den-gps" id="den-gps">📍 Buscando tu ubicación…</div>
-        <label>Foto (opcional) <input id="den-foto" type="file" accept="image/*" capture="environment"></label>
-        <button class="btn-prim" type="submit">Enviar denuncia</button>
+        <div class="den-bloque"><b>Ubicación</b>
+          <div class="den-gps" id="den-gps">📍 Tomando tu ubicación…</div>
+          <span class="den-nota">Se registra automáticamente el lugar desde donde hacés la denuncia.</span></div>
+        <label>Referencia (opcional) <input id="den-dir" placeholder="Ej: frente a la escuela, casa con portón verde"></label>
+        <div class="den-bloque"><b>Foto</b>
+          <div id="den-foto-caja"><button type="button" class="btn-foto" onclick="sacarFotoDen()">📷 Sacar foto</button></div>
+          <span class="den-nota">La foto se saca en el momento con la cámara de la app. No se pueden subir fotos de la galería.</span></div>
+        <button class="btn-prim" type="submit" id="den-enviar" disabled>Enviar denuncia</button>
         <small id="den-modo" style="color:var(--texto-suave);text-align:center"></small>
       </form>
     </div>
@@ -809,11 +823,11 @@ function abrirRadial(id,btn){
 function cerrarRadial(id){ document.getElementById(id).classList.remove('abierto'); }
 const TIPOS_DEN={"transito":["Tránsito","#ea580c"],"policial":["Policial","#1d4ed8"],"residuos":["Residuos","#d91c90"],
   "espacio-verde":["Espacio verde","#15803d"],"otros":["Otros","#6b7280"]};
-let denTipo=null, denPos=null;
+let denTipo=null, denPos=null, denFoto=null, denGpsWatch=null;
 const FORM_DEN_HTML = document.getElementById('form-den').innerHTML;
 function abrirDenuncia(k){
   cerrarRadial('denun');
-  denTipo=k; denPos=null;
+  denTipo=k; denPos=null; denFoto=null;
   const f=document.getElementById('form-den'); f.innerHTML=FORM_DEN_HTML;
   const [n,c]=TIPOS_DEN[k], t=document.getElementById('den-tag');
   t.textContent='Denuncia · '+n; t.style.background=c;
@@ -821,25 +835,52 @@ function abrirDenuncia(k){
     ? (window.datosDenuncias.modo==='demo' ? 'Modo demo: la denuncia queda guardada en este celular.' : '')
     : 'Prototipo: el envío todavía no está conectado.';
   setTimeout(()=>irA('p-denuncia'),250);
-  if(navigator.geolocation) navigator.geolocation.getCurrentPosition(p=>{
-    denPos={lat:p.coords.latitude,lng:p.coords.longitude,precision:Math.round(p.coords.accuracy)};
-    const g=document.getElementById('den-gps'); g.textContent=`📍 Ubicación tomada (±${denPos.precision} m)`; g.classList.add('ok');
-  },()=>{ document.getElementById('den-gps').textContent='📍 No pudimos tomar tu ubicación: escribí la dirección.'; },
-  {enableHighAccuracy:true,timeout:10000});
-  else document.getElementById('den-gps').textContent='📍 Escribí la dirección.';
+  seguirUbicacionDen();
+}
+/* La ubicación es obligatoria y la toma el GPS (no se escribe a mano). Se sigue
+   actualizando mientras el formulario está abierto para quedarse con la más precisa. */
+function seguirUbicacionDen(){
+  if(denGpsWatch!=null){ navigator.geolocation.clearWatch(denGpsWatch); denGpsWatch=null; }
+  const g=()=>document.getElementById('den-gps');
+  if(!navigator.geolocation){ g().className='den-gps mal'; g().textContent='📍 Este celular no permite tomar la ubicación: no se puede enviar la denuncia.'; return; }
+  g().className='den-gps'; g().textContent='📍 Tomando tu ubicación…';
+  denGpsWatch=navigator.geolocation.watchPosition(p=>{
+    const nueva={lat:p.coords.latitude,lng:p.coords.longitude,precision:Math.round(p.coords.accuracy),hora:Date.now()};
+    if(!denPos || nueva.precision<=denPos.precision || Date.now()-denPos.hora>60000) denPos=nueva;
+    if(!g()) return;
+    g().className='den-gps ok'; g().textContent=`📍 Ubicación registrada (precisión ±${denPos.precision} m)`;
+    habilitarEnvioDen();
+  },()=>{
+    if(!g()) return;
+    g().className='den-gps mal';
+    g().innerHTML='📍 Necesitamos tu ubicación para recibir la denuncia. Activá el GPS y permití la ubicación a esta página. <a href="#" onclick="event.preventDefault();seguirUbicacionDen()" style="color:inherit;font-weight:800">Reintentar</a>';
+    habilitarEnvioDen();
+  },{enableHighAccuracy:true,maximumAge:0,timeout:20000});
+}
+function habilitarEnvioDen(){ const b=document.getElementById('den-enviar'); if(b) b.disabled=!denPos; }
+function dejarDeSeguirDen(){ if(denGpsWatch!=null){ navigator.geolocation.clearWatch(denGpsWatch); denGpsWatch=null; } }
+async function sacarFotoDen(){
+  if(!window.tomarFoto){ alertaForm('La cámara todavía no está lista. Esperá un segundo y volvé a tocar.'); return; }
+  const foto=await window.tomarFoto({ sello:()=>window.textoSello(denPos) });
+  if(!foto) return;
+  denFoto={url:foto, hora:Date.now(), ubicacion:denPos||null};
+  document.getElementById('den-foto-caja').innerHTML=`<div class="den-foto-prev"><img src="${foto}" alt="Foto de la denuncia">
+    <button type="button" onclick="sacarFotoDen()">↺ Sacar otra</button></div>`;
 }
 async function enviarDenuncia(){
   const f=document.getElementById('form-den'), b=f.querySelector('button[type=submit]');
-  const desc=document.getElementById('den-desc').value.trim(), dir=document.getElementById('den-dir').value.trim();
-  if(!denPos && !dir){ alertaForm('Necesitamos tu ubicación o una dirección.'); return; }
+  const desc=document.getElementById('den-desc').value.trim(), ref=document.getElementById('den-dir').value.trim();
+  if(!denPos){ alertaForm('Todavía no tenemos tu ubicación. Activá el GPS para poder enviar la denuncia.'); return; }
   b.disabled=true; b.textContent='Enviando…';
   let id=null;
   try{
     if(window.datosDenuncias){
-      const foto=await window.comprimirFoto(document.getElementById('den-foto').files[0]);
-      id=await window.datosDenuncias.crearDenuncia({tipo:denTipo, descripcion:desc, direccion:dir||null, ubicacion:denPos, foto:foto||null});
+      id=await window.datosDenuncias.crearDenuncia({tipo:denTipo, descripcion:desc, direccion:ref||null,
+        ubicacion:{lat:denPos.lat,lng:denPos.lng,precision:denPos.precision,hora:denPos.hora},
+        foto:denFoto?denFoto.url:null, fotoHora:denFoto?denFoto.hora:null, fotoEnVivo:!!denFoto});
     }
   }catch(e){ b.disabled=false; b.textContent='Enviar denuncia'; alertaForm('No se pudo enviar. Revisá tu conexión e intentá de nuevo.'); console.error(e); return; }
+  dejarDeSeguirDen();
   f.innerHTML=`<div style="text-align:center;padding:30px 10px"><div style="font-size:46px">✅</div>
     <h2 style="margin:10px 0 6px">¡Denuncia enviada!</h2>
     ${id?`<p style="color:var(--texto-suave)">Número de denuncia</p><p style="font-size:22px;font-weight:800;color:var(--primario);letter-spacing:1px">${id.slice(-6).toUpperCase()}</p>
@@ -1082,6 +1123,8 @@ async function enviarIdea(){
 </script>
 <script type="module">
   try{
+    const cam = await import('./camara.js');
+    window.tomarFoto = cam.tomarFoto; window.textoSello = cam.textoSello;
     const m = await import('./datos.js');
     window.datosDenuncias = m.datos; window.comprimirFoto = m.comprimirFoto;
   }catch(e){ console.warn('Envío de denuncias no disponible', e); }

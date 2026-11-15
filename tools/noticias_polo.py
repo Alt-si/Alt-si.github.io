@@ -103,23 +103,23 @@ SALIDA_EMP = "app-9dejulio/polo-empresas.json"
 CARPETA_EMP = "app-9dejulio/polo-empresas"
 
 def logos_portada():
+    """Logos que aparecen DESPUÉS del título "Empresas que nos acompañan" y ANTES del título siguiente."""
     from bs4 import BeautifulSoup
     sopa = BeautifulSoup(bajar(BASE).decode("utf-8", "replace"), "html.parser")
-    titulo = sopa.find(string=re.compile(r"empresas", re.I))
-    if not titulo:
+    texto = sopa.find(string=re.compile(r"empresas\s+que", re.I)) or sopa.find(string=re.compile(r"empresas", re.I))
+    if not texto:
         return []
-    nodo = titulo.parent
-    for _ in range(8):                      # subir hasta el bloque que contiene los logos
-        if len(nodo.find_all("img")) >= 3 or nodo.parent is None:
-            break
-        nodo = nodo.parent
-    if len(nodo.find_all("img")) < 3:       # el carrusel puede estar en el bloque siguiente
-        sig = nodo.find_next(lambda t: t.name in ("div", "section") and len(t.find_all("img")) >= 3)
-        nodo = sig or nodo
+    inicio = texto.parent
     urls = []
-    for img in nodo.find_all("img"):
-        src = img.get("data-src") or img.get("data-lazy-src") or img.get("src") or ""
+    for el in inicio.find_all_next():
+        if el.name in ("h1", "h2", "h3", "h4") and el.get_text(strip=True) and texto not in el.strings:
+            break                                   # empezó otra sección
+        if el.name != "img":
+            continue
+        src = el.get("data-src") or el.get("data-lazy-src") or el.get("src") or ""
         if src.startswith("data:") or "/wp-content/uploads/" not in src:
+            continue
+        if re.search(r"slider|whatsapp|banner", src, re.I):
             continue
         src = urllib.request.urljoin(BASE, src).replace("http://", "https://")
         if src not in urls:

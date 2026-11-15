@@ -3,18 +3,6 @@
  "fuente": "https://polosancayetano.com.ar/",
  "empresas": [
   {
-   "imagen": "polo-empresas/Slider-Polo-9.png",
-   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/12/Slider-Polo-9.png"
-  },
-  {
-   "imagen": "polo-empresas/Slider-Polo-10.png",
-   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/12/Slider-Polo-10.png"
-  },
-  {
-   "imagen": "polo-empresas/Slider-Polo-11.png",
-   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/12/Slider-Polo-11.png"
-  },
-  {
    "imagen": "polo-empresas/coop_dudignac-logo-300x89.png",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/11/coop_dudignac-logo-300x89.png"
   },
@@ -73,18 +61,6 @@
   {
    "imagen": "polo-empresas/SYAFA-ID-9Ao-Definitiva-editable-01-300x225.jpg",
    "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2025/12/SYAFA-ID-9Ao-Definitiva-editable-01-300x225.jpg"
-  },
-  {
-   "imagen": "polo-empresas/WhatsApp-Image-2026-08-24-at-7.32.56-AM-768x960.jpeg",
-   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2026/08/WhatsApp-Image-2026-08-24-at-7.32.56-AM-768x960.jpeg"
-  },
-  {
-   "imagen": "polo-empresas/WhatsApp-Image-2026-07-14-at-9.29.22-AM-768x960.jpeg",
-   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2026/07/WhatsApp-Image-2026-07-14-at-9.29.22-AM-768x960.jpeg"
-  },
-  {
-   "imagen": "polo-empresas/WhatsApp-Image-2026-04-30-at-11.17.56-AM-768x960.jpeg",
-   "imagen_original": "https://polosancayetano.com.ar/wp-content/uploads/2026/04/WhatsApp-Image-2026-04-30-at-11.17.56-AM-768x960.jpeg"
   }
  ]
 }

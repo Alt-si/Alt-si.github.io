@@ -1,6 +1,7 @@
 /* Lógica compartida de las mini apps de personal. El área sale de <html data-area="...">. */
-import { datos, distanciaM, textoDistancia, aFecha, comprimirFoto, ubicacionActual, AGENTE_ACTIVO_MIN } from "../datos.js";
+import { datos, distanciaM, textoDistancia, aFecha, ubicacionActual, AGENTE_ACTIVO_MIN } from "../datos.js";
 import { AREAS_APP } from "./areas.js";
+import { tomarFoto, textoSello } from "../camara.js";
 
 const AREA = document.documentElement.dataset.area;
 const INFO = AREAS_APP[AREA];
@@ -224,9 +225,9 @@ function abrirDetalle(id, refresco) {
     <span class="chip estado" style="--c:${e.color}">${e.txt}</span>
     <h2 style="margin-top:8px">Denuncia ${esc(id.slice(-6).toUpperCase())}</h2>
     <div class="meta">${hace(d.creada)}${dist != null ? " · a " + textoDistancia(dist) + " de vos" : ""}${d.agenteNombre ? " · 👮 " + esc(d.agenteNombre) : ""}</div>
-    ${d.foto ? `<img class="foto" src="${d.foto}" alt="Foto de la denuncia">` : ""}
+    ${d.foto ? `<img class="foto" src="${d.foto}" alt="Foto de la denuncia">${d.fotoEnVivo ? `<div class="ayuda" style="margin:-6px 0 10px">📷 Foto sacada en el momento${d.fotoHora ? " · " + new Date(d.fotoHora).toLocaleString("es-AR") : ""}</div>` : ""}` : ""}
     <div class="bloque"><small>Qué denuncia el vecino</small>${esc(d.descripcion)}</div>
-    <div class="bloque"><small>Dónde</small>${esc(d.direccion || "Sin dirección escrita")}${d.ubicacion ? `<br><span class="ayuda">GPS del vecino (±${d.ubicacion.precision || "?"} m)</span>` : ""}</div>
+    <div class="bloque"><small>Dónde</small>${d.direccion ? "Referencia: " + esc(d.direccion) : "Sin referencia escrita"}${d.ubicacion ? `<br><span class="ayuda">📍 GPS del vecino al denunciar (±${d.ubicacion.precision || "?"} m)</span>` : ""}</div>
     ${res ? `<div class="bloque"><small>${esc(INFO.resolver.estado)}</small>
         ${INFO.campos.filter(c => res.campos[c.id] && res.campos[c.id] !== "—").map(c =>
           c.tipo === "patente" ? `<b style="font-size:22px;letter-spacing:2px">${esc(res.campos[c.id])}</b><br>`
@@ -276,11 +277,22 @@ function formResolver(d) {
   $("panel").innerHTML = `<div class="agarre"></div><h2>${esc(INFO.resolver.titulo)}</h2>
     <div class="meta">Denuncia ${esc(d.id.slice(-6).toUpperCase())} · ${esc(d.direccion || "")}</div>
     <form class="inf" id="f-res">${html}
-      <label>${esc(INFO.fotoLabel)}<input id="f-foto" type="file" accept="image/*" capture="environment"></label>
+      <label>${esc(INFO.fotoLabel)}<div id="f-foto-caja"><button type="button" class="b sec chico" id="b-foto" style="width:100%">📷 Sacar foto</button></div>
+        <span class="ayuda">Se saca en el momento y queda sellada con fecha, hora y ubicación.</span></label>
       <div id="f-err"></div>
       <button class="b azul" type="submit">${esc(INFO.resolver.guardar)}</button>
       <button class="b sec chico" type="button" id="b-volver">Volver</button>
     </form>`;
+  let fotoRes = null;
+  const pedirFoto = async () => {
+    const f = await tomarFoto({ sello: () => textoSello(miPos) });
+    if (!f) return;
+    fotoRes = f;
+    $("f-foto-caja").innerHTML = `<img src="${f}" style="width:100%;border-radius:12px;display:block" alt="">
+      <button type="button" class="b sec chico" id="b-foto" style="width:100%;margin-top:8px">↺ Sacar otra</button>`;
+    $("b-foto").onclick = pedirFoto;
+  };
+  $("b-foto").onclick = pedirFoto;
   $("panel").querySelectorAll("input.patente").forEach(i => i.oninput = e => e.target.value = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, ""));
   $("b-volver").onclick = () => { $("panel").innerHTML = ""; abrirDetalle(d.id); };
   $("f-res").onsubmit = async e => {
@@ -294,7 +306,7 @@ function formResolver(d) {
       const pos = miPos || await ubicacionActual();
       const resumen = INFO.resumen(campos) || "";
       await datos.cerrarDenuncia(d.id, { estado: "resuelta", resolucion: {
-        campos, resumen, foto: await comprimirFoto($("f-foto").files[0]), ubicacion: pos || null,
+        campos, resumen, foto: fotoRes, fotoEnVivo: !!fotoRes, ubicacion: pos || null,
         agenteUid: yo.uid, agenteNombre: yo.nombre, fecha: Date.now() } });
       toast(`${INFO.resolver.ok}${resumen ? " · " + resumen : ""}`); pestaña = "historial"; $("panel").innerHTML = ""; cerrarHoja(); pintar();
     } catch (err) { console.error(err); b.disabled = false; b.textContent = INFO.resolver.guardar; $("f-err").innerHTML = `<div class="error">No se pudo guardar. Revisá la conexión.</div>`; }
