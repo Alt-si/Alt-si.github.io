@@ -1,7 +1,23 @@
 {
- "actualizado": "2026-11-14T19:55:52Z",
+ "actualizado": "2026-11-16T18:31:19Z",
  "fuente": "https://www.9dejulio.gov.ar/index.php",
  "noticias": [
+  {
+   "id": 9903,
+   "titulo": "La intendente visitó a los alumnos que competirán en la final del certamen de samsung",
+   "fecha": "16/11/26",
+   "imagen": "noticias-img/9903.jpg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9903",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/87ef47cd9bbaaef905e9bb2d9a2fb6ffsamsung 2.jpg"
+  },
+  {
+   "id": 9902,
+   "titulo": "Semana global del emprendimiento: se presentará un nuevo espacio de coworking y networking abierto a la comunidad",
+   "fecha": "16/11/26",
+   "imagen": "noticias-img/9902.png",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9902",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/38d809551c918abe3d5c538f54cf6bf5SEMANA GLOBAL DEL EMPRENDIMIENTO - 1.png"
+  },
   {
    "id": 9901,
    "titulo": "Quiroga vivió una emotiva jornada musical con la primera edición de “expo canto”",
@@ -81,22 +97,6 @@
    "imagen": "noticias-img/9892.jpeg",
    "link": "https://www.9dejulio.gov.ar/noticia.php?id=9892",
    "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/39d39616849da29f4eb01dcc45b35c5freflexiones yoga.jpeg"
-  },
-  {
-   "id": 9891,
-   "titulo": "Avanza el ordenamiento catastral y urbano en las localidades del partido",
-   "fecha": "12/11/26",
-   "imagen": "noticias-img/9891.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9891",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/398d631947d58efad8fc3d3b140b2a82ordenamiento  localidades (2).jpeg"
-  },
-  {
-   "id": 9890,
-   "titulo": "El estacionamiento medido incorpora una nueva función para cargar saldo desde el celular",
-   "fecha": "12/11/26",
-   "imagen": "noticias-img/9890.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9890",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/ac8ee133027add1ceccb6a08ad3c514bSEM saldo celu (1).jpeg"
   }
  ]
 }
