@@ -1,7 +1,15 @@
 {
- "actualizado": "2026-11-16T18:31:19Z",
+ "actualizado": "2026-11-17T20:53:16Z",
  "fuente": "https://www.9dejulio.gov.ar/index.php",
  "noticias": [
+  {
+   "id": 9904,
+   "titulo": "Durante el tradicional desfile del domingo",
+   "fecha": "17/11/26",
+   "imagen": "noticias-img/9904.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9904",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/90325627914deda5364d1e9d73a6ccd2desfile cortes.jpeg"
+  },
   {
    "id": 9903,
    "titulo": "La intendente visitó a los alumnos que competirán en la final del certamen de samsung",
@@ -89,14 +97,6 @@
    "imagen": "noticias-img/9893.jpeg",
    "link": "https://www.9dejulio.gov.ar/noticia.php?id=9893",
    "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/cb6af05667492fa622c717fb50213775retiro autos (2).jpeg"
-  },
-  {
-   "id": 9892,
-   "titulo": "La importancia del yoga en los adultos mayores",
-   "fecha": "12/11/26",
-   "imagen": "noticias-img/9892.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9892",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/39d39616849da29f4eb01dcc45b35c5freflexiones yoga.jpeg"
   }
  ]
 }
