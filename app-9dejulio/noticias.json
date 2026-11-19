@@ -1,7 +1,55 @@
 {
- "actualizado": "2026-11-18T20:29:12Z",
+ "actualizado": "2026-11-19T20:33:25Z",
  "fuente": "https://www.9dejulio.gov.ar/index.php",
  "noticias": [
+  {
+   "id": 9916,
+   "titulo": "Se inauguró un nuevo espacio de coworking y networking",
+   "fecha": "19/11/26",
+   "imagen": "noticias-img/9916.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9916",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/c97cd5c9c21a9278689a48b29310dd94coworking (1).jpeg"
+  },
+  {
+   "id": 9915,
+   "titulo": "Relaciones con la comunidad: acompañamiento y fortalecimiento de las instituciones",
+   "fecha": "19/11/26",
+   "imagen": "noticias-img/9915.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9915",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/e5b29ecb7e7a5522e662f5bf19cd1d82relaciones con la comunidad (1).jpeg"
+  },
+  {
+   "id": 9914,
+   "titulo": "Cultura invita a difundir eventos a través de su agenda cultural",
+   "fecha": "19/11/26",
+   "imagen": "noticias-img/9914.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9914",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/a5dd4e885908f6e4547e49245fe8fcd4AGENDA CULTURAL.jpeg"
+  },
+  {
+   "id": 9913,
+   "titulo": "Gentile se reunió con referentes de iglesias evangélicas",
+   "fecha": "19/11/26",
+   "imagen": "noticias-img/9913.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9913",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/a399b8c4f75e3156181a83a8d7edc371pastores (1).jpeg"
+  },
+  {
+   "id": 9911,
+   "titulo": "CIERRE DE LA 19ª EDICIÓN DE “MUSEO A LAS ESCUELAS”",
+   "fecha": "19/11/26",
+   "imagen": "noticias-img/9911.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9911",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/d4d02d20bdf554ac4f8da892ddf78063museo cierre.jpeg"
+  },
+  {
+   "id": 9910,
+   "titulo": "La importancia del yoga en los adultos mayores",
+   "fecha": "19/11/26",
+   "imagen": "noticias-img/9910.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9910",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/4aefecc6308f1b98ec64efc261259d70reflexiones yoga.jpeg"
+  },
   {
    "id": 9909,
    "titulo": "Nuevo sistema de control y gestión de flota municipal",
@@ -49,54 +97,6 @@
    "imagen": "noticias-img/9904.jpeg",
    "link": "https://www.9dejulio.gov.ar/noticia.php?id=9904",
    "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/90325627914deda5364d1e9d73a6ccd2desfile cortes.jpeg"
-  },
-  {
-   "id": 9903,
-   "titulo": "La intendente visitó a los alumnos que competirán en la final del certamen de samsung",
-   "fecha": "16/11/26",
-   "imagen": "noticias-img/9903.jpg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9903",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/87ef47cd9bbaaef905e9bb2d9a2fb6ffsamsung 2.jpg"
-  },
-  {
-   "id": 9902,
-   "titulo": "Semana global del emprendimiento: se presentará un nuevo espacio de coworking y networking abierto a la comunidad",
-   "fecha": "16/11/26",
-   "imagen": "noticias-img/9902.png",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9902",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/38d809551c918abe3d5c538f54cf6bf5SEMANA GLOBAL DEL EMPRENDIMIENTO - 1.png"
-  },
-  {
-   "id": 9901,
-   "titulo": "Quiroga vivió una emotiva jornada musical con la primera edición de “expo canto”",
-   "fecha": "14/11/26",
-   "imagen": "noticias-img/9901.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9901",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/7267a184e49fd4cc782c260b9d3b471eIMG9664.jpeg"
-  },
-  {
-   "id": 9900,
-   "titulo": "Se entregaron certificados a personal de seguridad y tránsito",
-   "fecha": "13/11/26",
-   "imagen": "noticias-img/9900.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9900",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/9c9732d5416c2633d379b3678021d327certificados seguridad (1).jpeg"
-  },
-  {
-   "id": 9899,
-   "titulo": "Servicios públicos: cómo funcionará la recolección de residuos el lunes 16",
-   "fecha": "13/11/26",
-   "imagen": "noticias-img/9899.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9899",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/7708a072a74ecc783cd8f556941f00b0residuos (1).jpeg"
-  },
-  {
-   "id": 9898,
-   "titulo": "Se abre la preinscripción en el centro de desarrollo infantil",
-   "fecha": "13/11/26",
-   "imagen": "noticias-img/9898.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9898",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/d293e3473dcc9ad68c4a07337bbcfdbecdi.jpeg"
   }
  ]
 }
