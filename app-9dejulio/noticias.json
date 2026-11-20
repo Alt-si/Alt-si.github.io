@@ -1,7 +1,39 @@
 {
- "actualizado": "2026-11-19T20:33:25Z",
+ "actualizado": "2026-11-20T20:13:25Z",
  "fuente": "https://www.9dejulio.gov.ar/index.php",
  "noticias": [
+  {
+   "id": 9920,
+   "titulo": "Se ejecutan numerosas obras de bacheo",
+   "fecha": "20/11/26",
+   "imagen": "noticias-img/9920.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9920",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/076445929ef21938a49c6d1adf3ba141bacheo (1).jpeg"
+  },
+  {
+   "id": 9919,
+   "titulo": "Servicios públicos: cómo funcionará la recolección durante el feriado",
+   "fecha": "20/11/26",
+   "imagen": "noticias-img/9919.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9919",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/44647248dfb41770bff8d00d6bf71701residuos (4).jpeg"
+  },
+  {
+   "id": 9918,
+   "titulo": "Vuelve el desfile a nueve de julio",
+   "fecha": "20/11/26",
+   "imagen": "noticias-img/9918.jpg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9918",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/24524ecd3aa4fc11351f01cb7d3da345DESFILE.jpg"
+  },
+  {
+   "id": 9917,
+   "titulo": "Convocan a decorar los frentes de las viviendas",
+   "fecha": "20/11/26",
+   "imagen": "http://www.9dejulio.gov.ar/images/uploads/6b844e9b70de3f388f5b09739964c7d3decoración navideña.png",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9917",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/6b844e9b70de3f388f5b09739964c7d3decoración navideña.png"
+  },
   {
    "id": 9916,
    "titulo": "Se inauguró un nuevo espacio de coworking y networking",
@@ -65,38 +97,6 @@
    "imagen": "noticias-img/9908.jpeg",
    "link": "https://www.9dejulio.gov.ar/noticia.php?id=9908",
    "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/e94257a8982ba23aaba5e66f0831b2f5allanamientos motos (1).jpeg"
-  },
-  {
-   "id": 9907,
-   "titulo": "“tres generaciones cantan”: encuentro coral en el salón blanco municipal",
-   "fecha": "18/11/26",
-   "imagen": "noticias-img/9907.png",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9907",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/6238053d1f029f22c6e4f0cbe99ef849tres generaciones cantan.PNG"
-  },
-  {
-   "id": 9906,
-   "titulo": "Se realizaron talleres de creatividad y reutilización de materiales",
-   "fecha": "18/11/26",
-   "imagen": "noticias-img/9906.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9906",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/ffc085359bcfa596935dded70a7997e7talleres emprendedores (1).jpeg"
-  },
-  {
-   "id": 9905,
-   "titulo": "Nueva entidad de bien públic0",
-   "fecha": "18/11/26",
-   "imagen": "noticias-img/9905.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9905",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/a60e203c3f772c8e6d067a57f79de9aeNUEVA ENTIDAD (1).jpeg"
-  },
-  {
-   "id": 9904,
-   "titulo": "Durante el tradicional desfile del domingo",
-   "fecha": "17/11/26",
-   "imagen": "noticias-img/9904.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9904",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/90325627914deda5364d1e9d73a6ccd2desfile cortes.jpeg"
   }
  ]
 }
