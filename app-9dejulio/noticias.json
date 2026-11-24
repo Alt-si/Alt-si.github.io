@@ -1,7 +1,31 @@
 {
- "actualizado": "2026-11-20T20:13:25Z",
+ "actualizado": "2026-11-24T17:40:21Z",
  "fuente": "https://www.9dejulio.gov.ar/index.php",
  "noticias": [
+  {
+   "id": 9923,
+   "titulo": "El taller de teatro municipal realizó su primera muestra anual",
+   "fecha": "24/11/26",
+   "imagen": "noticias-img/9923.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9923",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/f3cef2dc76e7155979c9cbf77b64fa92teatro (1).jpeg"
+  },
+  {
+   "id": 9922,
+   "titulo": "Vuelve el festival de compras: una propuesta para impulsar a los emprendedores locales",
+   "fecha": "24/11/26",
+   "imagen": "noticias-img/9922.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9922",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/3c6e55d4bd222600212249f890e416a0FESTIVAL DE COMPRAS.jpeg"
+  },
+  {
+   "id": 9921,
+   "titulo": "El desfile volvió a las calles con más de 100 instituciones y una multitud de vecinos",
+   "fecha": "24/11/26",
+   "imagen": "noticias-img/9921.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9921",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/ed1ff11b0211e7e3847f2ceccf7edf75desfile (11).jpeg"
+  },
   {
    "id": 9920,
    "titulo": "Se ejecutan numerosas obras de bacheo",
@@ -73,30 +97,6 @@
    "imagen": "noticias-img/9911.jpeg",
    "link": "https://www.9dejulio.gov.ar/noticia.php?id=9911",
    "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/d4d02d20bdf554ac4f8da892ddf78063museo cierre.jpeg"
-  },
-  {
-   "id": 9910,
-   "titulo": "La importancia del yoga en los adultos mayores",
-   "fecha": "19/11/26",
-   "imagen": "noticias-img/9910.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9910",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/4aefecc6308f1b98ec64efc261259d70reflexiones yoga.jpeg"
-  },
-  {
-   "id": 9909,
-   "titulo": "Nuevo sistema de control y gestión de flota municipal",
-   "fecha": "18/11/26",
-   "imagen": "noticias-img/9909.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9909",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/68e81542d43054f9e68461cfe8d3ce1bflota 1.jpeg"
-  },
-  {
-   "id": 9908,
-   "titulo": "Cinco allanamientos y ocho motos secuestradas por escapes adulterados y maniobras peligrosas",
-   "fecha": "18/11/26",
-   "imagen": "noticias-img/9908.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9908",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/e94257a8982ba23aaba5e66f0831b2f5allanamientos motos (1).jpeg"
   }
  ]
 }
