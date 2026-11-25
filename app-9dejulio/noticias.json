@@ -1,7 +1,31 @@
 {
- "actualizado": "2026-11-24T17:40:21Z",
+ "actualizado": "2026-11-25T22:30:00Z",
  "fuente": "https://www.9dejulio.gov.ar/index.php",
  "noticias": [
+  {
+   "id": 9926,
+   "titulo": "Se dio el cierre al ciclo 2026 de “museo a las escuelas”",
+   "fecha": "25/11/26",
+   "imagen": "noticias-img/9926.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9926",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/90043e3fc9cca97148651b50b1f48c02museo a las escuelas cierre (1).jpeg"
+  },
+  {
+   "id": 9925,
+   "titulo": "La universidad popular realizará el cierre de talleres y una muestra de trabajos",
+   "fecha": "25/11/26",
+   "imagen": "noticias-img/9925.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9925",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/1ec2d8cafb2bae4914cc39226232b1d8cierre up.jpeg"
+  },
+  {
+   "id": 9924,
+   "titulo": "Exposición anual de dibujo, pintura y mosaico",
+   "fecha": "25/11/26",
+   "imagen": "noticias-img/9924.jpg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9924",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/fc020333d57ff0beadd3cff6578aeb19muestra anual (1).jpg"
+  },
   {
    "id": 9923,
    "titulo": "El taller de teatro municipal realizó su primera muestra anual",
@@ -73,30 +97,6 @@
    "imagen": "noticias-img/9915.jpeg",
    "link": "https://www.9dejulio.gov.ar/noticia.php?id=9915",
    "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/e5b29ecb7e7a5522e662f5bf19cd1d82relaciones con la comunidad (1).jpeg"
-  },
-  {
-   "id": 9914,
-   "titulo": "Cultura invita a difundir eventos a través de su agenda cultural",
-   "fecha": "19/11/26",
-   "imagen": "noticias-img/9914.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9914",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/a5dd4e885908f6e4547e49245fe8fcd4AGENDA CULTURAL.jpeg"
-  },
-  {
-   "id": 9913,
-   "titulo": "Gentile se reunió con referentes de iglesias evangélicas",
-   "fecha": "19/11/26",
-   "imagen": "noticias-img/9913.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9913",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/a399b8c4f75e3156181a83a8d7edc371pastores (1).jpeg"
-  },
-  {
-   "id": 9911,
-   "titulo": "CIERRE DE LA 19ª EDICIÓN DE “MUSEO A LAS ESCUELAS”",
-   "fecha": "19/11/26",
-   "imagen": "noticias-img/9911.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9911",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/d4d02d20bdf554ac4f8da892ddf78063museo cierre.jpeg"
   }
  ]
 }
