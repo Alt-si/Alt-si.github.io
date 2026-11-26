@@ -1,7 +1,15 @@
 {
- "actualizado": "2026-11-26T15:11:29Z",
+ "actualizado": "2026-11-26T23:50:31Z",
  "fuente": "https://www.9dejulio.gov.ar/index.php",
  "noticias": [
+  {
+   "id": 9931,
+   "titulo": "La intendente recibió al boxeador kevin zárate antes de su viaje a inglaterra",
+   "fecha": "26/11/26",
+   "imagen": "http://www.9dejulio.gov.ar/images/uploads/046b737348f537787cd5b998ddd96d7eZárate.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9931",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/046b737348f537787cd5b998ddd96d7eZárate.jpeg"
+  },
   {
    "id": 9930,
    "titulo": "Actividades municipales e importantes gestiones de acompañamiento",
@@ -89,14 +97,6 @@
    "imagen": "noticias-img/9920.jpeg",
    "link": "https://www.9dejulio.gov.ar/noticia.php?id=9920",
    "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/076445929ef21938a49c6d1adf3ba141bacheo (1).jpeg"
-  },
-  {
-   "id": 9919,
-   "titulo": "Servicios públicos: cómo funcionará la recolección durante el feriado",
-   "fecha": "20/11/26",
-   "imagen": "noticias-img/9919.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9919",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/44647248dfb41770bff8d00d6bf71701residuos (4).jpeg"
   }
  ]
 }
