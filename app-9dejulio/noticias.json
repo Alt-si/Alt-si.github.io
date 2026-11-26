@@ -1,7 +1,39 @@
 {
- "actualizado": "2026-11-25T22:30:00Z",
+ "actualizado": "2026-11-26T15:11:29Z",
  "fuente": "https://www.9dejulio.gov.ar/index.php",
  "noticias": [
+  {
+   "id": 9930,
+   "titulo": "Actividades municipales e importantes gestiones de acompañamiento",
+   "fecha": "26/11/26",
+   "imagen": "noticias-img/9930.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9930",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/1c556da42f6e6ecf01ffb30038d0ac00violencia (2).jpeg"
+  },
+  {
+   "id": 9929,
+   "titulo": "Se ejecutan numerosas obras de bacheo",
+   "fecha": "26/11/26",
+   "imagen": "noticias-img/9929.jpg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9929",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/caf59b2490e2056790bab3381a7afcab4-BACHEO.jpg"
+  },
+  {
+   "id": 9928,
+   "titulo": "El teatro municipal prepara una noche de monólogos con entrada gratuita",
+   "fecha": "26/11/26",
+   "imagen": "noticias-img/9928.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9928",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/a9039f572471d9b66b1924ae2824cf71teatro (1).jpeg"
+  },
+  {
+   "id": 9927,
+   "titulo": "Más de 100 artistas le pondrán música al cierre del año",
+   "fecha": "26/11/26",
+   "imagen": "http://www.9dejulio.gov.ar/images/uploads/bbc38ad456ab407a0c2696db2643491borquesta fin de año.png",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9927",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/bbc38ad456ab407a0c2696db2643491borquesta fin de año.png"
+  },
   {
    "id": 9926,
    "titulo": "Se dio el cierre al ciclo 2026 de “museo a las escuelas”",
@@ -65,38 +97,6 @@
    "imagen": "noticias-img/9919.jpeg",
    "link": "https://www.9dejulio.gov.ar/noticia.php?id=9919",
    "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/44647248dfb41770bff8d00d6bf71701residuos (4).jpeg"
-  },
-  {
-   "id": 9918,
-   "titulo": "Vuelve el desfile a nueve de julio",
-   "fecha": "20/11/26",
-   "imagen": "noticias-img/9918.jpg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9918",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/24524ecd3aa4fc11351f01cb7d3da345DESFILE.jpg"
-  },
-  {
-   "id": 9917,
-   "titulo": "Convocan a decorar los frentes de las viviendas",
-   "fecha": "20/11/26",
-   "imagen": "http://www.9dejulio.gov.ar/images/uploads/6b844e9b70de3f388f5b09739964c7d3decoración navideña.png",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9917",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/6b844e9b70de3f388f5b09739964c7d3decoración navideña.png"
-  },
-  {
-   "id": 9916,
-   "titulo": "Se inauguró un nuevo espacio de coworking y networking",
-   "fecha": "19/11/26",
-   "imagen": "noticias-img/9916.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9916",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/c97cd5c9c21a9278689a48b29310dd94coworking (1).jpeg"
-  },
-  {
-   "id": 9915,
-   "titulo": "Relaciones con la comunidad: acompañamiento y fortalecimiento de las instituciones",
-   "fecha": "19/11/26",
-   "imagen": "noticias-img/9915.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9915",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/e5b29ecb7e7a5522e662f5bf19cd1d82relaciones con la comunidad (1).jpeg"
   }
  ]
 }
