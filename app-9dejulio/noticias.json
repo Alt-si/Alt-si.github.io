@@ -1,7 +1,39 @@
 {
- "actualizado": "2026-11-26T23:50:31Z",
+ "actualizado": "2026-11-27T18:57:07Z",
  "fuente": "https://www.9dejulio.gov.ar/index.php",
  "noticias": [
+  {
+   "id": 9935,
+   "titulo": "Gentile logró el respaldo para avanzar con la limpieza del canal el cardizal",
+   "fecha": "27/11/26",
+   "imagen": "http://www.9dejulio.gov.ar/images/uploads/e4d93df1dc252ab99d9b1856b8e61267cuenca bolívar (1).jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9935",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/e4d93df1dc252ab99d9b1856b8e61267cuenca bolívar (1).jpeg"
+  },
+  {
+   "id": 9934,
+   "titulo": "Modificación en el cronograma de recolección de reciclado",
+   "fecha": "27/11/26",
+   "imagen": "noticias-img/9934.jpg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9934",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/b226bb3fe88d8a66148a3ccec10cd119cambios reciclables.jpg"
+  },
+  {
+   "id": 9933,
+   "titulo": "Alumnos de la técnica 2 recibieron una mención especial en la final nacional de samsung",
+   "fecha": "27/11/26",
+   "imagen": "noticias-img/9933.jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9933",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/1f055089a4cc129a602d578f65764a3falumnos (2).jpeg"
+  },
+  {
+   "id": 9932,
+   "titulo": "Nueve de julio mostró su sistema de gestión de flota en un encuentro nacional de innovación",
+   "fecha": "27/11/26",
+   "imagen": "http://www.9dejulio.gov.ar/images/uploads/4d4de60395a81d8120b657e0a44a3fdbgestión de flota (1).jpeg",
+   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9932",
+   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/4d4de60395a81d8120b657e0a44a3fdbgestión de flota (1).jpeg"
+  },
   {
    "id": 9931,
    "titulo": "La intendente recibió al boxeador kevin zárate antes de su viaje a inglaterra",
@@ -65,38 +97,6 @@
    "imagen": "noticias-img/9924.jpg",
    "link": "https://www.9dejulio.gov.ar/noticia.php?id=9924",
    "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/fc020333d57ff0beadd3cff6578aeb19muestra anual (1).jpg"
-  },
-  {
-   "id": 9923,
-   "titulo": "El taller de teatro municipal realizó su primera muestra anual",
-   "fecha": "24/11/26",
-   "imagen": "noticias-img/9923.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9923",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/f3cef2dc76e7155979c9cbf77b64fa92teatro (1).jpeg"
-  },
-  {
-   "id": 9922,
-   "titulo": "Vuelve el festival de compras: una propuesta para impulsar a los emprendedores locales",
-   "fecha": "24/11/26",
-   "imagen": "noticias-img/9922.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9922",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/3c6e55d4bd222600212249f890e416a0FESTIVAL DE COMPRAS.jpeg"
-  },
-  {
-   "id": 9921,
-   "titulo": "El desfile volvió a las calles con más de 100 instituciones y una multitud de vecinos",
-   "fecha": "24/11/26",
-   "imagen": "noticias-img/9921.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9921",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/ed1ff11b0211e7e3847f2ceccf7edf75desfile (11).jpeg"
-  },
-  {
-   "id": 9920,
-   "titulo": "Se ejecutan numerosas obras de bacheo",
-   "fecha": "20/11/26",
-   "imagen": "noticias-img/9920.jpeg",
-   "link": "https://www.9dejulio.gov.ar/noticia.php?id=9920",
-   "imagen_original": "https://www.9dejulio.gov.ar/images/uploads/076445929ef21938a49c6d1adf3ba141bacheo (1).jpeg"
   }
  ]
 }
